@@ -1,0 +1,75 @@
+import { View, Text, FlatList, Image, ActivityIndicator, RefreshControl } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { SafeAreaView } from 'react-native-safe-area-context'
+import { router } from 'expo-router'
+
+import { images } from '../../constants'
+import { fetchAllPerks } from '../../hook/useFetch'
+import { SearchInput, CustomCard } from '../../components'
+
+
+const Home = () => {
+  const { data, isLoading, error, refetch } = fetchAllPerks('api/v1/perks', {});
+  const [refreshing, setRefreshing] = useState(false);
+
+  const onRefresh = async () => {
+    setRefreshing(true);
+    await refetch();
+    setRefreshing(false);
+  };
+
+  return (
+    <SafeAreaView edges={['top']}>
+      <FlatList className='px-4'
+
+        data={data}
+        keyExtractor={(item) => item._id}
+        numColumns={2}
+        horizontal={false}
+        columnWrapperStyle={{justifyContent: 'space-between'}}
+        renderItem={({ item }) => (
+          <View>
+            <CustomCard
+            perks={item}
+            handleNavigate={() => router.push(`/perks-details/${item._id}`)}
+          />
+          </View>
+          
+        )}
+
+
+
+        // horizontal={false}
+
+        ListHeaderComponent={() => (
+          <View className='my-6 space-y-6'>
+            <View className='justify-between items-start flex-row mb-6'>
+              <View>
+                <Text className='font-pmedium text-sm'>
+                  Welcome Back
+                </Text>
+                <Text className='text-2xl font-psemibold'>
+                  Jonah
+                </Text>
+              </View>
+              <View>
+                <Image
+                  source={images.perksLogo}
+                  className="w-11 h-12"
+                  resizeMode="contain"
+                />
+              </View>
+            </View>
+
+            <SearchInput />
+          </View>
+        )}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
+      />
+    </SafeAreaView>
+  )
+}
+
+export default Home
