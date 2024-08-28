@@ -28,13 +28,10 @@ const Home = () => {
         horizontal={false}
         columnWrapperStyle={{justifyContent: 'space-between'}}
         renderItem={({ item }) => (
-          <View>
             <CustomCard
             perks={item}
             handleNavigate={() => router.push(`/perks-details/${item._id}`)}
           />
-          </View>
-          
         )}
 
 

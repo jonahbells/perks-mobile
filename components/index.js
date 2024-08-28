@@ -4,6 +4,7 @@ import FormField from "./FormField";
 import ScreenHeaderBtn from "./ScreenHeaderBtn";
 import SearchInput from "./SearchInput";
 import SreenHeader from "./ScreenHeader";
+import Footer from "./Footer"
 
 export {
   CustomButton,
@@ -11,5 +12,6 @@ export {
   FormField,
   ScreenHeaderBtn,
   SearchInput,
-  SreenHeader
+  SreenHeader,
+  Footer
 };

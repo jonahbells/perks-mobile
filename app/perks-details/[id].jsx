@@ -11,7 +11,7 @@ import {
 
 import { image, icons } from '../../constants'
 import { fetchPerkById } from "../../hook/useFetch";
-import { ScreenHeaderBtn } from "../../components";
+import { ScreenHeaderBtn, Footer } from "../../components";
 
 const PerksDetails = () => {
   const params = useLocalSearchParams();
@@ -27,10 +27,10 @@ const PerksDetails = () => {
   }, []);
 
   return (
-    <SafeAreaView className='flex-1 bg-white'>
+    <SafeAreaView className='flex-1'>
       <Stack.Screen
         options={{
-          headerStyle: { backgroundColor: "#FAFAFC"},
+          headerStyle: { backgroundColor: "#f2f2f2" },
           headerShadowVisible: false,
           headerBackVisible: false,
           headerLeft: () => (
@@ -57,13 +57,13 @@ const PerksDetails = () => {
           ) : data === 0 ? (
             <Text>No data available</Text>
           ) : (
-            <View  className='p-16'>
+            <View className='p-16'>
               <Text>{data.perks_name}</Text>
 
             </View>
           )}
         </ScrollView>
-
+        <Footer />
       </>
     </SafeAreaView>
   );
