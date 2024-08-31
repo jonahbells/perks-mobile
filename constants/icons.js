@@ -16,8 +16,9 @@ import homeOutline from "../assets/icons/home-outline.png";
 import scanner from "../assets/icons/scanner.png";
 import user from "../assets/icons/user.png";
 import userOutline from "../assets/icons/user-outline.png";
-import left from "../assets/icons/left.png";
 import heartOutline from "../assets/icons/heart-ol.png"
+import left from "../assets/icons/left.png"
+import shoppingBag from "../assets/icons/shopping-bag.png"
 
 
 export default {
@@ -40,5 +41,6 @@ export default {
   user,
   userOutline,
   left,
-  heartOutline
+  heartOutline,
+  shoppingBag
 };

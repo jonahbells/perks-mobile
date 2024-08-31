@@ -5,17 +5,17 @@ import { icons } from '../../constants'
 
 const TabIcon = ({ icon, color, name, focused }) => {
   return (
-    <View className="items-center justify-center gap-2 mt-2">
+    <View className="items-center justify-center mt-6">
       <Image
         source={icon}
         resizeMode='contain'
-        tintColor={color}
+        tintColor= {color}
         className='w-6 h-6'
       />
-      <Text className="text-xs"
+      {/* <Text className="text-xs"
         style={{ color: color }}>
         {name}
-      </Text>
+      </Text> */}
     </View>
   )
 }
@@ -26,12 +26,22 @@ const TabsLayout = () => {
       <Tabs
         screenOptions={{
           tabBarShowLabel: false,
-          tabBarActiveTintColor: '#3b82f6',
-          tabBarInactiveTintColor: '#1f2937',
+          tabBarActiveTintColor: "#fefefe",
+          tabBarInactiveTintColor: "#9ca3af",
           tabBarStyle: {
-            backgroundColor: '#fff',
-            height: 90,
-          }
+            backgroundColor: "#6132bc",
+            height: 70,
+            width: 382,
+            position: 'absolute',
+            bottom: 20,          
+            left: 16,
+            right: 16,
+            elevation: 0,        
+            borderRadius: 15,
+            // alignItems: 'center',
+            // justifyContent: 'center',
+            borderTopWidth: 0
+          },
         }}
       >
         <Tabs.Screen
