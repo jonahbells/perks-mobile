@@ -37,10 +37,10 @@ const CustomCard = ({ perks, handleNavigate }) => {
             <View>
               <Text className='text-md font-pregular' numberOfLines={2}>{perks.perks_name}</Text>
             </View>
-            <View className='flex flex-row justify-between'>
+            <View className='flex-row justify-between'>
               <View>
-                <Text className="text-lg font-pbold text-black">₱{perks.discount} off</Text>
-                <Text className="text-lg font-pbold text-black">₱{perks.original_amount}</Text>
+                <Text className="text-lg font-psemibold text-black">₱{perks.discount} off</Text>
+                <Text className="text-lg font-psemibold text-black">₱{perks.original_amount}</Text>
               </View>
               <View>
                   <CommonButton 

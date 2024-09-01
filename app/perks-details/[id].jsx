@@ -94,7 +94,7 @@ const PerksDetails = () => {
         <View className="items-center">
           {perks.perks_image ? (
             <Image
-              className="w-full h-[400] rounded-[50px]"
+              className="w-full h-[400] rounded-3xl"
               source={{
                 uri:
                   "https://api.perksmania.com/api/v1/perks/image/" +
@@ -115,7 +115,7 @@ const PerksDetails = () => {
               </Text>
             </View>
             <View>
-              <View className="bg-gray rounded-xl">
+              <View className="bg-gray rounded-2xl">
                 <Text className="text-xl font-psemibold px-4 py-2">
                   ₱ {perks.original_amount}
                 </Text>

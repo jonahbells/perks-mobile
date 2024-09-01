@@ -5,12 +5,12 @@ import { icons } from '../../constants'
 
 const TabIcon = ({ icon, color, name, focused }) => {
   return (
-    <View className="items-center justify-center mt-6">
+    <View className="mt-6 flex items-center justify-center">
       <Image
         source={icon}
         resizeMode='contain'
         tintColor= {color}
-        className='w-6 h-6'
+        className='w-7 h-7'
       />
       {/* <Text className="text-xs"
         style={{ color: color }}>
@@ -33,7 +33,7 @@ const TabsLayout = () => {
             height: 70,
             width: 382,
             position: 'absolute',
-            bottom: 20,          
+            bottom: 25,          
             left: 16,
             right: 16,
             elevation: 0,        
