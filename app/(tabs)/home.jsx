@@ -19,7 +19,7 @@ const Home = () => {
   // };
 
   return (
-    <SafeAreaView  className='flex-1 bg-white'>
+    <SafeAreaView  className='flex-1 bg-white '>
       <View className='px-4 my-4'>
         <View className='justify-between items-start flex-row mb-6'>
           <View>

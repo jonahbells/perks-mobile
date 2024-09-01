@@ -12,7 +12,7 @@ import { image, icons } from '../constants'
 const CustomCard = ({ perks, handleNavigate }) => {
   const url = "https://api.perksmania.com/api/v1/perks/image/";
   return (
-    <View className="mb-4 w-[182px] h-[280px] rounded-2xl bg-zinc-100">
+    <View className="mb-4 w-[182px] h-[280px] rounded-2xl bg-gray">
       <TouchableOpacity
 
         onPress={handleNavigate}
@@ -43,7 +43,6 @@ const CustomCard = ({ perks, handleNavigate }) => {
                 <Text className="text-lg font-pbold text-black">₱{perks.original_amount}</Text>
               </View>
               <View>
-        
                   <CommonButton 
                     iconUrl={icons.heartOutline}
                     handlePress={() => ('')}

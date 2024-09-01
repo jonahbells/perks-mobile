@@ -7,10 +7,10 @@ import {
   ScrollView,
   ActivityIndicator,
   RefreshControl,
-  Image
+  Image,
 } from "react-native";
 
-import { image, icons } from '../../constants'
+import { image, icons } from "../../constants";
 import { fetchPerkById } from "../../hook/useFetch";
 import { CommonButton, Footer } from "../../components";
 
@@ -25,7 +25,7 @@ const PerksDetails = () => {
 
   const perksById = async () => {
     try {
-      const response = await fetchPerkById(params.id, {});  // Use the API call from api.js
+      const response = await fetchPerkById(params.id, {}); // Use the API call from api.js
       setPerks(response);
     } catch (error) {
       setError(error);
@@ -42,69 +42,106 @@ const PerksDetails = () => {
     setRefreshing(true);
     await refetch();
     setRefreshing(false);
-  }
-
+  };
 
   // Function to handle refetch
   const refetch = () => {
     setIsLoading(true);
-    perksById()
+    perksById();
   };
 
-
   return (
-    <SafeAreaView className='flex-1 bg-white'>
-      <View className='px-6'>
-      <View >
-        <CommonButton
-          iconUrl={icons.left}
-          handlePress={() => router.back()}
-          buttonDimension="w-10 h-10 rounded-3xl justify-center"
-          imgDimension="w-6 h-6 ml-[7px]"
-          color="bg-gray"
-        />
-      </View>
-      <View>
-        {perks.perks_image ? (
-          <Image
-            className='h-[430px]'
-            source={{ uri: 'https://api.perksmania.com/api/v1/perks/image/' + perks.perks_image[0].src }}
-            resizeMode="cover"
-          />
-        ) : (
-          <Text>No image available</Text>
-        )}
-      </View>
+    <SafeAreaView edges={[ 'bottom']} className="flex-1 bg-white">
+      <Stack.Screen
+        options={{
+          // headerStyle: { backgroundColor: COLORS.lightWhite },
+          headerShadowVisible: false,
+          headerBackVisible: false,
+          headerLeft: () => (
+            <CommonButton
+              iconUrl={icons.left}
+              handlePress={() => router.back()}
+              buttonDimension="w-11 h-11 rounded-3xl justify-center"
+              imgDimension="w-6 h-6 ml-[8px]"
+              color="bg-gray"
+            />
+          ),
+          headerRight: () => (
+            <CommonButton
+              iconUrl={icons.heartOutline}
+              handlePress={() => router.back()}
+              buttonDimension="w-11 h-11 rounded-3xl justify-center items-center"
+              imgDimension="w-5 h-5"
+              color="bg-gray"
+            />
+          ),
+          headerTitle: () => (
+            <Text className="font-pmedium text-2xl">Details</Text>
+          ),
+        }}
+      />
 
-      <View className='px-4 -mt-5 rounded-t-3xl border-#f2f2f2 bg-black-300 z-50'>
-        <View className='flex-row justify-between' >
-          <View className='w-60'>
-            <Text className='pt-5 text-2xl font-psemibold' numberOfLines={3}>{perks.perks_name}</Text>
-          </View>
-          <View>
-            <View className='bg-blue-100 rounded-2xl mt-5'>
-              <Text className='text-2xl font-psemibold px-3 py-1'>₱ {perks.original_amount}</Text>
+      <View className="px-4 mt-4">
+        {/* <View>
+          <CommonButton
+            iconUrl={icons.left}
+            handlePress={() => router.back()}
+            buttonDimension="w-10 h-10 rounded-3xl justify-center"
+            imgDimension="w-6 h-6 ml-[7px]"
+            color="bg-gray"
+          />
+        </View> */}
+        <View className="items-center">
+          {perks.perks_image ? (
+            <Image
+              className="w-full h-[400] rounded-[50px]"
+              source={{
+                uri:
+                  "https://api.perksmania.com/api/v1/perks/image/" +
+                  perks.perks_image[0].src,
+              }}
+              resizeMode="cover"
+            />
+          ) : (
+            <Text>No image available</Text>
+          )}
+        </View>
+
+        <View className="mt-4">
+          <View className="flex-row min-h-[80] justify-between">
+            <View className="w-[220] ">
+              <Text className="text-xl font-psemibold" numberOfLines={3}>
+                {perks.perks_name}
+              </Text>
+            </View>
+            <View>
+              <View className="bg-gray rounded-xl">
+                <Text className="text-xl font-psemibold px-4 py-2">
+                  ₱ {perks.original_amount}
+                </Text>
+              </View>
             </View>
           </View>
-        </View>
-        <View className='mt-8 h-[250px]'>
-          <ScrollView showsVerticalScrollIndicator={false}>
-            <Text className='font-pmedium text-xl'>Description</Text>
-            <Text className='font-pregular text-md text-justify'>{perks.perks_description}</Text>
-          </ScrollView>
+          <View className="mt-2 max-h-[200px]">
+            <ScrollView showsVerticalScrollIndicator={false}>
+              <Text className="font-pmedium text-lg">Description</Text>
+              <Text className="font-pregular text-md text-justify">
+                {perks.perks_description}
+              </Text>
+            </ScrollView>
+          </View>
         </View>
       </View>
-      <Footer />
-      </View>
+      
+        <Footer />
     </SafeAreaView>
-
   );
 };
 
 export default PerksDetails;
 
-
-{/* <ScrollView
+{
+  /* <ScrollView
           showsVerticalScrollIndicator={false}
           refreshControl={
             <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
@@ -120,4 +157,5 @@ export default PerksDetails;
             
           )}
           
-        </ScrollView> */}
+        </ScrollView> */
+}

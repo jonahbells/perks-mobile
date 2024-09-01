@@ -17,8 +17,9 @@ import scanner from "../assets/icons/scanner.png";
 import user from "../assets/icons/user.png";
 import userOutline from "../assets/icons/user-outline.png";
 import heartOutline from "../assets/icons/heart-ol.png"
-import left from "../assets/icons/left.png"
-import shoppingBag from "../assets/icons/shopping-bag.png"
+import left from "../assets/icons/left.png";
+import shoppingBag from "../assets/icons/shopping-bag.png";
+import cart from "../assets/icons/online-shopping.png";
 
 
 export default {
@@ -42,5 +43,6 @@ export default {
   userOutline,
   left,
   heartOutline,
-  shoppingBag
+  shoppingBag,
+  cart
 };

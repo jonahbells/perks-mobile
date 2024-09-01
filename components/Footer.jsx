@@ -4,20 +4,20 @@ import { icons } from "../constants";
 
 const Footer = ({ url }) => {
   return (
-    <View className='p-4 mb-1 absolute bottom-0 left-0 right-0 space-x-4 items-center flex-row'>
-      <TouchableOpacity className='w-[55px] h-[55px] border-[1px] items-center justify-center border-black rounded-2xl'>
+    <View className='px-4 h-[90] absolute bottom-0 right-0 left-0 space-x-2 items-center flex-row'>
+      <TouchableOpacity className='p-4 w-[55] h-[55] justify-center items-center rounded-2xl bg-gray'>
         <Image
-          source={icons.heartOutline}
+          source={icons.cart}
           resizeMode='contain'
-          className='w-[40%] h-[40%]'
+          className='w-6 h-6'
         />
       </TouchableOpacity>
 
       <TouchableOpacity
-        className='flex-1 h-[100%] justify-center items-center border-[1px] bg-black rounded-2xl'
+        className='flex-1 h-[55] justify-center items-center bg-primary rounded-2xl'
         onPress={() => ('')}
       >
-        <Text className='font-semibold text-lg text-black-300'>Claim Perks</Text>
+        <Text className='font-semibold text-lg text-white'>Claim erks</Text>
       </TouchableOpacity>
     </View>
   );
