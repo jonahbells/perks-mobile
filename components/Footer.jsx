@@ -17,7 +17,7 @@ const Footer = ({ url }) => {
         className='flex-1 h-[55] justify-center items-center bg-primary rounded-2xl'
         onPress={() => ('')}
       >
-        <Text className='font-semibold text-lg text-white'>Claim perks</Text>
+        <Text className='font-psemibold text-lg text-white'>Claim perks</Text>
       </TouchableOpacity>
     </View>
   );
