@@ -51,10 +51,9 @@ const PerksDetails = () => {
   };
 
   return (
-    <SafeAreaView edges={[ 'bottom']} className="flex-1 bg-white">
+    <SafeAreaView edges={['bottom']} className="flex-1 bg-white">
       <Stack.Screen
         options={{
-          // headerStyle: { backgroundColor: COLORS.lightWhite },
           headerShadowVisible: false,
           headerBackVisible: false,
           headerLeft: () => (
@@ -62,8 +61,8 @@ const PerksDetails = () => {
               iconUrl={icons.left}
               handlePress={() => router.back()}
               buttonDimension="w-11 h-11 rounded-3xl justify-center"
-              imgDimension="w-6 h-6 ml-[8px]"
-              color="bg-gray"
+              imgDimension="w-5 h-5 ml-[10px]"
+              color="bg-secondary"
             />
           ),
           headerRight: () => (
@@ -72,7 +71,7 @@ const PerksDetails = () => {
               handlePress={() => router.back()}
               buttonDimension="w-11 h-11 rounded-3xl justify-center items-center"
               imgDimension="w-5 h-5"
-              color="bg-gray"
+              color="bg-secondary"
             />
           ),
           headerTitle: () => (
@@ -82,15 +81,6 @@ const PerksDetails = () => {
       />
 
       <View className="px-4 mt-4">
-        {/* <View>
-          <CommonButton
-            iconUrl={icons.left}
-            handlePress={() => router.back()}
-            buttonDimension="w-10 h-10 rounded-3xl justify-center"
-            imgDimension="w-6 h-6 ml-[7px]"
-            color="bg-gray"
-          />
-        </View> */}
         <View className="items-center">
           {perks.perks_image ? (
             <Image
@@ -115,7 +105,7 @@ const PerksDetails = () => {
               </Text>
             </View>
             <View>
-              <View className="bg-gray rounded-2xl">
+              <View className="bg-secondary rounded-2xl">
                 <Text className="text-xl font-psemibold px-4 py-2">
                   ₱ {perks.original_amount}
                 </Text>
@@ -132,30 +122,10 @@ const PerksDetails = () => {
           </View>
         </View>
       </View>
-      
-        <Footer />
+
+      <Footer />
     </SafeAreaView>
   );
 };
 
 export default PerksDetails;
-
-{
-  /* <ScrollView
-          showsVerticalScrollIndicator={false}
-          refreshControl={
-            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-          }
-        >
-          {isLoading ? (
-            <ActivityIndicator size="large" color="#312651" />
-          ) : error ? (
-            <Text>Something went wrong</Text>
-          ) : data === 0 ? (
-            <Text>No data available</Text>
-          ) : (
-            
-          )}
-          
-        </ScrollView> */
-}

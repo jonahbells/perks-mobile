@@ -9,11 +9,11 @@ const SearchInput = ({ initialQuery }) => {
   const [query, setQuery] = useState(initialQuery || "");
 
   return (
-    <View className="flex flex-row items-center space-x-4 w-full h-16 px-4 rounded-2xl border-[1px] focus:border-secondary">
+    <View className="mb-6 flex-row items-center w-full h-14 px-4 rounded-2xl bg-white">
       <TextInput
         className="text-base flex-1 font-pregular"
         value={query}
-        placeholder="Search a video topic"
+        placeholder="Search..."
         placeholderTextColor="#94a3b8"
         onChangeText={(e) => setQuery(e)}
       />
@@ -32,7 +32,8 @@ const SearchInput = ({ initialQuery }) => {
       >
         <Image 
         source={icons.search} 
-        className="w-5 h-5" 
+        tintColor='#94a3b8'
+        className="w-5 h-5 " 
         resizeMode="contain" />
       </TouchableOpacity>
     </View>

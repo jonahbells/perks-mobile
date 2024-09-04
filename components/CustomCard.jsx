@@ -12,7 +12,7 @@ import { image, icons } from '../constants'
 const CustomCard = ({ perks, handleNavigate }) => {
   const url = "https://api.perksmania.com/api/v1/perks/image/";
   return (
-    <View className="mb-4 w-[182px] h-[280px] rounded-2xl bg-gray">
+    <View className="mb-4 w-[182px] h-[280px] rounded-2xl bg-secondary">
       <TouchableOpacity
 
         onPress={handleNavigate}

@@ -5,7 +5,7 @@ import { icons } from '../../constants'
 
 const TabIcon = ({ icon, color, name, focused }) => {
   return (
-    <View className="mt-6 flex items-center justify-center">
+    <View className={`bg-${focused? "secondary": "#999"} rounded-full p-2`}>
       <Image
         source={icon}
         resizeMode='contain'
@@ -26,21 +26,20 @@ const TabsLayout = () => {
       <Tabs
         screenOptions={{
           tabBarShowLabel: false,
-          tabBarActiveTintColor: "#fefefe",
-          tabBarInactiveTintColor: "#9ca3af",
+          // tabBarActiveTintColor: "#fefefe",
+          tabBarInactiveTintColor: "#999",
           tabBarStyle: {
             backgroundColor: "#6132bc",
-            height: 70,
-            width: 382,
+            height: 75,
             position: 'absolute',
-            bottom: 25,          
-            left: 16,
-            right: 16,
-            elevation: 0,        
-            borderRadius: 15,
-            // alignItems: 'center',
-            // justifyContent: 'center',
-            borderTopWidth: 0
+            bottom: 25,       
+            marginHorizontal: 15,
+            paddingVertical: 25,   
+            borderRadius: 40,
+            alignItems: 'center',
+            justifyContent: 'center',
+            borderTopWidth: 0,
+            paddingHorizontal: 10
           },
         }}
       >
@@ -48,10 +47,10 @@ const TabsLayout = () => {
           name='home'
           options={{
             title: 'Home',
-            headerShown: false,
+            // headerShown: true,
             tabBarIcon: ({ color, focused }) => (
               <TabIcon
-                icon={focused ? icons.home : icons.homeOutline}
+                icon={icons.homeOutline}
                 color={color}
                 name='Home'
                 focused={focused}
@@ -65,10 +64,10 @@ const TabsLayout = () => {
           name='bookmark'
           options={{
             title: 'Bookmark',
-            headerShown: false,
+            // headerShown: false,
             tabBarIcon: ({ color, focused }) => (
               <TabIcon
-                icon={focused ? icons.bookmark : icons.bookmarkOutline}
+                icon={icons.bookmarkOutline}
                 color={color}
                 name='Bookmark'
                 focused={focused}
@@ -82,7 +81,7 @@ const TabsLayout = () => {
           name='scan'
           options={{
             title: 'Scan',
-            headerShown: false,
+            // headerShown: false,
             tabBarIcon: ({ color, focused }) => (
               <TabIcon
                 icon={icons.scanner}
@@ -99,10 +98,10 @@ const TabsLayout = () => {
           name='profile'
           options={{
             title: 'Profile',
-            headerShown: false,
+            // headerShown: false,
             tabBarIcon: ({ color, focused }) => (
               <TabIcon
-                icon={focused ? icons.user : icons.userOutline}
+                icon={icons.userOutline}
                 color={color}
                 name='Profile'
                 focused={focused}

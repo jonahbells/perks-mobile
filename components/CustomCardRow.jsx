@@ -37,7 +37,7 @@ const CustomCardRow = () => {
     const refetch = () => fetchData();
 
     return (
-        <View className='px-4'>
+        <View>
             <FlatList
                 data={data}
                 keyExtractor={(item) => item._id}
@@ -56,7 +56,7 @@ const CustomCardRow = () => {
                     <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
                 }
                 // ListFooterComponent={<View className="h-[170px]" />}
-                contentContainerStyle={{ paddingBottom: 220 }}
+                contentContainerStyle={{ paddingBottom: 60 }}
             />
         </View>
 

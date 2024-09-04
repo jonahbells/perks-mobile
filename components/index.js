@@ -2,10 +2,10 @@ import CustomButton from "./CustomButton";
 import CustomCard from "./CustomCard";
 import FormField from "./FormField";
 import SearchInput from "./SearchInput";
-import SreenHeader from "./ScreenHeader";
 import Footer from "./Footer";
 import CustomCardRow from "./CustomCardRow";
 import CommonButton from "./CommonButton";
+import Header from "./Header"
 
 export {
   CustomButton,
@@ -13,7 +13,7 @@ export {
   FormField,
   CommonButton,
   SearchInput,
-  SreenHeader,
   Footer,
-  CustomCardRow
+  CustomCardRow,
+  Header
 };
