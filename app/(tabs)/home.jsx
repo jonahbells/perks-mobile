@@ -4,8 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { Stack, router } from 'expo-router'
 
 import { images } from '../../constants'
-import { fetchAllPerks } from '../../hook/useFetch'
-import { CustomCardRow, Header } from '../../components'
+import { CustomCardRow, Header, FeaturedMerchant } from '../../components'
 import { icons } from '../../constants'
 
 
@@ -25,6 +24,7 @@ const Home = () => {
         header: () => <Header />
       }} />
       <View className='px-4 bg-white'>
+      <FeaturedMerchant />
       <CustomCardRow />
       </View>
     </>

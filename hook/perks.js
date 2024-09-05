@@ -83,7 +83,7 @@ import axios from 'axios';
 
 // Create an instance of axios with base configuration
 const api = axios.create({
-  baseURL: 'https://api.perksmania.com/',  // Your base URL
+  baseURL: 'https://api.perksmania.com/api/v1/',  // Your base URL
   timeout: 10000,  // Optional timeout
   headers: {
     'Content-Type': 'application/json',
@@ -93,7 +93,7 @@ const api = axios.create({
 
 export const fetchAllPerks = async () => {
   try {
-    const response = await api.get('api/v1/perks');
+    const response = await api.get('perks');
     return response.data.rows;
   } catch (error) {
     throw error;  // Propagate error to the caller
@@ -104,7 +104,7 @@ export const fetchAllPerks = async () => {
 // Function to make GET request by id
 export const fetchPerkById = async (id) => {
   try {
-    const response = await api.get('api/v1/perks/'+id);
+    const response = await api.get('perks/'+id);
     return response.data;
 
   } catch (error) {

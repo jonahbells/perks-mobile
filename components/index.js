@@ -6,6 +6,8 @@ import Footer from "./Footer";
 import CustomCardRow from "./CustomCardRow";
 import CommonButton from "./CommonButton";
 import Header from "./Header"
+import FeaturedMerchant from "./FeaturedMerchant";
+import FeaturedMerchantList from "./FeaturedMerchantList";
 
 export {
   CustomButton,
@@ -15,5 +17,7 @@ export {
   SearchInput,
   Footer,
   CustomCardRow,
-  Header
+  Header,
+  FeaturedMerchant,
+  FeaturedMerchantList
 };

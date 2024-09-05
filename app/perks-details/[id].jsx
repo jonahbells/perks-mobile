@@ -11,7 +11,7 @@ import {
 } from "react-native";
 
 import { image, icons } from "../../constants";
-import { fetchPerkById } from "../../hook/useFetch";
+import { fetchPerkById } from "../../hook/perks";
 import { CommonButton, Footer } from "../../components";
 
 const PerksDetails = () => {

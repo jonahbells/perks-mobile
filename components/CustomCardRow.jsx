@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { router } from "expo-router"
 
 import CustomCard from "./CustomCard"
-import { fetchAllPerks } from '../hook/useFetch'
+import { fetchAllPerks } from '../hook/perks'
 
 const CustomCardRow = () => {
 
