@@ -5,7 +5,7 @@ import SearchInput from "./SearchInput";
 import Footer from "./Footer";
 import CustomCardRow from "./CustomCardRow";
 import CommonButton from "./CommonButton";
-import Header from "./Header"
+import ScreenHeader from "./ScreenHeader";
 import FeaturedMerchant from "./FeaturedMerchant";
 import FeaturedMerchantList from "./FeaturedMerchantList";
 
@@ -17,7 +17,7 @@ export {
   SearchInput,
   Footer,
   CustomCardRow,
-  Header,
+  ScreenHeader,
   FeaturedMerchant,
   FeaturedMerchantList
 };

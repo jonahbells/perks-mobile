@@ -3,7 +3,7 @@ import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
 import { images } from '../constants'
-import { SearchInput } from '../components'
+import  SearchInput from './SearchInput'
 
 const Header = () => {
     return (

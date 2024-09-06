@@ -4,7 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { Stack, router } from 'expo-router'
 
 import { images } from '../../constants'
-import { CustomCardRow, Header, FeaturedMerchant } from '../../components'
+import { CustomCardRow, ScreenHeader, FeaturedMerchant } from '../../components'
 import { icons } from '../../constants'
 
 
@@ -21,7 +21,9 @@ const Home = () => {
   return (
     <>
       <Stack.Screen options={{
-        header: () => <Header />
+        header: () => (
+          <ScreenHeader />
+        ) 
       }} />
       <View className='px-4 bg-white'>
       <FeaturedMerchant />
