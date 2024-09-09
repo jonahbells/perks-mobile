@@ -19,6 +19,9 @@ const PerksDetails = () => {
   const router = useRouter();
 
   const [perks, setPerks] = useState({});
+  const url = perks.perks_image && perks.perks_image[0] && perks.perks_image[0].src
+    ? `https://api.perksmania.com/api/v1/perks/image/${perks.perks_image[0].src}`
+    : null;
   const [isloading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [refreshing, setRefreshing] = useState(false);
@@ -85,11 +88,7 @@ const PerksDetails = () => {
           {perks.perks_image ? (
             <Image
               className="w-full h-[400] rounded-3xl"
-              source={{
-                uri:
-                  "https://api.perksmania.com/api/v1/perks/image/" +
-                  perks.perks_image[0].src,
-              }}
+              source={{ uri: url }}
               resizeMode="cover"
             />
           ) : (

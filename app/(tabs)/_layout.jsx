@@ -5,7 +5,7 @@ import { icons } from '../../constants'
 
 const TabIcon = ({ icon, color, name, focused }) => {
   return (
-    <View className={`bg-${focused? "secondary": "#999"} rounded-full p-2`}>
+    <View className={`${focused? "bg-secondary": "bg-#999"} rounded-full p-2`}>
       <Image
         source={icon}
         resizeMode='contain'
