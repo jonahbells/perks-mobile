@@ -14,9 +14,8 @@ const CustomCard = ({ perks, handleNavigate }) => {
   ? `https://api.perksmania.com/api/v1/perks/image/${perks.perks_image[0].src}`
   : null;
   return (
-    <View className="mb-4 w-[182px] h-[280px] rounded-2xl bg-secondary">
+    <View className='mb-4 w-[50%] h-[280px] rounded-2xl bg-secondary'>
       <TouchableOpacity
-
         onPress={handleNavigate}
         activeOpacity={1}
       >

@@ -1,4 +1,4 @@
-import { View, Text, FlatList, Image, ActivityIndicator, RefreshControl } from 'react-native'
+import { View, Text, FlatList, Image, ActivityIndicator, RefreshControl, ScrollView } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { Stack, router } from 'expo-router'
@@ -23,12 +23,15 @@ const Home = () => {
       <Stack.Screen options={{
         header: () => (
           <ScreenHeader />
-        ) 
+        )
       }} />
-      <View className='px-4 bg-white'>
-      <FeaturedMerchant />
-      <CustomCardRow />
-      </View>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        className='bg-white'>
+          <FeaturedMerchant />
+
+            <CustomCardRow />
+      </ScrollView>
     </>
   )
 }

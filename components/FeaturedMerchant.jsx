@@ -12,7 +12,9 @@ const FeaturedMerchant = () => {
   const fetchData = async () => {
     try {
       const responseData = await fetchAllMerchants({}); // Use the API call from api.js
-      setData(responseData.slice(0, 5));
+      const filtered = responseData.filter(item => item.is_activated == true);
+
+      setData(filtered.slice(0, 5));
     } catch (err) {
       setError(err.message);
     } finally {
@@ -34,7 +36,8 @@ const FeaturedMerchant = () => {
   const refetch = () => fetchData();
 
   return (
-    <View>
+    <View className='pl-4 py-4'>
+      <Text className='text-lg font-pregular mb-4'>Featured Merchant</Text>
       <FlatList
         data={data}
         renderItem={({ item, index }) => (
@@ -42,6 +45,8 @@ const FeaturedMerchant = () => {
           item={item} 
           index={index} />
         )}
+        horizontal
+        showsHorizontalScrollIndicator={false}
       />
     </View>
   );

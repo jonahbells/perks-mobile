@@ -1,4 +1,4 @@
-import { FlatList, Text, View, RefreshControl } from 'react-native'
+import { FlatList, Text, View, RefreshControl, ActivityIndicator } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { router } from "expo-router"
 
@@ -37,27 +37,20 @@ const CustomCardRow = () => {
     const refetch = () => fetchData();
 
     return (
-        <View className=''>
-            <FlatList
-                data={data}
-                keyExtractor={(item) => item._id}
-                horizontal={false}
-                numColumns={2}
-                columnWrapperStyle={{ justifyContent: 'space-between' }}
-                showsVerticalScrollIndicator={false}
-                renderItem={({ item }) => (
+        <View className='px-4 flex-1 flex-row flex-wrap content-start'>
+            {loading ? (
+                <ActivityIndicator size='large' />
+            ) : error ? (
+                <Text>Something went wrong</Text>
+            ) : (
+                data?.map((item, index) => (
                     <CustomCard
                         perks={item}
+                        key={`perks-details-${item._id}`}
                         handleNavigate={() => router.push(`/perks-details/${item._id}`)}
                     />
-                )}
-
-                refreshControl={
-                    <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-                }
-                // ListFooterComponent={<View className="h-[170px]" />}
-                contentContainerStyle={{ paddingBottom: 250 }}
-            />
+                ))
+            )}
         </View>
 
     )
