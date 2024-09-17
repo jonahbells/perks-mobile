@@ -16,7 +16,7 @@ const CustomCard = ({ perks, handleNavigate }) => {
       : null;
   return (
     <View className='p-2 w-[50%] h-[300] '>
-      <View className="rounded-2xl bg-secondary shadow-md shadow-slate-300">
+      <View className="rounded-2xl bg-secondary shadow-sm shadow-slate-300">
         <TouchableOpacity onPress={handleNavigate} activeOpacity={1}>
           <View className="p-2">
             <View>

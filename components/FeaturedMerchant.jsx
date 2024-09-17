@@ -37,7 +37,7 @@ const FeaturedMerchant = () => {
 
   return (
     <View className='py-4'>
-      <Text className='text-base font-pregular mb-4'>Featured Merchant</Text>
+      <Text className='text-lg font-psemibold mb-4 ml-4'>Featured Merchants</Text>
       <FlatList
         data={data}
         renderItem={({ item, index }) => (

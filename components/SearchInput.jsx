@@ -9,16 +9,9 @@ const SearchInput = ({ initialQuery }) => {
   const [query, setQuery] = useState(initialQuery || "");
 
   return (
-    <View className="mb-6 flex-row items-center w-full h-14 px-4 rounded-2xl bg-white">
-      <TextInput
-        className="text-base flex-1 font-pregular"
-        value={query}
-        placeholder="Search..."
-        placeholderTextColor="#94a3b8"
-        onChangeText={(e) => setQuery(e)}
-      />
-
+    <View className="mb-6 flex-row items-center w-full h-14 px-4 rounded-xl bg-white">
       <TouchableOpacity
+        className='mr-1'
         onPress={() => {
           if (query === "")
             return Alert.alert(
@@ -33,9 +26,19 @@ const SearchInput = ({ initialQuery }) => {
         <Image 
         source={icons.search} 
         tintColor='#94a3b8'
-        className="w-5 h-5 " 
+        className="w-6 h-6 " 
         resizeMode="contain" />
       </TouchableOpacity>
+
+      <TextInput
+        className="text-base flex-1 font-pregular"
+        value={query}
+        placeholder="Search..."
+        placeholderTextColor="#94a3b8"
+        onChangeText={(e) => setQuery(e)}
+      />
+
+      
     </View>
   );
 };
