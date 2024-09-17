@@ -37,7 +37,7 @@ const CustomCardRow = () => {
     const refetch = () => fetchData();
 
     return (
-        <View className='px-4 flex-1 flex-row flex-wrap content-start'>
+            <View className='px-2 flex-row flex-wrap w-[100%]'>
             {loading ? (
                 <ActivityIndicator size='large' />
             ) : error ? (

@@ -1,12 +1,23 @@
-import { View, Text, FlatList, Image, ActivityIndicator, RefreshControl, ScrollView } from 'react-native'
-import React, { useEffect, useState } from 'react'
-import { SafeAreaView } from 'react-native-safe-area-context'
-import { Stack, router } from 'expo-router'
+import {
+  View,
+  Text,
+  FlatList,
+  Image,
+  ActivityIndicator,
+  RefreshControl,
+  ScrollView,
+} from "react-native";
+import React, { useEffect, useState } from "react";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { Stack, router } from "expo-router";
 
-import { images } from '../../constants'
-import { CustomCardRow, ScreenHeader, FeaturedMerchant } from '../../components'
-import { icons } from '../../constants'
-
+import { images } from "../../constants";
+import {
+  CustomCardRow,
+  ScreenHeader,
+  FeaturedMerchant,
+} from "../../components";
+import { icons } from "../../constants";
 
 const Home = () => {
   // const { data, isLoading, error, refetch } = fetchAllPerks('api/v1/perks', {});
@@ -20,20 +31,18 @@ const Home = () => {
 
   return (
     <>
-      <Stack.Screen options={{
-        header: () => (
-          <ScreenHeader />
-        )
-      }} />
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        className='bg-white'>
-          <FeaturedMerchant />
+      <Stack.Screen
+        options={{
+          header: () => <ScreenHeader />,
+        }}
+      />
+      <ScrollView showsVerticalScrollIndicator={false} className="bg-white">
+        <FeaturedMerchant />
 
-            <CustomCardRow />
+        <CustomCardRow />
       </ScrollView>
     </>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
