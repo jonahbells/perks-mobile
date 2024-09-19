@@ -37,21 +37,25 @@ const CustomCardRow = () => {
     const refetch = () => fetchData();
 
     return (
+        <View className='px-2 mt-6'>
 
-            <View className='px-2 flex-row flex-wrap w-[100%] mb-28'>
-            {loading ? (
-                <ActivityIndicator size='large' />
-            ) : error ? (
-                <Text>Something went wrong</Text>
-            ) : (
-                data?.map((item, index) => (
-                    <CustomCard
-                        perks={item}
-                        key={`perks-details-${item._id}`}
-                        handleNavigate={() => router.push(`/perks-details/${item._id}`)}
-                    />
-                ))
-            )}
+            <Text className='px-2 font-psemibold text-lg'>Discover Perks</Text>
+
+            <View className='flex-row flex-wrap mb-28'>
+                {loading ? (
+                    <ActivityIndicator size='large' />
+                ) : error ? (
+                    <Text>Something went wrong</Text>
+                ) : (
+                    data?.map((item, index) => (
+                        <CustomCard
+                            perks={item}
+                            key={`perks-details-${item._id}`}
+                            handleNavigate={() => router.push(`/perks-details/${item._id}`)}
+                        />
+                    ))
+                )}
+            </View>
         </View>
 
     )

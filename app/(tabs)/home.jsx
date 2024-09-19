@@ -36,9 +36,9 @@ const Home = () => {
           header: () => <ScreenHeader />,
         }}
       />
-      <ScrollView showsVerticalScrollIndicator={false} className="bg-white">
+      <ScrollView showsVerticalScrollIndicator={false} 
+      className="bg-white ">
         <FeaturedMerchant />
-
         <CustomCardRow />
       </ScrollView>
     </>

@@ -36,7 +36,7 @@ const FeaturedMerchant = () => {
   const refetch = () => fetchData();
 
   return (
-    <View className='py-4'>
+    <View className='mt-4'>
       <Text className='text-lg font-psemibold mb-4 ml-4'>Featured Merchants</Text>
       <FlatList
         data={data}
