@@ -39,7 +39,7 @@ const CustomCardRow = () => {
     return (
         <View className='px-2 mt-6'>
 
-            <Text className='px-2 font-psemibold text-lg'>Discover Perks</Text>
+            <Text className='px-2 mb-2 font-pmedium text-xl'>Discover Perks</Text>
 
             <View className='flex-row flex-wrap mb-28'>
                 {loading ? (

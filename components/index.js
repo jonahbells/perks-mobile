@@ -8,6 +8,7 @@ import CommonButton from "./CommonButton";
 import ScreenHeader from "./ScreenHeader";
 import FeaturedMerchant from "./FeaturedMerchant";
 import FeaturedMerchantList from "./FeaturedMerchantList";
+import Pagination from "./Pagination";
 
 export {
   CustomButton,
@@ -19,5 +20,6 @@ export {
   CustomCardRow,
   ScreenHeader,
   FeaturedMerchant,
-  FeaturedMerchantList
+  FeaturedMerchantList,
+  Pagination
 };

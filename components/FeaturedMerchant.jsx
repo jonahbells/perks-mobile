@@ -1,13 +1,35 @@
-import { View, Text, FlatList } from "react-native";
-import React, { useEffect, useState } from "react";
+import { View, Text, FlatList, ViewToken } from "react-native";
+import React, { useEffect, useRef, useState } from "react";
+import Pagination from "./Pagination";
 import FeaturedMerchantList from "./FeaturedMerchantList";
 import { fetchAllMerchants } from "../hook/merchants";
+import Animated, { useAnimatedScrollHandler, useSharedValue } from 'react-native-reanimated';
 
 const FeaturedMerchant = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [refreshing, setRefreshing] = useState(false);
+  const scrollX = useSharedValue(0);
+  const onScrollHandler = useAnimatedScrollHandler({
+    onScroll: (e) => {
+      scrollX.value= e.contentOffset.x;
+    }
+  });
+  const [paginationIndex, setPaginationIndex] = useState(0);
+
+  const onViewableItemsChanged = ({viewableItems}) => {
+    if(viewableItems[0].index !== undefined && viewableItems[0].index !==null)
+      setPaginationIndex(viewableItems[0].index);
+  }
+
+  const viewabilityConfig = {
+    itemVisiblePercentThreshold: 50
+  }
+
+  const viewabilityConfigCallbackPairs = useRef([
+    {viewabilityConfig, onViewableItemsChanged}
+  ]);
 
   const fetchData = async () => {
     try {
@@ -37,16 +59,27 @@ const FeaturedMerchant = () => {
 
   return (
     <View className='mt-4'>
-      <Text className='text-lg font-psemibold mb-4 ml-4'>Featured Merchants</Text>
-      <FlatList
+      <Text className='text-xl font-pmedium ml-4 mb-2'>Featured Merchants</Text>
+      <Animated.FlatList
         data={data}
         renderItem={({ item, index }) => (
           <FeaturedMerchantList 
           item={item} 
-          index={index} />
+          index={index} 
+          scrollX={scrollX}/>
         )}
         horizontal
         showsHorizontalScrollIndicator={false}
+        pagingEnabled
+        onScroll={onScrollHandler}
+        viewabilityConfigCallbackPairs={viewabilityConfigCallbackPairs.current}
+        onEndReached={() => setData([...data])}
+        onEndReachedThreshold={0.5}
+      />
+      <Pagination 
+        items={data}
+        scrollX={scrollX}
+        paginationIndex={paginationIndex}
       />
     </View>
   );

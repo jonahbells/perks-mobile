@@ -17,7 +17,6 @@ import {
   ScreenHeader,
   FeaturedMerchant,
 } from "../../components";
-import { icons } from "../../constants";
 
 const Home = () => {
   // const { data, isLoading, error, refetch } = fetchAllPerks('api/v1/perks', {});
