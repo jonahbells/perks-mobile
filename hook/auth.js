@@ -31,6 +31,10 @@ const getToken = async () => {
     }
 };
 
+export const signOut = async () => {
+    AsyncStorage.multiRemove(['token'])
+};
+
 // Sign In Function using AES Encryption
 export const signIn = async (email, password) => {
     const passphraseEmail = 'L#G@LR#GYSTRY';
@@ -91,3 +95,5 @@ export const getCurrentUser = async () => {
         throw error;
     }
 };
+
+

@@ -10,7 +10,7 @@ import { useGlobalContext } from "../context/GlobalProvider";
 const Welcome = () => {
   const { isLogged } = useGlobalContext();
 
-  if (isLogged) return <Redirect href="/home" />;
+  if (isLogged) return <Redirect href="/home" />
 
   return (
     <SafeAreaView className="h-full">

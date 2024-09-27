@@ -7,7 +7,7 @@ import SearchInput from './SearchInput'
 
 const Header = () => {
     return (
-        <SafeAreaView edges={['top']} className='px-4 bg-primary rounded-3xl'>
+        <SafeAreaView edges={['top']} className='px-4 bg-primary rounded-b-3xl'>
             <View className='flex-row justify-between h-20 items-center'>
                 <View className='flex-row space-x-2'>
                     <View>

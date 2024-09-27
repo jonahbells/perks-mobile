@@ -2,15 +2,25 @@ import { useState } from 'react';
 import { View, Text, ScrollView, Switch, Image, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { FontAwesome } from '@expo/vector-icons'; // for icons
-import { Link } from 'expo-router';
+import { Redirect, router } from 'expo-router';
 
 import { useGlobalContext } from "../../context/GlobalProvider";
 import { signOut } from "../../hook/auth";
 
 // Assuming you use NativeWind's class names in a similar TailwindCSS way
 const Profile = () => {
-  const { user, setUser, setIsLogged } = useGlobalContext();
+  const { user, setUser, isLogged, setIsLogged } = useGlobalContext();
   const [isFaceIDEnabled, setFaceIDEnabled] = useState(false);
+
+  const logout = async () => {
+    await signOut();
+    setUser(null);
+    setIsLogged(false);
+
+    router.replace("/home");
+  };
+  
+  if (!isLogged) return <Redirect href="/sign-in" />;
 
   return (
     <SafeAreaView edges={['top']} className="bg-gray-100 h-full">
@@ -110,7 +120,9 @@ const Profile = () => {
           </TouchableOpacity>
 
           {/* Log Out */}
-          <TouchableOpacity className="flex-row items-center justify-between bg-white p-4 rounded-xl mb-3">
+          <TouchableOpacity className="flex-row items-center justify-between bg-white p-4 rounded-xl mb-3"
+          onPress={logout}
+          >
             <View className="flex-row items-center">
               <FontAwesome name="sign-out" size={24} color="gray" />
               <Text className="ml-3 text-gray-800">Log out</Text>

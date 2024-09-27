@@ -27,8 +27,10 @@ const GlobalProvider = ({ children }) => {
       .finally(() => {
         setLoading(false);
       });
+      
   }, []);
 
+  console.log(isLogged)
   return (
     <GlobalContext.Provider
       value={{
