@@ -7,5 +7,17 @@ import logoSmall from "../assets/images/logo-small.png";
 import empty from "../assets/images/empty.png";
 import splash from "../assets/images/splash.png";
 import perksLogo from "../assets/images/perks-logo.png";
+import perksIcon from "../assets/images/perks-icon.png";
 
-export default { profile, thumbnail, cards, path, logo, logoSmall, empty, splash, perksLogo };
+export default { 
+    profile, 
+    thumbnail, 
+    cards, 
+    path, 
+    logo, 
+    logoSmall, 
+    empty, 
+    splash, 
+    perksLogo,
+    perksIcon 
+};

@@ -9,7 +9,7 @@ const SearchInput = ({ initialQuery }) => {
   const [query, setQuery] = useState(initialQuery || "");
 
   return (
-    <View className="mb-6 flex-row items-center w-full h-14 px-4 rounded-xl bg-white">
+    <View className="mb-6 flex-row items-center w-full h-14 px-4 rounded-full border-[1px] border-black-400">
       <TouchableOpacity
         className='mr-1'
         onPress={() => {
@@ -31,9 +31,9 @@ const SearchInput = ({ initialQuery }) => {
       </TouchableOpacity>
 
       <TextInput
-        className="text-base flex-1 font-pregular"
+        className="text-base flex-1 font-pregular text-white"
         value={query}
-        placeholder="Search..."
+        placeholder="What are you looking for?"
         placeholderTextColor="#94a3b8"
         onChangeText={(e) => setQuery(e)}
       />

@@ -4,10 +4,14 @@ import { Redirect, router } from 'expo-router'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
 import { CustomButton } from '../components'
-
 import { images } from '../constants'
+import { useGlobalContext } from "../context/GlobalProvider";
 
-export default function App() {
+const Welcome = () => {
+  const { isLogged } = useGlobalContext();
+
+  if (isLogged) return <Redirect href="/home" />;
+
   return (
     <SafeAreaView className="h-full">
 
@@ -45,3 +49,5 @@ export default function App() {
     </SafeAreaView>
   )
 }
+
+export default Welcome;

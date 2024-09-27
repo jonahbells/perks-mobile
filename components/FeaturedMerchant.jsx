@@ -58,8 +58,8 @@ const FeaturedMerchant = () => {
   const refetch = () => fetchData();
 
   return (
-    <View className='mt-4'>
-      <Text className='text-xl font-pmedium ml-4 mb-2'>Featured Merchants</Text>
+    <View className='mt-8'>
+      <Text className='text-xl font-pmedium ml-4 mb-4'>Featured Merchants</Text>
       <Animated.FlatList
         data={data}
         renderItem={({ item, index }) => (

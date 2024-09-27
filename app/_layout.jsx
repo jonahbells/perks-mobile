@@ -3,6 +3,8 @@ import { Slot, SplashScreen, Stack } from 'expo-router'
 import { useFonts } from 'expo-font'
 import { useEffect } from 'react';
 
+import GlobalProvider from "../context/GlobalProvider";
+
 SplashScreen.preventAutoHideAsync();
 
 const RootLayout = () => {
@@ -19,26 +21,36 @@ const RootLayout = () => {
   });
 
   useEffect(() => {
-    if(error) throw error
-    if(fontsLoaded) SplashScreen.hideAsync();
-  }, [fontsLoaded, error])
+    if (error) throw error;
 
-  if(!fontsLoaded && !error) return null;
+    if (fontsLoaded) {
+      SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded, error]);
+
+  if (!fontsLoaded) {
+    return null;
+  }
+
+  if (!fontsLoaded && !error) {
+    return null;
+  }
 
   return (
+    <GlobalProvider>
     <Stack>
-      <Stack.Screen 
+      <Stack.Screen
         name='(tabs)'
         options={{ headerShown: false }}
       />
-      <Stack.Screen 
+      <Stack.Screen
         name='index'
         options={{ headerShown: false }}
       />
-      {/* <Stack.Screen 
+      <Stack.Screen
         name='(auth)'
         options={{ headerShown: false }}
-      /> */}
+      />
       {/* <Stack.Screen 
         name='perks-details/[id]'
         options={{ headerShown: false }}
@@ -48,6 +60,7 @@ const RootLayout = () => {
         options={{ headerShown: false }}
       /> */}
     </Stack>
+    </GlobalProvider>
   )
 }
 

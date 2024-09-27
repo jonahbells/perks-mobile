@@ -27,14 +27,14 @@ const TabsLayout = () => {
         screenOptions={{
           tabBarShowLabel: false,
           // tabBarActiveTintColor: "#fefefe",
-          tabBarInactiveTintColor: "#999",
+          // tabBarInactiveTintColor: "#999",
           tabBarStyle: {
             backgroundColor: "#6132bc",
             height: 75,
             position: 'absolute',
             bottom: 25,       
-            marginHorizontal: 15,
-            paddingVertical: 25,   
+            marginHorizontal: 40,
+            paddingVertical: 28,   
             borderRadius: 40,
             alignItems: 'center',
             justifyContent: 'center',
@@ -47,7 +47,7 @@ const TabsLayout = () => {
           name='home'
           options={{
             title: 'Home',
-            // headerShown: true,
+            // headerShown: false,
             tabBarIcon: ({ color, focused }) => (
               <TabIcon
                 icon={icons.homeOutline}
@@ -98,7 +98,7 @@ const TabsLayout = () => {
           name='profile'
           options={{
             title: 'Profile',
-            // headerShown: false,
+            headerShown: false,
             tabBarIcon: ({ color, focused }) => (
               <TabIcon
                 icon={icons.userOutline}

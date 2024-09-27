@@ -23,7 +23,7 @@ const Pagination = ({ items, paginationIndex, scrollX }) => {
         return (
             <Animated.View 
             key={index} 
-            className={`${paginationIndex === index ? 'bg-black-300': 'bg-black-400' } h-2 w-2 mx-[2] rounded-full`}
+            className={`${paginationIndex === index ? 'bg-primary': 'bg-black-400' } h-2 w-2 mx-[3] rounded-full`}
             style={[pgAnimationStyle]}
             />
         )
