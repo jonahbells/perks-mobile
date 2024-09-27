@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "Perks",
-    "slug": "perks",
-    "scheme": "perks",
+    "name": "Perks Mania",
+    "slug": "PerksmaniaMobile",
+    "scheme": "PerksmaniaMobile",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/perkmania_launcher.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
@@ -13,13 +13,15 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.mherbm.PerksmaniaMobile"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.mherbm.PerksmaniaMobile"
     },
     "web": {
       "favicon": "./assets/favicon.png",
@@ -27,6 +29,11 @@
     },
     "plugins": [
       "expo-router"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "e4f18246-3a24-49f9-86cf-492c38b01be9"
+      }
+    }
   }
 }
