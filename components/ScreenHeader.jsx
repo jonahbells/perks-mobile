@@ -2,10 +2,13 @@ import { View, Text, Image } from 'react-native'
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
+import { useGlobalContext } from "../context/GlobalProvider";
 import { images } from '../constants'
 import SearchInput from './SearchInput'
 
 const Header = () => {
+    const { user, setUser, isLogged, setIsLogged } = useGlobalContext();
+
     return (
         <SafeAreaView edges={['top']} className='px-4 bg-primary rounded-b-3xl'>
             <View className='flex-row justify-between h-20 items-center'>
@@ -22,7 +25,7 @@ const Header = () => {
                             Welcome Back
                         </Text>
                         <Text className='text-xl font-psemibold text-white'>
-                            Jonah
+                            {user? user.firstname : 'Guest'}
                         </Text>
                     </View>
                 </View>
