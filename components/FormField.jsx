@@ -14,27 +14,30 @@ const FormField = ({
   ...props
 }) => {
   const [showPassword, setShowPassword] = useState(false);
+  const [isFocused, setIsFocused] = useState(false); 
 
 
   return (
     <View className={`space-y-2 ${otherStyles}`}>
       <Text className="text-base font-pmedium">{title}</Text>
 
-      <View className={`w-full h-16 px-4 rounded-2xl border-[1px] focus:border-primary flex flex-row items-center ${
-          errors ? "border-red-500" : "border-gray-300"
+      <View className={`w-full h-16 px-4 rounded-2xl border-[1px] flex flex-row items-center ${
+          isFocused ? "border-primary" : errors ? "border-red-500" : "border-gray-300"
         }`}>
         <TextInput
           className="flex-1 text-black font-psemibold text-base"
           value={value}
           placeholder={placeholder}
-          placeholderTextColor="#6b7280"
+          placeholderTextColor="#9ca3af"
           onChangeText={handleChangeText}
-          secureTextEntry={title === "Password" && !showPassword}
+          secureTextEntry={(title === "Password" || title === "Confirm Password") && !showPassword}
+          onFocus={() => setIsFocused(true)} 
+          onBlur={() => setIsFocused(false)}
           {...props}
         />
 
 
-        {title === "Password" && (
+        {(title === "Password" || title === "Confirm Password") && (
           <TouchableOpacity className='mr-1' onPress={() => setShowPassword(!showPassword)}>
             <Image
               source={!showPassword ? icons.eye : icons.eyeHide}

@@ -57,7 +57,7 @@ const SignIn = () => {
   return (
     <SafeAreaView className="bg-white h-full">
       <View
-        className="w-full flex items-center h-full px-4 mt-10"
+        className="w-full flex items-center h-full px-4 mt-5"
         style={{
           minHeight: Dimensions.get("window").height - 100,
         }}
@@ -70,7 +70,7 @@ const SignIn = () => {
           />
         </View>
 
-        <Text className="text-3xl font-semibold text-black mt-10">
+        <Text className="text-3xl font-semibold text-black mt-5">
           Welcome back
         </Text>
         <Text className="text-base font-semibold text-gray-500 mt-2">
