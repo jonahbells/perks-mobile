@@ -25,19 +25,20 @@ const SignUp = () => {
   const [form, setForm] = useState({
     email: "",
     password: "",
-    confirm_password: ""
+    confirmPassword: ""
   });
 
   const validateForm = () => {
     let errors = {};
     let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
 
-    if (!reg.test(form.email)) errors.email = "Email is incorrect";
+    if (!reg.test(form.email)) errors.emailIncorrect = "Email is incorrect";
     if (!form.email) errors.email = "Email is required";
     if (!form.password) errors.password = "Password is required";
-    if (form.password != form.confirm_password) {
-      errors.notMatch = "Password do not match"
+    if (form.password != form.confirmPassword) {
+      errors.notMatch = "Password do not match";
     }
+    if (!form.confirmPassword) errors.confirmPasswordIncorrect = "Confirm Password is required";
 
     setErrors(errors);
     return Object.keys(errors).length === 0;
@@ -56,6 +57,7 @@ const SignUp = () => {
         console.log(result);
         setUser(result);
         setIsLogged(true);
+        
 
         Alert.alert("Success", "User signed in successfully");
         router.replace("/home");
@@ -98,7 +100,7 @@ const SignUp = () => {
           otherStyles="mt-5"
           keyboardType="email-address"
           placeholder="perks@customer.com"
-          errors={errors.email}
+          errors={errors.email || errors.emailIncorrect}
         />
 
         <FormField
@@ -116,7 +118,7 @@ const SignUp = () => {
           handleChangeText={(e) => setForm({ ...form, confirm_password: e })}
           otherStyles="mt-5"
           placeholder="• • • • • • • •"
-          errors={errors.notMatch}
+          errors={errors.notMatch || errors.confirmPasswordIncorrect}
         />
 
         <CustomButton
