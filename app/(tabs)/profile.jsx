@@ -10,6 +10,8 @@ import { signOut } from "../../hook/auth";
 // Assuming you use NativeWind's class names in a similar TailwindCSS way
 const Profile = () => {
   const { user, setUser, isLogged, setIsLogged } = useGlobalContext();
+  const url = user && user.profile_image ? `https://api.perksmania.com/api/v1/customers/image/${user.profile_image}`
+        : null;
   const [isFaceIDEnabled, setFaceIDEnabled] = useState(false);
 
   const logout = async () => {
@@ -26,13 +28,15 @@ const Profile = () => {
     <SafeAreaView edges={['top']} className="bg-gray-100 h-full">
       <ScrollView className="p-4">
         {/* Profile Header */}
-        <View className="bg-primary rounded-xl p-4 items-center">
-          <Image
-            source={{ uri: 'https://placekitten.com/200/200' }} // Replace with actual user image
+        <View className="bg-primary rounded-xl p-6 items-center">
+          { url ?
+          (<Image
+            source={{ uri: url}} // Replace with actual user image
             className="w-20 h-20 rounded-full"
-          />
-          <Text className="text-white text-xl font-semibold mt-2">Duygu Çağlayan</Text>
-          <Text className="text-white text-sm mt-1">Gold Member</Text>
+          />) : <FontAwesome name="user-circle-o" size={80} color="#d1d5db" />
+          }
+          <Text className="text-white text-xl font-semibold mt-2">{user?.firstname} {user?.lastname}</Text>
+          <Text className="text-white text-sm mt-1">{user?.email}</Text>
         </View>
 
         {/* General Section */}

@@ -51,10 +51,10 @@ const RootLayout = () => {
         name='(auth)'
         options={{ headerShown: false }}
       />
-      {/* <Stack.Screen 
+      <Stack.Screen 
         name='perks-details/[id]'
         options={{ headerShown: false }}
-      /> */}
+      />
       {/* <Stack.Screen 
         name='/search/{query}'
         options={{ headerShown: false }}

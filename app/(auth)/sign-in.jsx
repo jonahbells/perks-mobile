@@ -84,10 +84,8 @@ const SignIn = () => {
           otherStyles="mt-7"
           keyboardType="email-address"
           placeholder="perks@customer.com"
+          errors={errors.email}
         />
-        {errors.email ? (
-          <Text className="text-base text-gray-500">{errors.email}</Text>
-        ) : null}
 
         <FormField
           title="Password"
@@ -95,10 +93,8 @@ const SignIn = () => {
           handleChangeText={(e) => setForm({ ...form, password: e })}
           otherStyles="mt-5"
           placeholder="• • • • • • • •"
+          errors={errors.password}
         />
-        {errors.password ? (
-          <Text className="text-base text-gray-500">{errors.password}</Text>
-        ) : null}
 
         <CustomButton
           title="Login"
