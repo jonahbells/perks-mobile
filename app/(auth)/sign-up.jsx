@@ -51,8 +51,8 @@ const SignUp = () => {
       setSubmitting(true);
 
       try {
-        await signUp(form.email, form.password);
-        const result = await getCurrentUser();
+        const result = await signUp(form);
+        
         console.log(result);
         setUser(result);
         setIsLogged(true);
