@@ -7,7 +7,7 @@ import { icons } from '../../constants'
 
 const TabIcon = ({ icon, color, name, focused }) => {
   return (
-    <View className={`${focused? "bg-secondary": "bg-#999"} rounded-full p-2`}>
+    <View className={`${focused? "bg-secondary": null} rounded-full p-2`}>
       <Image
         source={icon}
         resizeMode='contain'
@@ -40,8 +40,8 @@ const TabsLayout = () => {
       <Tabs
         screenOptions={{
           tabBarShowLabel: false,
-          // tabBarActiveTintColor: "#fefefe",
-          // tabBarInactiveTintColor: "#999",
+          tabBarActiveTintColor: "#6132bc",
+          tabBarInactiveTintColor: "#9ca3af",
           tabBarStyle: {
             backgroundColor: "#6132bc",
             height: 75,

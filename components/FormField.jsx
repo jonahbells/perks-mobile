@@ -16,13 +16,12 @@ const FormField = ({
   const [showPassword, setShowPassword] = useState(false);
   const [isFocused, setIsFocused] = useState(false); 
 
-
   return (
     <View className={`space-y-2 ${otherStyles}`}>
       <Text className="text-base font-pmedium">{title}</Text>
 
       <View className={`w-full h-16 px-4 rounded-2xl border-[1px] flex flex-row items-center ${
-          isFocused ? "border-primary" : errors ? "border-red-500" : "border-gray-300"
+          isFocused ? "border-primary" : errors ? "border-red-500 border-2" : "border-gray-300"
         }`}>
         <TextInput
           className="flex-1 text-black font-psemibold text-base"

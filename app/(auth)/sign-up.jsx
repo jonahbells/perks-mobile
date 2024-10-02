@@ -6,6 +6,7 @@ import {
   Alert,
   Image,
   TouchableOpacity,
+  Modal
 } from "react-native";
 import { useState } from "react";
 import { Link, router } from "expo-router";
@@ -22,22 +23,28 @@ const SignUp = () => {
   const { setUser, setIsLogged } = useGlobalContext();
   const [isSubmitting, setSubmitting] = useState(false);
   const [errors, setErrors] = useState({});
+  const [modalVisible, setModalVisible] = useState(false);
+  const [regSuccessMessage, setRegSuccessMessage] = useState("")
   const [form, setForm] = useState({
     email: "",
     password: "",
-    confirm_password: ""
+    confirmPassword: ""
   });
+  
 
   const validateForm = () => {
     let errors = {};
     let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
 
-    if (!reg.test(form.email)) errors.email = "Email is incorrect";
+    if (form.email && !reg.test(form.email)) errors.emailIncorrect = "Email is incorrect";
     if (!form.email) errors.email = "Email is required";
     if (!form.password) errors.password = "Password is required";
-    if (form.password != form.confirm_password) {
-      errors.notMatch = "Password do not match"
+    if (form.password && form.password != form.confirmPassword) {
+      errors.notMatch = "Password do not match";
     }
+    if (!form.confirmPassword) errors.confirmPasswordIncorrect = "Confirm Password is required";
+
+    console.log("Errors:", errors); // Log errors to see what's being set
 
     setErrors(errors);
     return Object.keys(errors).length === 0;
@@ -52,13 +59,12 @@ const SignUp = () => {
 
       try {
         const result = await signUp(form);
-        
-        console.log(result);
-        setUser(result);
-        setIsLogged(true);
 
-        Alert.alert("Success", "User signed in successfully");
-        router.replace("/home");
+        if (result != 'Error') {
+          setRegSuccessMessage("You have succesfully registered, we have sent an activation link to your email, please check.")
+          setModalVisible(true)
+        }
+
       } catch (error) {
         Alert.alert("Error", error.message);
       } finally {
@@ -70,100 +76,120 @@ const SignUp = () => {
   return (
     <SafeAreaView className="bg-white h-full">
       <ScrollView>
-      <View
-        className="w-full flex items-center h-full px-4 mt-5"
-        style={{
-          minHeight: Dimensions.get("window").height - 100,
-        }}
-      >
-        <View>
-          <Image
-            source={images.perksIcon}
-            resizeMode="contain"
-            className="w-[300] h-[60]"
-          />
-        </View>
-
-        <Text className="text-3xl font-semibold text-black mt-5">
-          Register Account
-        </Text>
-        <Text className="text-base font-semibold text-gray-500 mt-2">
-          Please enter your details to register.
-        </Text>
-
-        <FormField
-          title="Email"
-          value={form.email}
-          handleChangeText={(e) => setForm({ ...form, email: e })}
-          otherStyles="mt-5"
-          keyboardType="email-address"
-          placeholder="perks@customer.com"
-          errors={errors.email}
-        />
-
-        <FormField
-          title="Password"
-          value={form.password}
-          handleChangeText={(e) => setForm({ ...form, password: e })}
-          otherStyles="mt-5"
-          placeholder="• • • • • • • •"
-          errors={errors.password}
-        />
-
-        <FormField
-          title="Confirm Password"
-          value={form.confirm_password}
-          handleChangeText={(e) => setForm({ ...form, confirm_password: e })}
-          otherStyles="mt-5"
-          placeholder="• • • • • • • •"
-          errors={errors.notMatch}
-        />
-
-        <CustomButton
-          title="Login"
-          handlePress={submit}
-          containerStyles="mt-5"
-          isLoading={isSubmitting}
-        />
-
-        <View className="w-full items-center">
-          {/* OR separator */}
-          <View className="flex-row items-center my-5">
-            {/* Left line */}
-            <View className="flex-1 h-px bg-gray-300" />
-
-            {/* OR text */}
-            <Text className="mx-2 text-gray-500">OR</Text>
-
-            {/* Right line */}
-            <View className="flex-1 h-px bg-gray-300" />
+        <View
+          className="w-full flex items-center h-full px-4 mt-5"
+          style={{
+            minHeight: Dimensions.get("window").height - 100,
+          }}
+        >
+          <View>
+            <Image
+              source={images.perksIcon}
+              resizeMode="contain"
+              className="w-[300] h-[60]"
+            />
           </View>
 
-          {/* Apple Button */}
-          <TouchableOpacity className="w-full py-4 flex-row items-center justify-center bg-gray-300 border-gray-300 rounded-2xl">
-            <FontAwesome name="apple" size={24} color="black" />
-            <Text className="text-gray-700 text-lg font-semibold ml-2">
-              Sign in with Apple
-            </Text>
-          </TouchableOpacity>
-
-          {/* Google Button */}
-          <TouchableOpacity className="w-full py-4 mt-2 flex-row items-center justify-center border bg-gray-300 border-gray-300 rounded-2xl">
-            <FontAwesome name="google" size={24} color="gray" />
-            <Text className="text-gray-700 text-lg font-semibold ml-2">
-              Sign in with Google
-            </Text>
-          </TouchableOpacity>
-        </View>
-        <View className="flex justify-center flex-row gap-2 mt-2">
-          <Text className="text-lg text-gray-500 font-pregular">
-            Have an account already?
+          <Text className="text-3xl font-semibold text-black mt-5">
+            Register Account
           </Text>
-          <Link href="/sign-in" className="text-lg font-psemibold text-primary">
-            Login
-          </Link>
+          <Text className="text-base font-semibold text-gray-500 mt-2">
+            Please enter your details to register.
+          </Text>
+
+          <FormField
+            title="Email"
+            value={form.email}
+            handleChangeText={(e) => setForm({ ...form, email: e })}
+            otherStyles="mt-5"
+            keyboardType="email-address"
+            placeholder="perks@customer.com"
+            errors={errors.email || errors.emailIncorrect}
+          />
+
+          <FormField
+            title="Password"
+            value={form.password}
+            handleChangeText={(e) => setForm({ ...form, password: e })}
+            otherStyles="mt-5"
+            placeholder="• • • • • • • •"
+            errors={errors.password}
+          />
+
+          <FormField
+            title="Confirm Password"
+            value={form.confirmPassword}
+            handleChangeText={(e) => setForm({ ...form, confirmPassword: e })}
+            otherStyles="mt-5"
+            placeholder="• • • • • • • •"
+            errors={errors.notMatch || errors.confirmPasswordIncorrect}
+          />
+
+          <CustomButton
+            title="Login"
+            handlePress={submit}
+            containerStyles="mt-5"
+            isLoading={isSubmitting}
+          />
+
+          <View className="w-full items-center">
+            {/* OR separator */}
+            <View className="flex-row items-center my-5">
+              {/* Left line */}
+              <View className="flex-1 h-px bg-gray-300" />
+
+              {/* OR text */}
+              <Text className="mx-2 text-gray-500">OR</Text>
+
+              {/* Right line */}
+              <View className="flex-1 h-px bg-gray-300" />
+            </View>
+
+            {/* Apple Button */}
+            <TouchableOpacity className="w-full py-4 flex-row items-center justify-center bg-gray-300 border-gray-300 rounded-2xl">
+              <FontAwesome name="apple" size={24} color="black" />
+              <Text className="text-gray-700 text-lg font-semibold ml-2">
+                Sign in with Apple
+              </Text>
+            </TouchableOpacity>
+
+            {/* Google Button */}
+            <TouchableOpacity className="w-full py-4 mt-2 flex-row items-center justify-center border bg-gray-300 border-gray-300 rounded-2xl">
+              <FontAwesome name="google" size={24} color="gray" />
+              <Text className="text-gray-700 text-lg font-semibold ml-2">
+                Sign in with Google
+              </Text>
+            </TouchableOpacity>
+          </View>
+          <View className="flex justify-center flex-row gap-2 mt-2">
+            <Text className="text-lg text-gray-500 font-pregular">
+              Have an account already?
+            </Text>
+            <Link href="/sign-in" className="text-lg font-psemibold text-primary">
+              Login
+            </Link>
+          </View>
         </View>
-      </View>
+        <View>
+          <Modal
+            animationType="fade"
+            transparent={true}
+            visible={modalVisible}
+            onRequestClose={() => {
+              // Alert.alert('Modal has been closed.');
+              setModalVisible(!modalVisible);
+            }}>
+            <View>
+              <View>
+                <Text>{regSuccessMessage}</Text>
+                <TouchableOpacity
+                  onPress={() => setModalVisible(false)}>
+                  <Text>Close</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </Modal>
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
