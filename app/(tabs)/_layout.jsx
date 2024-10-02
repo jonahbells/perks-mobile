@@ -1,5 +1,7 @@
 import { View, Text, Image } from 'react-native'
 import { Tabs, Redirect } from 'expo-router'
+import Ionicons from '@expo/vector-icons/Ionicons'; // Import Ionicons
+
 
 import { icons } from '../../constants'
 
@@ -19,6 +21,18 @@ const TabIcon = ({ icon, color, name, focused }) => {
     </View>
   )
 }
+
+const IoniconsTabIcon = ({ name, color, focused }) => {
+  return (
+    <View className={`${focused? "bg-secondary": "bg-#999"} rounded-full p-2`}>
+    <Ionicons
+      name={name}
+      size={28} // Adjust size as needed
+      color={color} // Active/Inactive color
+    />
+    </View>
+  );
+};
 
 const TabsLayout = () => {
   return (
@@ -61,19 +75,18 @@ const TabsLayout = () => {
         />
 
         <Tabs.Screen
-          name='bookmark'
+          name="merchant"
           options={{
-            title: 'Bookmark',
-            // headerShown: false,
+            title: 'Merchants',
             tabBarIcon: ({ color, focused }) => (
-              <TabIcon
-                icon={icons.bookmarkOutline}
-                color={color}
-                name='Bookmark'
-                focused={focused}
+              <View style={{ alignItems: 'center', justifyContent: 'center', height: 50 }}>
+              <IoniconsTabIcon
+                name='business-outline' // Ionicons name for Merchants
+                color={color}     
+                focused={focused}      // Active/Inactive color
               />
-            )
-
+              </View>
+            ),
           }}
         />
 

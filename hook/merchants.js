@@ -19,3 +19,15 @@ export const fetchAllMerchants = async () => {
   }
 
 };
+
+// Function to make GET request by id
+export const fetchMerchantById = async (id) => {
+  try {
+    const response = await api.get('merchants/'+id);
+    return response.data;
+
+  } catch (error) {
+    throw error;  // Propagate error to the caller
+  }
+
+};

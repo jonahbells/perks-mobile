@@ -5,15 +5,27 @@ import {
   ActivityIndicator,
   Image,
 } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import CommonButton from "./CommonButton";
 import { image, icons } from "../constants";
+import Ionicons from '@expo/vector-icons/Ionicons';
+
 
 const CustomCard = ({ perks, handleNavigate }) => {
+
+  const [isLiked, setIsLiked] = useState(false); // State to track if the heart is liked
+
   const url =
     perks.perks_image && perks.perks_image[0] && perks.perks_image[0].src
       ? `https://api.perksmania.com/api/v1/perks/image/${perks.perks_image[0].src}`
       : null;
+
+  const toggleHeart = () => {
+      setIsLiked(!isLiked); // Toggle between liked and unliked states
+
+      console.log(perks._id)
+      };
+
   return (
     <View className='p-2 w-[50%] h-[300]'>
       <TouchableOpacity
@@ -51,13 +63,13 @@ const CustomCard = ({ perks, handleNavigate }) => {
                 </Text>
               </View>
               <View>
-                <CommonButton
-                  iconUrl={icons.heartOutline}
-                  handlePress={() => ""}
-                  buttonDimension="w-9 h-9 rounded-3xl items-center justify-center"
-                  imgDimension="w-4 h-4"
-                  color="bg-white"
-                />
+                <TouchableOpacity onPress={toggleHeart} className = "p-2 bg-white rounded-full">
+                  <Ionicons 
+                    name={isLiked ? "heart" : "heart-outline"} // Toggle between filled and outlined heart
+                    size={24} 
+                    color={isLiked ? "red" : "black"} // Change color on toggle
+                  />
+                </TouchableOpacity>
               </View>
             </View>
           </View>
