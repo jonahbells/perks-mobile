@@ -67,13 +67,16 @@ export const signIn = async (email, password) => {
 // Sign In Function using AES Encryption
 export const signUp = async (form) => {
     const passphrase = 'L#G@LR#GYSTRY';
-    const encryptEmail = CryptoJS.AES.encrypt(form, passphrase).toString();
+    const encryptForm = CryptoJS.AES.encrypt(form, passphrase).toString();
+
+    console.log(encryptForm)
     
     try {
         const response = await api.post('customers', {
-            aparam: encryptEmail
+            aparam: encryptForm
         });
-
+        
+        console.log(response)
         return response;
     } catch (error) {
         console.error('Error during sign-up:', error.response?.data || error.message);

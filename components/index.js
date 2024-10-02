@@ -9,6 +9,7 @@ import ScreenHeader from "./ScreenHeader";
 import FeaturedMerchant from "./FeaturedMerchant";
 import FeaturedMerchantList from "./FeaturedMerchantList";
 import Pagination from "./Pagination";
+import Loader from "./Loader";
 
 export {
   CustomButton,
@@ -21,5 +22,6 @@ export {
   ScreenHeader,
   FeaturedMerchant,
   FeaturedMerchantList,
-  Pagination
+  Pagination,
+  Loader
 };

@@ -3,14 +3,14 @@ import { ScrollView, Text, View, Image } from 'react-native'
 import { Redirect, router } from 'expo-router'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
-import { CustomButton } from '../components'
+import { CustomButton, Loader } from '../components'
 import { images } from '../constants'
 import { useGlobalContext } from "../context/GlobalProvider";
 
 const Welcome = () => {
-  const { isLogged } = useGlobalContext();
+  const { loading, isLogged } = useGlobalContext();
 
-  if (isLogged) return <Redirect href="/home" />
+  if (!loading && isLogged) return <Redirect href="/home" />
 
   return (
     <SafeAreaView className="h-full">
@@ -36,7 +36,7 @@ const Welcome = () => {
           <View className='w-[200px]'>
             <CustomButton
               title="Get Started"
-              handlePress={() => router.push('/home')}
+              handlePress={() => router.replace('/home')}
               containerStyles="w-full mt-7"
             />
           </View>
