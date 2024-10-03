@@ -16,6 +16,8 @@ const FormField = ({
   const [showPassword, setShowPassword] = useState(false);
   const [isFocused, setIsFocused] = useState(false); 
 
+  console.log(errors)
+
   return (
     <View className={`space-y-2 ${otherStyles}`}>
       <Text className="text-base font-pmedium">{title}</Text>

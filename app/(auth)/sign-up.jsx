@@ -6,7 +6,7 @@ import {
   Alert,
   Image,
   TouchableOpacity,
-  Modal
+  Modal,
 } from "react-native";
 import { useState } from "react";
 import { Link, router } from "expo-router";
@@ -24,49 +24,59 @@ const SignUp = () => {
   const [isSubmitting, setSubmitting] = useState(false);
   const [errors, setErrors] = useState({});
   const [modalVisible, setModalVisible] = useState(false);
-  const [regSuccessMessage, setRegSuccessMessage] = useState("")
+  const [regSuccessMessage, setRegSuccessMessage] = useState("");
   const [form, setForm] = useState({
     email: "",
     password: "",
-    confirmPassword: ""
+    confirmPassword: "",
   });
-  
 
   const validateForm = () => {
     let errors = {};
-    let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
 
-    if (form.email && !reg.test(form.email)) errors.emailIncorrect = "Email is incorrect";
-    if (!form.email) errors.email = "Email is required";
-    if (!form.password) errors.password = "Password is required";
-    if (form.password && form.password != form.confirmPassword) {
-      errors.notMatch = "Password do not match";
+    // Email validation
+    const emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
+    if (!form.email) {
+      errors.email = "Email is required";
+    } else if (!emailRegex.test(form.email)) {
+      errors.email = "Invalid email format";
     }
-    if (!form.confirmPassword) errors.confirmPasswordIncorrect = "Confirm Password is required";
 
-    console.log("Errors:", errors); // Log errors to see what's being set
+    // Password validation
+    if (!form.password) {
+      errors.password = "Password is required";
+    } else if (form.password.length < 8) {
+      errors.password = "Password must be at least 8 characters";
+    }
 
+    // Confirm password validation
+    if (!form.confirmPassword) {
+      errors.confirmPassword = "Confirm Password is required";
+    } else if (form.password !== form.confirmPassword) {
+      errors.confirmPassword = "Passwords do not match";
+    }
+
+    // Check if there are any errors
     setErrors(errors);
     return Object.keys(errors).length === 0;
   };
 
   const submit = async () => {
-    // if (form.email === "" || form.password === "") {
-    //   Alert.alert("Error", "Please fill in all fields");
-    // }
     if (validateForm()) {
       setSubmitting(true);
 
       try {
+        console.log(form);
         const result = await signUp(form);
 
-        if (result != 'Error') {
-          setRegSuccessMessage("You have succesfully registered, we have sent an activation link to your email, please check.")
-          setModalVisible(true)
+        if (result !== "Error") {
+          setRegSuccessMessage(
+            "You have successfully registered, we have sent an activation link to your email, please check."
+          );
+          setModalVisible(true);
         }
-
       } catch (error) {
-        Alert.alert("Error", error.message);
+        console.log("Error", error.message);
       } finally {
         setSubmitting(false);
       }
@@ -90,10 +100,10 @@ const SignUp = () => {
             />
           </View>
 
-          <Text className="text-3xl font-semibold text-black mt-5">
+          <Text className="text-3xl font-psemibold text-black mt-5">
             Register Account
           </Text>
-          <Text className="text-base font-semibold text-gray-500 mt-2">
+          <Text className="text-base font-pregular text-gray-500 mt-2">
             Please enter your details to register.
           </Text>
 
@@ -104,7 +114,7 @@ const SignUp = () => {
             otherStyles="mt-5"
             keyboardType="email-address"
             placeholder="perks@customer.com"
-            errors={errors.email || errors.emailIncorrect}
+            errors={errors.email}
           />
 
           <FormField
@@ -122,11 +132,11 @@ const SignUp = () => {
             handleChangeText={(e) => setForm({ ...form, confirmPassword: e })}
             otherStyles="mt-5"
             placeholder="• • • • • • • •"
-            errors={errors.notMatch || errors.confirmPasswordIncorrect}
+            errors={errors.confirmPassword}
           />
 
           <CustomButton
-            title="Login"
+            title="Register"
             handlePress={submit}
             containerStyles="mt-5"
             isLoading={isSubmitting}
@@ -165,7 +175,10 @@ const SignUp = () => {
             <Text className="text-lg text-gray-500 font-pregular">
               Have an account already?
             </Text>
-            <Link href="/sign-in" className="text-lg font-psemibold text-primary">
+            <Link
+              href="/sign-in"
+              className="text-lg font-psemibold text-primary"
+            >
               Login
             </Link>
           </View>
@@ -176,15 +189,19 @@ const SignUp = () => {
             transparent={true}
             visible={modalVisible}
             onRequestClose={() => {
-              // Alert.alert('Modal has been closed.');
               setModalVisible(!modalVisible);
-            }}>
-            <View>
-              <View>
-                <Text>{regSuccessMessage}</Text>
+            }}
+          >
+            <View className="flex-1 justify-center items-center bg-black/50">
+              <View className="bg-white rounded-lg p-6 w-4/5 items-center">
+                <Text className="text-lg font-psemibold text-center mb-6">
+                  {regSuccessMessage}
+                </Text>
                 <TouchableOpacity
-                  onPress={() => setModalVisible(false)}>
-                  <Text>Close</Text>
+                  className="bg-red-500 py-2 px-4 rounded-lg"
+                  onPress={() => setModalVisible(false)}
+                >
+                  <Text className="text-white text-base text-center">Close</Text>
                 </TouchableOpacity>
               </View>
             </View>

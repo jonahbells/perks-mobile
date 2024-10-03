@@ -66,23 +66,32 @@ export const signIn = async (email, password) => {
 
 // Sign In Function using AES Encryption
 export const signUp = async (form) => {
-    const passphrase = 'L#G@LR#GYSTRY';
-    const encryptForm = CryptoJS.AES.encrypt(form, passphrase).toString();
+    console.log('Form before encryption:', form);
 
-    console.log(encryptForm)
+    const passphrase = 'L#G@LR#GYSTRY';
+
+    // Convert the form object to a JSON string before encryption
+    const formString = JSON.stringify(form);
+
+    // Encrypt the JSON string
+    const encryptForm = CryptoJS.AES.encrypt(formString, passphrase).toString();
+
+    console.log('Encrypted form:', encryptForm);
     
     try {
+        // Send the encrypted form as part of the request
         const response = await api.post('customers', {
             aparam: encryptForm
         });
         
-        console.log(response)
+        console.log('Server response:', response);
         return response;
     } catch (error) {
         console.error('Error during sign-up:', error.response?.data || error.message);
         throw error;  // Propagate error to the caller
     }
 };
+
 
 // Fetch the current user's profile after login
 export const getCurrentUser = async () => {
