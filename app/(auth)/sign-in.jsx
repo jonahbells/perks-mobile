@@ -16,7 +16,7 @@ import { FontAwesome } from "@expo/vector-icons"; // for icons
 
 import { images } from "../../constants";
 import { CustomButton, FormField } from "../../components";
-import { signIn, getCurrentUser } from "../../hook/auth";
+import { signIn, getCurrentUser, signOut } from "../../hook/auth";
 import { useGlobalContext } from "../../context/GlobalProvider";
 
 const SignIn = () => {
@@ -67,7 +67,7 @@ const SignIn = () => {
         setIsLogged(true); // Mark the user as logged in
   
         // Redirect to the home page
-        Alert.alert("Success", "User signed in successfully");
+        // Alert.alert("Success", "User signed in successfully");
         router.replace("/home");
       } catch (error) {
         // Handle any errors that occur during the sign-in process
@@ -183,7 +183,7 @@ const SignIn = () => {
             </Text>
             <TouchableOpacity
               className="bg-red-500 py-2 px-4 rounded-lg"
-              onPress={() => setModalVisible(false)}
+              onPress={() => {setModalVisible(false), signOut()}}
             >
               <Text className="text-white text-base text-center">Close</Text>
             </TouchableOpacity>
