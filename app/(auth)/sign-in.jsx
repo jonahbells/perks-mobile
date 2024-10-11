@@ -16,7 +16,7 @@ import { FontAwesome } from "@expo/vector-icons"; // for icons
 
 import { images } from "../../constants";
 import { CustomButton, FormField } from "../../components";
-import { signIn, signOut, getCurrentUser } from "../../hook/auth";
+import { signIn, getCurrentUser, signOut } from "../../hook/auth";
 import { useGlobalContext } from "../../context/GlobalProvider";
 
 const SignIn = () => {
