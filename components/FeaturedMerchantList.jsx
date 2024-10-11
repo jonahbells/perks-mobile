@@ -38,7 +38,7 @@ const FeaturedMerchantList = ({ item, index, scrollX }) => {
       <View>
         <Image
           source={{ uri: url }}
-          className='w-[360] h-44 rounded-2xl'
+          className='w-[360] h-44 rounded-xl'
         />
         {/* <Text className='pt-2 text-base font-plight'>{item.business_name}</Text> */}
       </View>

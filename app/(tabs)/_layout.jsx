@@ -7,7 +7,7 @@ import { icons } from '../../constants'
 
 const TabIcon = ({ icon, color, name, focused }) => {
   return (
-    <View className={`${focused? "bg-secondary": null} rounded-full p-2`}>
+    <View className={`${focused? "bg-gray-300": null} rounded-full p-2`}>
       <Image
         source={icon}
         resizeMode='contain'
@@ -24,7 +24,7 @@ const TabIcon = ({ icon, color, name, focused }) => {
 
 const IoniconsTabIcon = ({ name, color, focused }) => {
   return (
-    <View className={`${focused? "bg-secondary": "bg-#999"} rounded-full p-2`}>
+    <View className={`${focused? "bg-gray-300": "bg-#999"} rounded-full p-2`}>
     <Ionicons
       name={name}
       size={28} // Adjust size as needed
@@ -47,7 +47,7 @@ const TabsLayout = () => {
             height: 75,
             position: 'absolute',
             bottom: 25,       
-            marginHorizontal: 40,
+            marginHorizontal: 50,
             paddingVertical: 28,   
             borderRadius: 40,
             alignItems: 'center',

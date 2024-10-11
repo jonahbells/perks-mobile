@@ -13,7 +13,7 @@ const GlobalProvider = ({ children }) => {
   useEffect(() => {
     getCurrentUser()
       .then((res) => {
-        if (res) {
+        if (res.is_activated == true ) {
           setIsLogged(true);
           setUser(res);
         } else {
