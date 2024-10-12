@@ -27,6 +27,7 @@ const RootLayout = () => {
       SplashScreen.hideAsync();
     }
   }, [fontsLoaded, error]);
+  
 
   if (!fontsLoaded) {
     return null;
@@ -53,7 +54,7 @@ const RootLayout = () => {
       />
       <Stack.Screen 
         name='perks-details/[id]'
-        options={{ headerShown: true }}
+        options={{ headerShown: false }}
       />
       {/* <Stack.Screen 
         name='/search/{query}'

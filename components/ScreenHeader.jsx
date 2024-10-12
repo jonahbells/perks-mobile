@@ -13,7 +13,7 @@ const Header = () => {
         : null;
 
     return (
-        <SafeAreaView edges={['top']} className='px-4 bg-primary rounded-b-3xl'>
+        <SafeAreaView edges={['top']} className='px-4 bg-primary rounded-b-xl'>
             <View className='flex-row justify-between h-20 items-center'>
                 <View className='flex-row space-x-2'>
 
