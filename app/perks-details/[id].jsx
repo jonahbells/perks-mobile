@@ -43,60 +43,60 @@ const PerksDetails = () => {
 
   const onRefresh = async () => {
     setRefreshing(true);
-    await refetch();
+    await perksById();
     setRefreshing(false);
   };
 
   // Function to handle refetch
-  const refetch = () => {
-    setIsLoading(true);
-    perksById();
-  };
+  // const refetch = () => {
+  //   setRefreshing(true);
+  //   perksById();
+  // };
 
   return (
-    <SafeAreaView edges={['bottom']} className="flex-1 bg-white">
-      <Stack.Screen
-        options={{
-          headerShadowVisible: false,
-          headerBackVisible: false,
-          headerLeft: () => (
-            <CommonButton
-              iconUrl={icons.left}
-              handlePress={() => router.back()}
-              buttonDimension="w-11 h-11 rounded-3xl justify-center"
-              imgDimension="w-5 h-5 ml-[10px]"
-              color="bg-secondary"
-            />
-          ),
-          headerRight: () => (
-            <CommonButton
-              iconUrl={icons.heartOutline}
-              handlePress={() => router.back()}
-              buttonDimension="w-11 h-11 rounded-3xl justify-center items-center"
-              imgDimension="w-5 h-5"
-              color="bg-secondary"
-            />
-          ),
-          headerTitle: () => (
-            <Text className="font-pmedium text-2xl">Details</Text>
-          ),
-        }}
-      />
+    <View className="flex-1 bg-white">
 
-      <View className="px-4 mt-4">
-        <View className="items-center">
-          {perks.perks_image ? (
-            <Image
-              className="w-full h-[400] rounded-3xl"
-              source={{ uri: url }}
-              resizeMode="cover"
+      <ScrollView
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+      }
+      >
+        <View className="px-4 pt-12 flex-row justify-between items-center absolute z-50 w-full">
+          <CommonButton
+            iconUrl={icons.left}
+            handlePress={() => router.back()}
+            buttonDimension="p-2 rounded-full"
+            buttonColor="bg-secondary/70"
+            name="arrow-back"
+            size="25"
+            color="black"
+          />
+
+          <CommonButton
+            iconUrl={icons.heartOutline}
+            handlePress={() => router.back()}
+            buttonDimension="p-2 rounded-full  items-center"
+            imgDimension="w-5 h-5"
+            buttonColor="bg-secondary/70" 
+            name="heart-outline"
+            size="25"
             />
-          ) : (
-            <Text>No image available</Text>
-          )}
         </View>
 
-        <View className="mt-4">
+
+
+        {perks.perks_image ? (
+          <Image
+            className="h-[400]"
+            source={{ uri: url }}
+            resizeMode="cover"
+          />
+        ) : (
+          <Text>No image available</Text>
+        )}
+
+
+        <View className="mt-4 px-4">
           <View className="flex-row min-h-[80] justify-between">
             <View className="w-[220] ">
               <Text className="text-xl font-psemibold" numberOfLines={3}>
@@ -104,7 +104,7 @@ const PerksDetails = () => {
               </Text>
             </View>
             <View>
-              <View className="bg-secondary rounded-2xl">
+              <View className="bg-gray-200 rounded-2xl">
                 <Text className="text-xl font-psemibold px-4 py-2">
                   ₱ {perks.original_amount}
                 </Text>
@@ -112,18 +112,17 @@ const PerksDetails = () => {
             </View>
           </View>
           <View className="mt-2 max-h-[200px]">
-            <ScrollView showsVerticalScrollIndicator={false}>
-              <Text className="font-pmedium text-lg">Description</Text>
-              <Text className="font-pregular text-md text-justify">
-                {perks.perks_description}
-              </Text>
-            </ScrollView>
+            <Text className="font-pmedium text-lg">Description</Text>
+            <Text className="font-pregular text-md text-justify">
+              {perks.perks_description}
+            </Text>
           </View>
         </View>
-      </View>
+
+      </ScrollView>
 
       <Footer />
-    </SafeAreaView>
+    </View>
   );
 };
 

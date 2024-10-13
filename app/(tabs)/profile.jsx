@@ -34,8 +34,8 @@ const Profile = () => {
   if (!isLogged) return <Redirect href="/sign-in" />;
 
   return (
-    <SafeAreaView edges={["top"]} className="bg-gray-100 h-full">
-      <ScrollView className="p-4">
+    <SafeAreaView edges={["top, bottom"]} className="bg-gray-100 h-full">
+      <ScrollView className="p-4 pt-12">
         {/* Profile Header */}
         <View className="bg-primary rounded-xl p-6 items-center">
           {url ? (
@@ -135,7 +135,7 @@ const Profile = () => {
         </View>
 
         {/* Account Section */}
-        <View className="mt-6 pb-32">
+        <View className="mt-6 pb-40">
           <Text className="text-gray-600 text-lg font-semibold mb-4">
             Account
           </Text>

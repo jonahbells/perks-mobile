@@ -1,16 +1,17 @@
 import { Image, TouchableOpacity } from "react-native";
+import { FontAwesome, MaterialIcons, Ionicons } from "@expo/vector-icons"; // for icons
 
 
-const CommonButton = ({ iconUrl, buttonDimension, imgDimension, color, handlePress }) => {
+const CommonButton = ({ name, size, color, buttonDimension, buttonColor, handlePress }) => {
   return (
     <TouchableOpacity
       onPress={handlePress}
-      className={`${buttonDimension} ${color}`}
+      className={`${buttonDimension} ${buttonColor}`}
       >
-      <Image
-        source={iconUrl}
-        resizeMode='contain'
-        className={`${imgDimension}`}
+      <Ionicons
+        name={name}
+        size={size}
+        color={color}
       />
     </TouchableOpacity>
   );
