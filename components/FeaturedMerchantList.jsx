@@ -43,11 +43,11 @@ const FeaturedMerchantList = ({ item, index, scrollX }) => {
         className={`w-[350] h-52 rounded-xl`}
       />
       <LinearGradient
-        colors={["transparent", 'rgba(0, 0, 0, 0.4)']}
+        colors={["transparent", 'rgba(0, 0, 0, 0.8)']}
         className={`absolute left-8 right-0 top-0 w-[350] h-52 rounded-xl p-8`}
       >
         <View className="absolute top-40 px-4">
-          <Text className="text-white font-pregular text-lg">{item.business_name}</Text>
+          <Text className="text-white font-psemibold text-lg">{item.business_name}</Text>
         </View>
       </LinearGradient>
     </Animated.View>
