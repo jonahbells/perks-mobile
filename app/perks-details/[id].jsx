@@ -55,11 +55,10 @@ const PerksDetails = () => {
 
   return (
     <View className="flex-1 bg-white">
-
       <ScrollView
-      refreshControl={
-        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-      }
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
       >
         <View className="px-4 pt-12 flex-row justify-between items-center absolute z-50 w-full">
           <CommonButton
@@ -77,10 +76,10 @@ const PerksDetails = () => {
             handlePress={() => router.back()}
             buttonDimension="p-2 rounded-full  items-center"
             imgDimension="w-5 h-5"
-            buttonColor="bg-secondary/70" 
+            buttonColor="bg-secondary/70"
             name="heart-outline"
             size="25"
-            />
+          />
         </View>
 
 
