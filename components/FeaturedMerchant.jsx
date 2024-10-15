@@ -44,7 +44,7 @@ const FeaturedMerchant = ({ featuredMerchantList }) => {
   // Update pagination index when viewable items change
   const onViewableItemsChanged = ({ viewableItems }) => {
     if (viewableItems[0].index !== undefined && viewableItems[0].index !== null) {
-      setPaginationIndex(viewableItems[0].index % data.length); // Loop index for pagination
+      setPaginationIndex(viewableItems[0].index % 5); // Loop index for pagination
     }
   };
 

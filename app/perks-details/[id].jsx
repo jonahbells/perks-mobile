@@ -80,7 +80,7 @@ const PerksDetails = () => {
           <Text>No image available</Text>
         )}
 
-        <View className="mt-4 px-4 h-full pb-12">
+        <View className="mt-4 px-4 h-full pb-20">
           <View className="flex-row min-h-[80] justify-between">
             <View className="w-[220] ">
               <Text className="text-xl font-psemibold" numberOfLines={3}>

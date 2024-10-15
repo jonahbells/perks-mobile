@@ -41,14 +41,14 @@ const TabsLayout = () => {
         screenOptions={{
           tabBarShowLabel: false,
           tabBarActiveTintColor: "#6132bc",
-          tabBarInactiveTintColor: "#9ca3af",
+          tabBarInactiveTintColor: "#d7d7d7",
           tabBarStyle: {
             backgroundColor: "#6132bc",
             height: 75,
             position: 'absolute',
             bottom: 25,       
             marginHorizontal: 80,
-            // paddingVertical: 3,   
+            paddingVertical: 30,   
             borderRadius: 40,
             alignItems: 'center',
             justifyContent: 'center',
