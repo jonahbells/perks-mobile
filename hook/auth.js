@@ -24,6 +24,7 @@ const setToken = async (token) => {
 const getToken = async () => {
     try {
         const token = await AsyncStorage.getItem('token');
+        console.log(token)
         return token ? JSON.parse(token) : null;
     } catch (error) {
         console.error('Error getting token from AsyncStorage:', error);

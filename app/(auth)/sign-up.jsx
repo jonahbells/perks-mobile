@@ -144,7 +144,7 @@ const SignUp = () => {
 
           <View className="w-full items-center">
             {/* OR separator */}
-            <View className="flex-row items-center my-5">
+            <View className="flex-row items-center my-4">
               {/* Left line */}
               <View className="flex-1 h-px bg-gray-300" />
 

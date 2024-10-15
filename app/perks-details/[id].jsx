@@ -8,7 +8,10 @@ import {
   ActivityIndicator,
   RefreshControl,
   Image,
+  TouchableOpacity,
 } from "react-native";
+
+import { FontAwesome, MaterialIcons, Ionicons } from "@expo/vector-icons"; // for icons
 
 import { image, icons } from "../../constants";
 import { fetchPerkById } from "../../hook/perks";
@@ -19,9 +22,10 @@ const PerksDetails = () => {
   const router = useRouter();
 
   const [perks, setPerks] = useState({});
-  const url = perks.perks_image && perks.perks_image[0] && perks.perks_image[0].src
-    ? `https://api.perksmania.com/api/v1/perks/image/${perks.perks_image[0].src}`
-    : null;
+  const url =
+    perks.perks_image && perks.perks_image[0] && perks.perks_image[0].src
+      ? `https://api.perksmania.com/api/v1/perks/image/${perks.perks_image[0].src}`
+      : null;
   const [isloading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [refreshing, setRefreshing] = useState(false);
@@ -56,44 +60,25 @@ const PerksDetails = () => {
   return (
     <View className="flex-1 bg-white">
       <ScrollView
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-        }
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+      }
       >
         <View className="px-4 pt-12 flex-row justify-between items-center absolute z-50 w-full">
-          <CommonButton
-            iconUrl={icons.left}
-            handlePress={() => router.back()}
-            buttonDimension="p-2 rounded-full"
-            buttonColor="bg-secondary/70"
-            name="arrow-back"
-            size="25"
-            color="black"
-          />
-
-          <CommonButton
-            iconUrl={icons.heartOutline}
-            handlePress={() => router.back()}
-            buttonDimension="p-2 rounded-full  items-center"
-            imgDimension="w-5 h-5"
-            buttonColor="bg-secondary/70"
-            name="heart-outline"
-            size="25"
-          />
+        
+          <TouchableOpacity onPress={() => router.back()} className="p-2 rounded-full bg-secondary/70">
+            <Ionicons name="arrow-back" size={20} />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => router.back()} className="p-2 rounded-full bg-secondary/70">
+            <Ionicons name="heart-outline" size={20} />
+          </TouchableOpacity>
         </View>
 
-
-
         {perks.perks_image ? (
-          <Image
-            className="h-[400]"
-            source={{ uri: url }}
-            resizeMode="cover"
-          />
+          <Image className="h-[400]" source={{ uri: url }} resizeMode="cover" />
         ) : (
           <Text>No image available</Text>
         )}
-
 
         <View className="mt-4 px-4">
           <View className="flex-row min-h-[80] justify-between">
@@ -117,7 +102,6 @@ const PerksDetails = () => {
             </Text>
           </View>
         </View>
-
       </ScrollView>
 
       <Footer />

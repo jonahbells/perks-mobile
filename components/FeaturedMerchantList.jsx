@@ -31,20 +31,21 @@ const FeaturedMerchantList = ({ item, index, scrollX }) => {
       ]
     }
   })
-  console.log(rnAnimatedStyle)
 
   return (
     <Animated.View
       key={item._id}
-      className={`relative w-[414] justify-center items-center`}
-      style={rnAnimatedStyle}>
+      className={`relative justify-center items-center`}
+      style={[rnAnimatedStyle, {width:width}]}>
       <Image
         source={{ uri: url }}
-        className={`w-[350] h-52 rounded-xl`}
+        className={`h-52 rounded-xl`}
+        style={{width:width-57}}
       />
       <LinearGradient
         colors={["transparent", 'rgba(0, 0, 0, 0.6)']}
-        className={`absolute left-8 right-0 top-0 w-[350] h-52 rounded-xl p-8`}
+        className={`absolute left-7 right-0 top-0 h-52 rounded-xl`}
+        style={[{width:width-57}]}
       >
         <View className="absolute top-40 px-4">
           <Text className="text-white font-pmedium text-lg">{item.business_name}</Text>
