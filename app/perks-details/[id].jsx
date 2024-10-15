@@ -66,10 +66,10 @@ const PerksDetails = () => {
       >
         <View className="px-4 pt-12 flex-row justify-between items-center absolute z-50 w-full">
         
-          <TouchableOpacity onPress={() => router.back()} className="p-2 rounded-full bg-secondary/70">
+          <TouchableOpacity onPress={() => router.back()} className="p-2 rounded-full bg-gray/70">
             <Ionicons name="arrow-back" size={20} />
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => router.back()} className="p-2 rounded-full bg-secondary/70">
+          <TouchableOpacity onPress={() => router.back()} className="p-2 rounded-full bg-gray/70">
             <Ionicons name="heart-outline" size={20} />
           </TouchableOpacity>
         </View>
@@ -80,7 +80,7 @@ const PerksDetails = () => {
           <Text>No image available</Text>
         )}
 
-        <View className="mt-4 px-4">
+        <View className="mt-4 px-4 h-full pb-12">
           <View className="flex-row min-h-[80] justify-between">
             <View className="w-[220] ">
               <Text className="text-xl font-psemibold" numberOfLines={3}>
@@ -95,7 +95,7 @@ const PerksDetails = () => {
               </View>
             </View>
           </View>
-          <View className="mt-2 max-h-[200px]">
+          <View className="mt-2">
             <Text className="font-pmedium text-lg">Description</Text>
             <Text className="font-pregular text-md text-justify">
               {perks.perks_description}
