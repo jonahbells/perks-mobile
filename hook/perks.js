@@ -23,7 +23,7 @@
 //       // const data = await response.json();
 //       setData(response.data.rows);
 //       setIsLoading(false);
-//     } catch (error) {
+//     } catch (error) {496
 //       setError(error);
 //       console.log(error)
 //     } finally {

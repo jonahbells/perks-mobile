@@ -34,12 +34,14 @@ const SignIn = () => {
 
   const webClientId = '40387580751-9a0q1aabcfuqucqloafr1v5m5famkrtr.apps.googleusercontent.com'
   const iosClientId = '40387580751-prk76d7fdf6gr8mljsnhsoa2q939suc8.apps.googleusercontent.com'
+  const androidClientId = '40387580751-prk76d7fdf6gr8mljsnhsoa2q939suc8.apps.googleusercontent.com'
 
   WebBrowser.maybeCompleteAuthSession
 
   const config = {
     webClientId,
-    iosClientId
+    iosClientId,
+    androidClientId
   }
 
   const [request, response, promptAsync] = Google.useAuthRequest(

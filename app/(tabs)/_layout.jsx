@@ -48,7 +48,7 @@ const TabsLayout = () => {
             position: 'absolute',
             bottom: 25,       
             marginHorizontal: 50,
-            paddingVertical: 28,   
+            paddingVertical: 30,   
             borderRadius: 40,
             alignItems: 'center',
             justifyContent: 'center',
