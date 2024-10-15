@@ -48,7 +48,7 @@ const FeaturedMerchantList = ({ item, index, scrollX }) => {
         style={[{width:width-57}]}
       >
         <View className="absolute top-40 px-4">
-          <Text className="text-white font-pmedium text-lg">{item.business_name}</Text>
+          <Text className="text-gray font-pregular text-sm">{item.business_name}</Text>
         </View>
       </LinearGradient>
     </Animated.View>
