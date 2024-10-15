@@ -7,12 +7,12 @@ import { icons } from '../../constants'
 
 const TabIcon = ({ icon, color, name, focused }) => {
   return (
-    <View className={`${focused? "bg-gray-300": null} rounded-full p-2`}>
+    <View className={`${focused? "bg-white": null} rounded-full p-2`}>
       <Image
         source={icon}
         resizeMode='contain'
         tintColor= {color}
-        className='w-7 h-7'
+        className='w-6 h-6'
       />
       {/* <Text className="text-xs"
         style={{ color: color }}>
@@ -24,7 +24,7 @@ const TabIcon = ({ icon, color, name, focused }) => {
 
 const IoniconsTabIcon = ({ name, color, focused }) => {
   return (
-    <View className={`${focused? "bg-gray-300": "bg-#999"} rounded-full p-2`}>
+    <View className={`${focused? "bg-white": "bg-#999"} rounded-full p-2`}>
     <Ionicons
       name={name}
       size={28} // Adjust size as needed
@@ -47,13 +47,13 @@ const TabsLayout = () => {
             height: 75,
             position: 'absolute',
             bottom: 25,       
-            marginHorizontal: 50,
-            paddingVertical: 30,   
+            marginHorizontal: 80,
+            // paddingVertical: 3,   
             borderRadius: 40,
             alignItems: 'center',
             justifyContent: 'center',
             borderTopWidth: 0,
-            paddingHorizontal: 10
+            paddingHorizontal: 7
           },
         }}
       >
