@@ -8,9 +8,11 @@ import {
   TouchableOpacity,
   Modal
 } from "react-native";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, router } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
+import * as WebBrowser from "expo-web-browser";
+import * as Google from "expo-auth-session/providers/google";
 
 import { FontAwesome, MaterialIcons, Ionicons } from "@expo/vector-icons"; // for icons
 
@@ -29,6 +31,32 @@ const SignIn = () => {
     email: "",
     password: "",
   });
+
+  const webClientId = '40387580751-9a0q1aabcfuqucqloafr1v5m5famkrtr.apps.googleusercontent.com'
+  const iosClientId = '40387580751-prk76d7fdf6gr8mljsnhsoa2q939suc8.apps.googleusercontent.com'
+
+  WebBrowser.maybeCompleteAuthSession
+
+  const config = {
+    webClientId,
+    iosClientId
+  }
+
+  const [request, response, promptAsync] = Google.useAuthRequest(
+    config
+  );
+
+  const handleToken = () => {
+    if(response?.type === "success") {
+      const {authentication} = response;
+      const token = authentication?.accessToken;
+      console.log("access token", token)
+    }
+  }
+
+  useEffect(() => {
+    handleToken();
+  }, [response]);
 
   const validateForm = () => {
     let errors = {};
@@ -84,7 +112,7 @@ const SignIn = () => {
     <SafeAreaView edges={["bottom"]} className="bg-white h-full">
       <ScrollView className="pt-14">
         <View className="px-4">
-        <CommonButton
+          <CommonButton
             iconUrl={icons.left}
             handlePress={() => router.replace("/home")}
             buttonDimension="w-11 h-11 rounded-full justify-center items-center"
@@ -163,7 +191,10 @@ const SignIn = () => {
             </TouchableOpacity>
 
             {/* Google Button */}
-            <TouchableOpacity className="w-full py-4 mt-2 flex-row items-center justify-center border bg-gray-300 border-gray-300 rounded-2xl">
+            <TouchableOpacity 
+            className="w-full py-4 mt-2 flex-row items-center justify-center border bg-gray-300 border-gray-300 rounded-2xl"
+            onPress={() => promptAsync()}
+            >
               <FontAwesome name="google" size={24} color="gray" />
               <Text className="text-gray-700 text-lg font-semibold ml-2">
                 Sign in with Google

@@ -32,8 +32,9 @@
     ],
     "extra": {
       "eas": {
-        "projectId": "e4f18246-3a24-49f9-86cf-492c38b01be9"
+        "projectId": "1146ccc0-18af-43a6-9245-877aece35230"
       }
-    }
+    },
+    "owner": "jonah.delrosario"
   }
 }
