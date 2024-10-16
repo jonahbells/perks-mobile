@@ -31,3 +31,14 @@ export const fetchMerchantById = async (id) => {
   }
 
 };
+
+export const checkMerchantVerification = async (id) => {
+  try {
+    const response = await api.get('merchants/'+id);
+    return response.data;m
+
+  } catch (error) {
+    throw error;  // Propagate error to the caller
+  }
+
+};
