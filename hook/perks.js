@@ -112,3 +112,13 @@ export const fetchPerkById = async (id) => {
   }
 
 };
+
+// Function to make GET perks by merchant
+export const fetchPerksByMerchantId = async (id) => {
+  try {
+    const response = await api.get('perks/bymerchant'+id);
+    return response.data;
+  } catch (error) {
+    throw error;  // Propagate error to the caller
+  }
+};

@@ -26,6 +26,28 @@ const CustomCard = ({ perks, handleNavigate }) => {
       console.log(perks._id)
       };
 
+      const likesByCustomer = async () => {
+        try {
+          // Construct the API URL with merchant ID and query parameter
+          const url = `https://api.perksmania.com/api/v1/likes/customer/${id}`;
+  
+          // Make the fetch request
+          const response = await fetch(url);
+          const data = await response.json();
+  
+          // Assuming the API returns a field like 'verification_status' that tells us if the merchant is verified
+          if (data.verification_status === "Verified") {
+            setIsVerified(true);
+          } else {
+            setIsVerified(false);
+          }
+        } catch (error) {
+          setError("Failed to fetch merchant data");
+        } finally {
+          setLoading(false);
+        }
+      };
+
   return (
     <View className='p-2 w-[50%] h-[300]'>
       <TouchableOpacity
