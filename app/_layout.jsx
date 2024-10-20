@@ -3,6 +3,8 @@ import { Slot, SplashScreen, Stack } from 'expo-router'
 import { useFonts } from 'expo-font'
 import { useEffect } from 'react';
 
+import { ClerkProvider, ClerkLoaded } from '@clerk/clerk-expo'
+
 import GlobalProvider from "../context/GlobalProvider";
 
 SplashScreen.preventAutoHideAsync();
@@ -37,7 +39,9 @@ const RootLayout = () => {
     return null;
   }
 
+
   return (
+    <ClerkProvider publishableKey={process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY}>
     <GlobalProvider>
     <Stack>
       <Stack.Screen
@@ -62,6 +66,7 @@ const RootLayout = () => {
       /> */}
     </Stack>
     </GlobalProvider>
+    </ClerkProvider>
   )
 }
 

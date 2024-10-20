@@ -13,6 +13,7 @@ import { Link, router } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 import * as WebBrowser from "expo-web-browser";
 import * as Google from "expo-auth-session/providers/google";
+import { useOAuth, useUser } from '@clerk/clerk-expo'
 
 import { FontAwesome, MaterialIcons, Ionicons } from "@expo/vector-icons"; // for icons
 
@@ -32,6 +33,11 @@ const SignIn = () => {
     password: "",
   });
 
+  const { startOAuthFlow } = useOAuth({ strategy: 'oauth_google' })
+
+  const { user } = useUser(); // useUser provides user details after OAuth login
+  console.log("user", user)
+
   const webClientId = '40387580751-9a0q1aabcfuqucqloafr1v5m5famkrtr.apps.googleusercontent.com'
   const iosClientId = '40387580751-prk76d7fdf6gr8mljsnhsoa2q939suc8.apps.googleusercontent.com'
   const androidClientId = '40387580751-prk76d7fdf6gr8mljsnhsoa2q939suc8.apps.googleusercontent.com'
@@ -49,16 +55,34 @@ const SignIn = () => {
   );
 
   const handleToken = () => {
-    if(response?.type === "success") {
-      const {authentication} = response;
+    if (response?.type === "success") {
+      const { authentication } = response;
       const token = authentication?.accessToken;
       console.log("access token", token)
+    }
+  }
+
+  // Function to handle Google Sign-In
+  const handleGoogleSignIn = async () => {
+    try {
+      const { createdSessionId, signIn, signUp, setActive } = await startOAuthFlow({
+      })
+
+      if (createdSessionId) {
+        await setActive({ session: createdSessionId })
+      } else {
+        // Use signIn or signUp for next steps such as MFA
+      }
+    } catch (err) {
+      console.error('OAuth error', err)
     }
   }
 
   useEffect(() => {
     handleToken();
   }, [response]);
+
+
 
   const validateForm = () => {
     let errors = {};
@@ -114,7 +138,7 @@ const SignIn = () => {
     <SafeAreaView edges={["bottom"]} className="bg-white h-full">
       <ScrollView className="pt-14">
         <View className="px-4">
-        <TouchableOpacity onPress={() => router.replace("/home")} className="w-9 p-2 rounded-full bg-gray">
+          <TouchableOpacity onPress={() => router.replace("/home")} className="w-9 p-2 rounded-full bg-gray">
             <Ionicons name="arrow-back" size={20} />
           </TouchableOpacity>
         </View>
@@ -187,9 +211,9 @@ const SignIn = () => {
             </TouchableOpacity>
 
             {/* Google Button */}
-            <TouchableOpacity 
-            className="w-full py-4 mt-2 flex-row items-center justify-center border bg-gray-300 border-gray-300 rounded-2xl"
-            onPress={() => promptAsync()}
+            <TouchableOpacity
+              className="w-full py-4 mt-2 flex-row items-center justify-center border bg-gray-300 border-gray-300 rounded-2xl"
+              onPress={() => handleGoogleSignIn()}
             >
               <FontAwesome name="google" size={24} color="gray" />
               <Text className="text-gray-700 text-lg font-semibold ml-2">
