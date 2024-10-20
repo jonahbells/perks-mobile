@@ -53,7 +53,12 @@ const TabsLayout = () => {
             alignItems: 'center',
             justifyContent: 'center',
             borderTopWidth: 0,
-            paddingHorizontal: 7
+            paddingHorizontal: 7,
+            shadowColor: '#000', // iOS shadow color
+            shadowOffset: { width: 0, height: 2 }, // iOS shadow offset
+            shadowOpacity: 0.25, // iOS shadow opacity
+            shadowRadius: 3.84, // iOS shadow radius
+            elevation: 5, // Android elevation for shadow
           },
         }}
       >
