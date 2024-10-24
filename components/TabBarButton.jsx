@@ -17,7 +17,7 @@ const TabBarButton = ({
           <Image
             source={isFocused ? icons.home : icons.homeOutline}
             resizeMode="contain"
-            tintColor={isFocused ? "#fefefe" : "#cbd5e1"}
+            tintColor={isFocused ? "#fefefe" : "#94a3b8"}
             className="w-6 h-6"
           />
         ),
@@ -25,7 +25,7 @@ const TabBarButton = ({
           <Image
             source={isFocused ? icons.home : icons.homeOutline}
             resizeMode="contain"
-            tintColor={isFocused ? "#fefefe" : "#cbd5e1"}
+            tintColor={isFocused ? "#fefefe" : "#94a3b8"}
             className="w-6 h-6"
           />
         ),
@@ -33,7 +33,7 @@ const TabBarButton = ({
           <Image
             source={icons.scanner}
             resizeMode="contain"
-            tintColor={isFocused ? "#fefefe" : "#cbd5e1"}
+            tintColor={isFocused ? "#fefefe" : "#94a3b8"}
             className="w-6 h-6"
           />
         ),
@@ -41,7 +41,7 @@ const TabBarButton = ({
           <Image
             source={isFocused ? icons.user : icons.userOutline}
             resizeMode="contain"
-            tintColor={isFocused ? "#fefefe" : "#cbd5e1"}
+            tintColor={isFocused ? "#fefefe" : "#94a3b8"}
             className="w-6 h-6"
           />
         ),
@@ -53,7 +53,7 @@ const TabBarButton = ({
       className="flex-1 items-center justify-center"
     >
       {icon[routeName]}
-      <Text style={{ color: isFocused ? "#fefefe" : "#cbd5e1" }}>{label}</Text>
+      <Text style={{ color: isFocused ? "#fefefe" : "#94a3b8" }}>{label}</Text>
     </Pressable>
   );
 };
