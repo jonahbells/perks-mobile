@@ -14,7 +14,7 @@ import {
 import { icons, images } from "../../constants"; // Ensure fallback image is in your constants
 import { fetchMerchantById, checkMerchantVerification } from "../../hook/merchants";
 import { fetchPerksByMerchantId } from "../../hook/perks";
-import { CommonButton, Footer } from "../../components";
+import { CommonButton, CustomCardRow, Footer, CustomCard } from "../../components";
 import Ionicons from '@expo/vector-icons/Ionicons';
 
 const MerchantsDetails = ({ handleNavigate }) => {
@@ -28,52 +28,53 @@ const MerchantsDetails = ({ handleNavigate }) => {
   const [isLiked, setIsLiked] = useState(false);
   const [isSaved, setIsSaved] = useState(false); // State for the bookmark
   const [perks, setPerks] = useState(null);
+  const [data, setData] = useState({});
 
   // Set the image URL; if merchants.logoimage is not available, fallback to a default image
   const url = merchants.logoimage
     ? `https://api.perksmania.com/api/v1/merchants/image/${merchants.logoimage}`
-    : images.perksIcon; 
+    : images.perksIcon;
 
   const perksUrl = perks?.perks_image?.length > 0
     ? `https://api.perksmania.com/api/v1/perks/${perks.perks_image[0].src}`
-    : images.perksIcon; 
+    : images.perksIcon;
 
 
-    const checkMerchantVerification = async () => {
-      try {
-        // Construct the API URL with merchant ID and query parameter
-        const url = `https://api.perksmania.com/api/v1/merchants/${merchantId}?verification_status=Unverified`;
+  const checkMerchantVerification = async () => {
+    try {
+      // Construct the API URL with merchant ID and query parameter
+      const url = `https://api.perksmania.com/api/v1/merchants/${merchantId}?verification_status=Unverified`;
 
-        // Make the fetch request
-        const response = await fetch(url);
-        const data = await response.json();
+      // Make the fetch request
+      const response = await fetch(url);
+      const data = await response.json();
 
-        // Assuming the API returns a field like 'verification_status' that tells us if the merchant is verified
-        if (data.verification_status === "Verified") {
-          setIsVerified(true);
-        } else {
-          setIsVerified(false);
-        }
-      } catch (error) {
-        setError("Failed to fetch merchant data");
-      } finally {
-        setLoading(false);
+      // Assuming the API returns a field like 'verification_status' that tells us if the merchant is verified
+      if (data.verification_status === "Verified") {
+        setIsVerified(true);
+      } else {
+        setIsVerified(false);
       }
-    };
+    } catch (error) {
+      setError("Failed to fetch merchant data");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const fetchPerksByMerchantId = async () => {
     try {
       const response = await fetch(`https://api.perksmania.com/api/v1/perks/bymerchant/${params.id}`);
-      const data = await response.json();
+      const json = await response.json();
+        setData(json.rows); // Save data to state
       console.log('Perks Response:', data);
-      return data;
     } catch (error) {
       throw new Error('Error fetching perks');
     }
-    };
-  // const toggleHeart = () => {
-  //   setIsLiked(!isLiked);
-  // };
+  };
+  const toggleHeart = () => {
+    setIsLiked(!isLiked);
+  };
 
   const verificationBadge = {
     icon: merchants.verification_status === "Verified" ? "checkmark-circle" : "checkmark-circle-outline",
@@ -81,9 +82,9 @@ const MerchantsDetails = ({ handleNavigate }) => {
   };
 
   // Toggle the bookmark state
-  const savedBookmark = () => {
-    setIsSaved(!isSaved); // Correct toggle logic
-  };
+  // const savedBookmark = () => {
+  //   setIsSaved(!isSaved); // Correct toggle logic
+  // };
 
   const merchantsById = async () => {
     try {
@@ -104,6 +105,7 @@ const MerchantsDetails = ({ handleNavigate }) => {
 
   useEffect(() => {
     merchantsById();
+    fetchPerksByMerchantId();
   }, []);
 
   const onRefresh = async () => {
@@ -132,25 +134,21 @@ const MerchantsDetails = ({ handleNavigate }) => {
           headerShadowVisible: false,
           headerBackVisible: false,
           headerLeft: () => (
-            <CommonButton
-              iconUrl={icons.left}
-              handlePress={() => router.back()}
-              buttonDimension="w-11 h-11 rounded-3xl justify-center"
-              imgDimension="w-5 h-5 ml-[10px]"
-              color="bg-secondary"
-            />
+            <TouchableOpacity onPress={() => router.back()} className="p-2 rounded-full bg-gray/70">
+            <Ionicons name="arrow-back" size={20} />
+          </TouchableOpacity>
           ),
           headerTitle: () => (
             <Text className="font-pmedium text-pretty text-lg" numberOfLines={2}>Merchant Details</Text>
           ),
           headerRight: () => (
             <View>
-              <TouchableOpacity onPress={savedBookmark} className="p-2 bg-white rounded-full">
-                <Ionicons
-                  name={isSaved ? "bookmark" : "bookmark-outline"}
-                  size={24}
-                  color={isSaved ? "#0000ff" : "black"} // Change color on toggle
-                />
+              <TouchableOpacity onPress={toggleHeart} className="p-2 bg-gray rounded-full">
+              <Ionicons 
+                    name={isLiked ? "heart" : "heart-outline"} // Toggle between filled and outlined heart
+                    size={24} 
+                    color={isLiked ? "red" : "black"} // Change color on toggle
+                  />
               </TouchableOpacity>
             </View>
           ),
@@ -169,7 +167,7 @@ const MerchantsDetails = ({ handleNavigate }) => {
             <Text className="text-center text-red-500">Failed to load merchant details. Please try again later.</Text>
           </View>
         )} */}
-        
+
         <View className="px-4 mt-4">
           <View className="items-center">
             <Image
@@ -182,23 +180,22 @@ const MerchantsDetails = ({ handleNavigate }) => {
           <View className="mt-4">
             <View className="mt-4 flex-row justify-between items-center">
               <Text
-                className="font-bold text-balance text-base capitalize text-2xl flex-1 mr-4"
+                className="text-base font-psemibold capitalize text-2xl flex-1 mr-4"
                 numberOfLines={3}
-                style={{ color: '#0000ff' }}
               >
                 {merchants.business_name}
 
-              <View>
-              <Ionicons
+                <View>
+                  <Ionicons
                     name={verificationBadge.icon}
                     size={24}
                     color={verificationBadge.color}
                     style={{ marginLeft: 8, marginTop: 4 }}
                   />
-              </View>
+                </View>
               </Text>
-              
-              
+
+
               {/* <TouchableOpacity onPress={savedBookmark} className="p-2 bg-white rounded-full">
                 <Ionicons
                   name={isSaved ? "bookmark" : "bookmark-outline"}
@@ -225,74 +222,26 @@ const MerchantsDetails = ({ handleNavigate }) => {
 
 
             {/* Perks */}
-            <View className="mt-4 flex-row justify-between items-center">
-              <Text
-                className="font-bold text-balance text-base capitalize text-2xl flex-1 mr-4"
-                numberOfLines={3}
-                style={{ color: '#0000ff' }}
-              >
-                Perks
-              </Text>
-            </View>
+            <View className='mt-6'>
 
-            <View className="p-2 w-[50%] h-[300]">
-              <TouchableOpacity
-                className="rounded-2xl bg-secondary shadow-sm shadow-slate-300"
-                onPress={handleNavigate}
-                activeOpacity={1}
-              >
-                <View className="p-2">
-                  <View>
-                    {!perks ? (
-                      // Show ActivityIndicator while perks are loading
-                      <ActivityIndicator size="small" color="#0000ff" />
-                    ) : (
-                      <Image
-                        className="h-40 rounded-xl"
-                        source={{ uri: perksUrl }} // Dynamically load the perks image
-                        resizeMode="cover"
-                      />
-                    )}
-                  </View>
+              <Text className='font-bold text-balance text-base text-primary capitalize text-2xl flex-1 mr-4'>Discover Perks</Text>
 
-                  {perks && ( // Render the perks details only when data is available
-                    <View className="h-[100] flex-col justify-between mt-2">
-                      <View>
-                        <Text className="text-md font-pregular" numberOfLines={2}>
-                          {perks?.perks_name || "No Perk Available"} {/* Fallback text */}
-                        </Text>
-                      </View>
-                      <View className="flex-row justify-between">
-                        <View>
-                          <Text className="text-lg font-psemibold text-black">
-                            ₱{perks?.discount || "0"} off
-                          </Text>
-                          <Text className="text-lg font-psemibold text-black">
-                            ₱{perks?.original_amount || "0"}
-                          </Text>
-                        </View>
-                      </View>
-                    </View>
-                  )}
-                </View>
-              </TouchableOpacity>
-            </View>
-
-            {/* <View className='flex-row flex-wrap mb-28'>
+              <View className='flex-row flex-wrap mb-28'>
                 {isLoading ? (
-                    <ActivityIndicator size='large' />
+                  <ActivityIndicator size='large' />
                 ) : error ? (
-                    <Text>Something went wrong</Text>
+                  <Text>Something went wrong</Text>
                 ) : (
-                    params?.map((item, index) => (
-                        <CustomCard
-                            perks={item}
-                            key={`perks-details-${item._id}`}
-                            handleNavigate={() => router.push(`/perks-details/${item._id}`)}
-                        />
-                    ))
+                  data?.map((item, index) => (
+                    <CustomCard
+                      perks={item}
+                      key={`perks-details-${item._id}`}
+                      handleNavigate={() => router.push(`/perks-details/${item._id}`)}
+                    />
+                  ))
                 )}
-            </View> */}
+              </View>
+            </View>
 
           </View>
         </View>
