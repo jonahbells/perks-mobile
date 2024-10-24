@@ -20,6 +20,8 @@ import {
   FeaturedMerchant,
 } from "../../components";
 
+import Slider from "../../components/Home/Slider";
+
 const Home = () => {
   const [loading, setLoading] = useState(true);
   const [feturedMerchant, setFeturedMerchant] = useState([]);
@@ -43,16 +45,20 @@ const Home = () => {
 
   return (
     <>
+
+    {/* Header */}
+
       <Stack.Screen
         options={{
           header: () => <ScreenHeader />,
         }}
       />
-      <ScrollView showsVerticalScrollIndicator={false}
-        className="bg-white ">
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <Slider />
         {loading ? (
           <ActivityIndicator size={'large'}/> 
         ) : (
+          
           <FeaturedMerchant
             featuredMerchantList={feturedMerchant}
           />

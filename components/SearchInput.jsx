@@ -11,7 +11,7 @@ const SearchInput = ({ initialQuery }) => {
   return (
     <View className="mb-6 flex-row items-center w-full h-14 px-4 rounded-2xl bg-slate-100">
       <TouchableOpacity
-        className='mr-1'
+        className='mr-2'
         onPress={() => {
           if (query === "")
             return Alert.alert(
@@ -25,16 +25,16 @@ const SearchInput = ({ initialQuery }) => {
       >
         <Image 
         source={icons.search} 
-        tintColor='#94a3b8'
+        tintColor='#64748b'
         className="w-6 h-6 " 
         resizeMode="contain" />
       </TouchableOpacity>
 
       <TextInput
-        className="text-base flex-1 font-pregular text-black"
+        className="text-lg flex-1 font-pmedium text-black"
         value={query}
-        placeholder="What are you looking for?"
-        placeholderTextColor="#94a3b8"
+        placeholder="Search..."
+        placeholderTextColor="#64748b"
         onChangeText={(e) => setQuery(e)}
       />
 

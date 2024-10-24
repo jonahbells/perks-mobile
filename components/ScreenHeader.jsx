@@ -1,7 +1,7 @@
 import { View, Text, Image } from 'react-native'
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { FontAwesome } from '@expo/vector-icons'; // for icons
+import { FontAwesome, FontAwesome6 } from '@expo/vector-icons'; // for icons
 
 import { useGlobalContext } from "../context/GlobalProvider";
 import { images } from '../constants'
@@ -23,7 +23,7 @@ const Header = () => {
                                 source={{ uri: url }}
                                 className='h-10 w-10 rounded-full'
                             />) :
-                            <FontAwesome name="user-circle-o" size={40} color="#d1d5db" />
+                            <FontAwesome6 name="user-circle" size={40} color="#d1d5db" />
                         }
                     </View>
 

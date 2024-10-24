@@ -51,7 +51,7 @@ const CustomCard = ({ perks, handleNavigate }) => {
   return (
     <View className='p-2 w-[50%] h-[300]'>
       <TouchableOpacity
-        className="rounded-2xl bg-secondary shadow-sm shadow-slate-300"
+        className="rounded-2xl bg-white shadow-sm shadow-slate-300"
         onPress={handleNavigate}
         activeOpacity={1}
       >
@@ -85,7 +85,7 @@ const CustomCard = ({ perks, handleNavigate }) => {
                 </Text>
               </View>
               <View>
-                <TouchableOpacity onPress={toggleHeart} className = "p-2 bg-white rounded-full">
+                <TouchableOpacity onPress={toggleHeart} className = "p-2 bg-gray-100 rounded-full">
                   <Ionicons 
                     name={isLiked ? "heart" : "heart-outline"} // Toggle between filled and outlined heart
                     size={24} 

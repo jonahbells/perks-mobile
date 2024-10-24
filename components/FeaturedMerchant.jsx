@@ -63,7 +63,7 @@ const FeaturedMerchant = ({ featuredMerchantList }) => {
 
   return (
     <View className='mt-8'>
-      <Text className='text-xl font-pmedium ml-4 mb-4'>Featured Merchants</Text>
+      <Text className='text-xl font-psemibold ml-4 mb-4'>Featured Merchants</Text>
       <Animated.FlatList
         ref={ref}
         data={data}

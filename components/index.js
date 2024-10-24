@@ -10,6 +10,8 @@ import FeaturedMerchant from "./FeaturedMerchant";
 import FeaturedMerchantList from "./FeaturedMerchantList";
 import Pagination from "./Pagination";
 import Loader from "./Loader";
+import TabBar from "./TabBar";
+import TabBarButton from "./TabBarButton"
 
 export {
   CustomButton,
@@ -23,5 +25,7 @@ export {
   FeaturedMerchant,
   FeaturedMerchantList,
   Pagination,
-  Loader
+  Loader,
+  TabBar,
+  TabBarButton
 };
