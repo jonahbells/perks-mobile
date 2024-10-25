@@ -41,12 +41,12 @@ const Profile = () => {
           {url ? (
             <Image
               source={{ uri: url }} // Replace with actual user image
-              className="w-20 h-20 rounded-full"
+              className="w-24 h-24 rounded-full"
             />
           ) : (
             <View className="w-24 h-24 bg-black rounded-full justify-center items-center">
-            <Text className="text-white text-3xl">{user?.firstname?.[0]}{user?.lastname?.[0]}</Text>
-          </View>
+              <Text className="text-white text-3xl">{user?.firstname?.[0]}{user?.lastname?.[0]}</Text>
+            </View>
           )}
           <Text className="text-xl font-semibold mt-4">
             {user?.firstname} {user?.lastname}

@@ -137,9 +137,9 @@ const SignIn = () => {
   return (
     <SafeAreaView edges={["bottom"]} className="h-full">
       <ScrollView className="pt-14">
-        <View className="px-4">
-          <TouchableOpacity onPress={() => router.replace("/home")} className="w-9 p-2 rounded-full bg-gray">
-            <Ionicons name="arrow-back" size={20} />
+        <View className="px-4 flex-row">
+          <TouchableOpacity onPress={() => router.replace("/home")} className="p-2 rounded-full bg-white">
+            <Ionicons name="arrow-back" size={26} />
           </TouchableOpacity>
         </View>
         <View

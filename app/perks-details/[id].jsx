@@ -58,7 +58,7 @@ const PerksDetails = () => {
   // };
 
   return (
-    <View className="flex-1 bg-white">
+    <View className="flex-1">
       <ScrollView
       refreshControl={
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
@@ -66,11 +66,11 @@ const PerksDetails = () => {
       >
         <View className="px-4 pt-12 flex-row justify-between items-center absolute z-50 w-full">
         
-          <TouchableOpacity onPress={() => router.back()} className="p-2 rounded-full bg-gray/70">
-            <Ionicons name="arrow-back" size={20} />
+          <TouchableOpacity onPress={() => router.back()} className="p-2 rounded-full bg-white/70">
+            <Ionicons name="arrow-back" size={26} />
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => router.back()} className="p-2 rounded-full bg-gray/70">
-            <Ionicons name="heart-outline" size={20} />
+          <TouchableOpacity onPress={() => router.back()} className="p-2 rounded-full bg-white/70">
+            <Ionicons name="heart-outline" size={26} />
           </TouchableOpacity>
         </View>
 

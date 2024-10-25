@@ -23,7 +23,9 @@ const Header = () => {
                                 source={{ uri: url }}
                                 className='h-10 w-10 rounded-full'
                             />) :
-                            <FontAwesome6 name="user-circle" size={40} color="#d1d5db" />
+                            <View className="w-11 h-11 bg-black rounded-full justify-center items-center">
+                                <Text className="text-white font-pmedium text-xl">{user?.firstname && user?.lastname ? `${user.firstname[0]}${user.lastname[0]}` : "G"}</Text>
+                            </View>
                         }
                     </View>
 
