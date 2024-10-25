@@ -40,8 +40,8 @@ const Header = () => {
                 <View>
                     <Image
                         source={images.perksLogo}
-                        className="w-28 h-8"
-                        resizeMode='cover'
+                        className="w-20 h-7"
+                        resizeMode='contain'
                     />
                 </View>
             </View>

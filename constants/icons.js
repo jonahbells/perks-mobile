@@ -20,6 +20,8 @@ import heartOutline from "../assets/icons/heart-ol.png"
 import left from "../assets/icons/left.png";
 import shoppingBag from "../assets/icons/shopping-bag.png";
 import cart from "../assets/icons/online-shopping.png";
+import merchant from "../assets/icons/merchant.png";
+import merchantOutline from "../assets/icons/merchant-outline.png";
 
 
 export default {
@@ -44,5 +46,7 @@ export default {
   left,
   heartOutline,
   shoppingBag,
-  cart
+  cart,
+  merchant,
+  merchantOutline
 };

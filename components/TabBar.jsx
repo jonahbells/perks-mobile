@@ -1,14 +1,42 @@
-import { View, Text, TouchableOpacity, Image } from "react-native";
+import { View, Text, TouchableOpacity, Image, LayoutChangeEvent } from "react-native";
 
 import { images, icons } from "../constants";
 import TabBarButton from "./TabBarButton";
+import { useState } from "react";
+import Animated, { useAnimatedStyle, useSharedValue, withSpring } from "react-native-reanimated";
 
 const TabBar = ({ state, descriptors, navigation }) => {
+  const [dimensions, setDimensions] = useState({height: 20, width:100});
+
+  const buttonWidth = dimensions.width / state.routes.length;
+
+  const onTabbarLayout = (e) => {
+    setDimensions({
+      height: e.nativeEvent.layout.height,
+      width: e.nativeEvent.layout.width
+    })
+  }
+
+  const tabPositionX = useSharedValue(0);
+
+  const animatedStyle = useAnimatedStyle(() => {
+    return {
+      transform: [{ translateX: tabPositionX.value }],
+    };
+  });
+
   return (
-    <View
+    <View onLayout={onTabbarLayout}
+    style={{
+      shadowColor: 'black',
+      shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 0.25,
+      shadowRadius: 4,
+      elevation: 5, // Elevation for Android
+    }}
     className="
     absolute 
-    bottom-6 
+    bottom-5 
     flex-row 
     items-center 
     justify-between 
@@ -16,10 +44,18 @@ const TabBar = ({ state, descriptors, navigation }) => {
     mx-14 
     py-5 
     rounded-full
-    shadow-black
-    shadow-2xl
     "
     >
+      <Animated.View style={[animatedStyle,
+        {
+          position: "absolute",
+          backgroundColor: "rgba(255, 255, 255, 0.2)",
+          borderRadius: 30,
+          marginHorizontal: 10,
+          height: dimensions.height - 30,
+          width: buttonWidth - 19
+        }
+      ]} />
       {state.routes.map((route, index) => {
         const { options } = descriptors[route.key];
         const label =
@@ -32,6 +68,7 @@ const TabBar = ({ state, descriptors, navigation }) => {
         const isFocused = state.index === index;
 
         const onPress = () => {
+          tabPositionX.value = withSpring(buttonWidth * index, {duration: 1000})
           const event = navigation.emit({
             type: "tabPress",
             target: route.key,
@@ -50,40 +87,6 @@ const TabBar = ({ state, descriptors, navigation }) => {
           });
         };
 
-        const icon = {
-          home: (
-            <Image
-              source={isFocused ? icons.home : icons.homeOutline}
-              resizeMode="contain"
-              tintColor={isFocused ? "#fefefe" : "#cbd5e1"}
-              className="w-6 h-6"
-            />
-          ),
-          merchant: (
-            <Image
-              source={isFocused ? icons.home : icons.homeOutline}
-              resizeMode="contain"
-              tintColor={isFocused ? "#fefefe" : "#cbd5e1"}
-              className="w-6 h-6"
-            />
-          ),
-          scan: (
-            <Image
-              source={icons.scanner}
-              resizeMode="contain"
-              tintColor={isFocused ? "#fefefe" : "#cbd5e1"}
-              className="w-6 h-6"
-            />
-          ),
-          profile: (
-            <Image
-              source={isFocused ? icons.user : icons.userOutline}
-              resizeMode="contain"
-              tintColor={isFocused ? "#fefefe" : "#cbd5e1"}
-              className="w-6 h-6"
-            />
-          ),
-        };
 
         return (
           <TabBarButton
@@ -95,7 +98,6 @@ const TabBar = ({ state, descriptors, navigation }) => {
             routeName={route.name}
             color={isFocused ? "#fefefe" : "#cbd5e1"}
             label={label}
-            icon={icon}
           />
           // <TouchableOpacity
           //   key={route.name}
