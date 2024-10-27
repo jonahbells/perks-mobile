@@ -42,3 +42,14 @@ export const checkMerchantVerification = async (id) => {
   }
 
 };
+
+// export const savedByCustomer = async (id) => {
+//   try {
+//     const response = await api.post('merchants/');
+//     return response.data;m
+
+//   } catch (error) {
+//     throw error;  // Propagate error to the caller
+//   }
+
+// };

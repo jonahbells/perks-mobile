@@ -8,7 +8,12 @@ import {
   ActivityIndicator,
   RefreshControl,
   Image,
-  TouchableOpacity
+  TouchableOpacity,
+  Linking,
+  Clipboard,
+  ToastAndroid,
+  Platform,
+  Alert
 } from "react-native";
 
 import { icons, images } from "../../constants"; // Ensure fallback image is in your constants
@@ -16,6 +21,7 @@ import { fetchMerchantById, checkMerchantVerification } from "../../hook/merchan
 import { fetchPerksByMerchantId } from "../../hook/perks";
 import { CommonButton, CustomCardRow, Footer, CustomCard } from "../../components";
 import Ionicons from '@expo/vector-icons/Ionicons';
+
 
 const MerchantsDetails = ({ handleNavigate }) => {
   const params = useLocalSearchParams();
@@ -29,6 +35,7 @@ const MerchantsDetails = ({ handleNavigate }) => {
   const [isSaved, setIsSaved] = useState(false); // State for the bookmark
   const [perks, setPerks] = useState(null);
   const [data, setData] = useState({});
+  
 
   // Set the image URL; if merchants.logoimage is not available, fallback to a default image
   const url = merchants.logoimage
@@ -66,7 +73,7 @@ const MerchantsDetails = ({ handleNavigate }) => {
     try {
       const response = await fetch(`https://api.perksmania.com/api/v1/perks/bymerchant/${params.id}`);
       const json = await response.json();
-        setData(json.rows); // Save data to state
+      setData(json.rows); // Save data to state
       console.log('Perks Response:', data);
     } catch (error) {
       throw new Error('Error fetching perks');
@@ -102,6 +109,36 @@ const MerchantsDetails = ({ handleNavigate }) => {
     }
   };
 
+  // Function to handle phone number click and copying
+  const handlePhonePress = (phone) => {
+    // Show options to call or copy the phone number
+    Alert.alert(
+      "Contact Options",
+      `Do you want to call or copy ${phone}?`,
+      [
+        {
+          text: "Call",
+          onPress: () => Linking.openURL(`tel:${phone}`),
+        },
+        {
+          text: "Copy",
+          onPress: () => {
+            Clipboard.setString(phone);
+            if (Platform.OS === 'android') {
+              ToastAndroid.show("Phone number copied to clipboard", ToastAndroid.SHORT);
+            } else {
+              Alert.alert("Copied to Clipboard", "Phone number copied to clipboard");
+            }
+          },
+        },
+        {
+          text: "Cancel",
+          style: "cancel",
+        },
+      ]
+    );
+  };
+
 
   useEffect(() => {
     merchantsById();
@@ -135,8 +172,8 @@ const MerchantsDetails = ({ handleNavigate }) => {
           headerBackVisible: false,
           headerLeft: () => (
             <TouchableOpacity onPress={() => router.back()} className="p-2 rounded-full bg-gray/70">
-            <Ionicons name="arrow-back" size={20} />
-          </TouchableOpacity>
+              <Ionicons name="arrow-back" size={20} />
+            </TouchableOpacity>
           ),
           headerTitle: () => (
             <Text className="font-pmedium text-pretty text-lg" numberOfLines={2}>Merchant Details</Text>
@@ -144,11 +181,11 @@ const MerchantsDetails = ({ handleNavigate }) => {
           headerRight: () => (
             <View>
               <TouchableOpacity onPress={toggleHeart} className="p-2 bg-gray rounded-full">
-              <Ionicons 
-                    name={isLiked ? "heart" : "heart-outline"} // Toggle between filled and outlined heart
-                    size={24} 
-                    color={isLiked ? "red" : "black"} // Change color on toggle
-                  />
+                <Ionicons
+                  name={isLiked ? "heart" : "heart-outline"} // Toggle between filled and outlined heart
+                  size={24}
+                  color={isLiked ? "red" : "black"} // Change color on toggle
+                />
               </TouchableOpacity>
             </View>
           ),
@@ -180,7 +217,7 @@ const MerchantsDetails = ({ handleNavigate }) => {
           <View className="mt-4">
             <View className="mt-4 flex-row justify-between items-center">
               <Text
-                className="text-base font-psemibold capitalize text-2xl flex-1 mr-4"
+                className="font-psemibold capitalize text-2xl flex-1 mr-4"
                 numberOfLines={3}
               >
                 {merchants.business_name}
@@ -207,41 +244,53 @@ const MerchantsDetails = ({ handleNavigate }) => {
 
             <View className="flex-row items-center mt-2">
               <Ionicons name="location-outline" size={20} color="black" />
-              <Text className="font-normal text-balance text-base capitalize ml-2" numberOfLines={5}>
+              <Text className="font-normal text-pretty text-base capitalize ml-2" numberOfLines={5}>
                 {merchants.office_address ? merchants.office_address : 'No address available'}
               </Text>
             </View>
 
             <View className="flex-row items-center mt-2">
               <Ionicons name="call-outline" size={20} color="black" />
-              <Text className="font-normal text-balance text-base capitalize ml-2">
-                {merchants.office_contact ? merchants.office_contact : 'No phone number available'}
-              </Text>
+              {merchants.office_contact ? (
+                <TouchableOpacity onPress={() => handlePhonePress(merchants.office_contact)}>
+                  <Text className="font-normal text-balance text-base capitalize ml-2" numberOfLines={1}>
+                    {merchants.office_contact}
+                  </Text>
+                </TouchableOpacity>
+              ) : (
+                <Text className="font-normal text-balance text-base capitalize ml-2">No phone number available</Text>
+              )}
             </View>
+
+
 
 
 
             {/* Perks */}
-            <View className='mt-6'>
+            {data && data.length > 0 ? (
+              <View className="mt-6">
+                <Text className="font-bold text-balance text-base text-primary capitalize text-2xl flex-1 mr-4">Discover Perks</Text>
 
-              <Text className='font-bold text-balance text-base text-primary capitalize text-2xl flex-1 mr-4'>Discover Perks</Text>
-
-              <View className='flex-row flex-wrap mb-28'>
-                {isLoading ? (
-                  <ActivityIndicator size='large' />
-                ) : error ? (
-                  <Text>Something went wrong</Text>
-                ) : (
-                  data?.map((item, index) => (
-                    <CustomCard
-                      perks={item}
-                      key={`perks-details-${item._id}`}
-                      handleNavigate={() => router.push(`/perks-details/${item._id}`)}
-                    />
-                  ))
-                )}
+                <View className="flex-row flex-wrap mb-28">
+                  {isLoading ? (
+                    <ActivityIndicator size="large" />
+                  ) : error ? (
+                    <Text>Something went wrong</Text>
+                  ) : (
+                    data.map((item, index) => (
+                      <CustomCard
+                        perks={item}
+                        key={`perks-details-${item._id}`}
+                        handleNavigate={() => router.push(`/perks-details/${item._id}`)}
+                      />
+                    ))
+                  )}
+                </View>
               </View>
-            </View>
+            ) : (
+              <Text className="font-bold text-balance text-center text-primary capitalize text-2xl flex-1 mt-8">No Perks Available</Text> // Only display "Coming Soon" if no perks available
+            )}
+
 
           </View>
         </View>
