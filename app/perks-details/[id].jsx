@@ -9,6 +9,7 @@ import {
   RefreshControl,
   Image,
   TouchableOpacity,
+  Alert
 } from "react-native";
 
 import { FontAwesome, MaterialIcons, Ionicons } from "@expo/vector-icons"; // for icons
@@ -16,6 +17,8 @@ import { FontAwesome, MaterialIcons, Ionicons } from "@expo/vector-icons"; // fo
 import { image, icons } from "../../constants";
 import { fetchPerkById } from "../../hook/perks";
 import { CommonButton, Footer } from "../../components";
+import { useGlobalContext } from "../../context/GlobalProvider";
+import { Redirect, router } from "expo-router";
 
 const PerksDetails = () => {
   const params = useLocalSearchParams();
@@ -29,6 +32,33 @@ const PerksDetails = () => {
   const [isloading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [refreshing, setRefreshing] = useState(false);
+  const { user, setUser, isLogged, setIsLogged } = useGlobalContext();
+  const [isLiked, setIsLiked] = useState(false); // State to track if the heart is liked
+
+
+  const toggleHeart = () => {
+    if (isLogged) {
+      setIsLiked(!isLiked); // Toggle between liked and unliked states
+      console.log(perks._id);
+    } else {
+      Alert.alert(
+        "Sign In Required",
+        "You need to be logged in to like this perk. Would you like to sign in now?",
+        [
+          {
+            text: "Cancel",
+            style: "cancel", // Add a cancel button
+          },
+          {
+            text: "Sign In",
+            onPress: () => router.push("/sign-in"), // Navigate to sign-in page
+          }
+        ],
+        { cancelable: false }
+      );
+    }
+  };
+
 
   const perksById = async () => {
     try {
@@ -69,9 +99,17 @@ const PerksDetails = () => {
           <TouchableOpacity onPress={() => router.back()} className="p-2 rounded-full bg-white/70">
             <Ionicons name="arrow-back" size={26} />
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => router.back()} className="p-2 rounded-full bg-white/70">
-            <Ionicons name="heart-outline" size={26} />
-          </TouchableOpacity>
+
+          <View>
+                <TouchableOpacity onPress={toggleHeart} className="p-2 bg-gray-100 rounded-full">
+                  <Ionicons
+                    name={isLiked ? "heart" : "heart-outline"} // Toggle between filled and outlined heart
+                    size={24}
+                    color={isLiked ? "red" : "black"} // Change color on toggle
+                  />
+                </TouchableOpacity>
+              </View>
+
         </View>
 
         {perks.perks_image ? (

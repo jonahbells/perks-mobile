@@ -19,3 +19,21 @@ export const likesByCustomer = async (id) => {
   }
 
 };
+
+export const addLikebyCustomer = async (id) => {
+  try {
+    const response = await api.post('likes');
+    return response.data.rows;
+  } catch (error) {
+    throw error;  // Propagate error to the caller
+  }
+};
+
+export const unlikebyCustomer = async (id) => {
+  try {
+    const response = await api.delete('likes');
+    return response.data.rows;
+  } catch (error) {
+    throw error;  // Propagate error to the caller
+  }
+};
