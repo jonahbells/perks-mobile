@@ -60,7 +60,7 @@ const Profile = () => {
         </View>
 
         {/* Options Section */}
-        <View className="mt-8 bg-white rounded-3xl">
+        <View className="mt-8 bg-white rounded-2xl">
           <TouchableOpacity className="flex-row items-center justify-between py-4 px-4 border-b border-gray-300">
             <View className="flex-row items-center">
               <Feather name="lock" size={20} color="black" />
@@ -86,7 +86,7 @@ const Profile = () => {
         </View>
 
         {/* Help Section */}
-        <View className="mt-8 bg-white rounded-3xl">
+        <View className="mt-8 bg-white rounded-2xl">
           <TouchableOpacity className="flex-row items-center justify-between py-4 px-4 border-b border-gray-300">
             <View className="flex-row items-center">
               <Feather name="help-circle" size={20} color="black" />
