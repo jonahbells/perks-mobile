@@ -5,6 +5,7 @@ import { router } from "expo-router"
 
 import { icons, images } from "../../constants";
 import Ionicons from '@expo/vector-icons/Ionicons';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 
 const Merchants = () => {
@@ -51,7 +52,7 @@ const Merchants = () => {
   const RenderMerchants = ({ item }) => {
     return (
       <View className="my-2 w-full rounded-xl bg-white border-1 flex-row items-center">
-        <TouchableOpacity
+        <TouchableOpacity className="w-full"
           onPress={() => handlePress(item)} // Trigger when the merchant is tapped
 
         >
@@ -99,8 +100,9 @@ const Merchants = () => {
   }
 
   return (
-    <View className='px-4 mb-28 flex-row'>
+    <View className='px-4 mb-28'>
       <FlatList
+      showsVerticalScrollIndicator="false"
         data={data} // Set the data fetched from the API
         keyExtractor={(item, index) => item.id ? item.id.toString() : index.toString()} // Fallback to index if id is missing
         renderItem={({ item, index }) => (
