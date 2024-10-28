@@ -41,8 +41,8 @@ const TabBar = ({ state, descriptors, navigation }) => {
     items-center 
     justify-between 
     bg-primary 
-    mx-14 
-    py-5 
+    mx-20 
+    py-6 
     rounded-full
     "
     >
@@ -51,9 +51,9 @@ const TabBar = ({ state, descriptors, navigation }) => {
           position: "absolute",
           backgroundColor: "rgba(255, 255, 255, 0.2)",
           borderRadius: 30,
-          marginHorizontal: 10,
-          height: dimensions.height - 30,
-          width: buttonWidth - 19
+          marginHorizontal: 8,
+          height: dimensions.height - 25,
+          width: buttonWidth - 15
         }
       ]} />
       {state.routes.map((route, index) => {
@@ -68,7 +68,7 @@ const TabBar = ({ state, descriptors, navigation }) => {
         const isFocused = state.index === index;
 
         const onPress = () => {
-          tabPositionX.value = withSpring(buttonWidth * index, {duration: 1000})
+          tabPositionX.value = withSpring(buttonWidth * index, {duration: 1500})
           const event = navigation.emit({
             type: "tabPress",
             target: route.key,

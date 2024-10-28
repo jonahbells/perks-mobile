@@ -41,12 +41,12 @@ const Profile = () => {
           {url ? (
             <Image
               source={{ uri: url }} // Replace with actual user image
-              className="w-20 h-20 rounded-full"
+              className="w-24 h-24 rounded-full"
             />
           ) : (
             <View className="w-24 h-24 bg-black rounded-full justify-center items-center">
-            <Text className="text-white text-3xl">{user?.firstname?.[0]}{user?.lastname?.[0]}</Text>
-          </View>
+              <Text className="text-white text-3xl">{user?.firstname?.[0]}{user?.lastname?.[0]}</Text>
+            </View>
           )}
           <Text className="text-xl font-semibold mt-4">
             {user?.firstname} {user?.lastname}
@@ -60,7 +60,7 @@ const Profile = () => {
         </View>
 
         {/* Options Section */}
-        <View className="mt-8 bg-white rounded-3xl">
+        <View className="mt-8 bg-white rounded-2xl">
           <TouchableOpacity className="flex-row items-center justify-between py-4 px-4 border-b border-gray-300">
             <View className="flex-row items-center">
               <Feather name="lock" size={20} color="black" />
@@ -86,7 +86,7 @@ const Profile = () => {
         </View>
 
         {/* Help Section */}
-        <View className="mt-8 bg-white rounded-3xl">
+        <View className="mt-8 bg-white rounded-2xl">
           <TouchableOpacity className="flex-row items-center justify-between py-4 px-4 border-b border-gray-300">
             <View className="flex-row items-center">
               <Feather name="help-circle" size={20} color="black" />
