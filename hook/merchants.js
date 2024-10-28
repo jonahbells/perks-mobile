@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Create an instance of axios with base configuration
 const api = axios.create({
-  baseURL: 'https://api.perksmania.com/api/v1/',  // Your base URL
+  baseURL: process.env.API_URL,  // Your base URL
   timeout: 10000,  // Optional timeout
   headers: {
     'Content-Type': 'application/json',
