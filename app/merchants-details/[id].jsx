@@ -21,6 +21,7 @@ import { fetchMerchantById, checkMerchantVerification } from "../../hook/merchan
 import { fetchPerksByMerchantId } from "../../hook/perks";
 import { CommonButton, CustomCardRow, Footer, CustomCard } from "../../components";
 import Ionicons from '@expo/vector-icons/Ionicons';
+import { useGlobalContext } from "../../context/GlobalProvider";
 
 
 const MerchantsDetails = ({ handleNavigate }) => {
@@ -35,6 +36,8 @@ const MerchantsDetails = ({ handleNavigate }) => {
   const [isSaved, setIsSaved] = useState(false); // State for the bookmark
   const [perks, setPerks] = useState(null);
   const [data, setData] = useState({});
+  const { user, setUser, isLogged, setIsLogged } = useGlobalContext();
+
   
 
   // Set the image URL; if merchants.logoimage is not available, fallback to a default image
@@ -79,9 +82,30 @@ const MerchantsDetails = ({ handleNavigate }) => {
       throw new Error('Error fetching perks');
     }
   };
+
   const toggleHeart = () => {
-    setIsLiked(!isLiked);
-  };
+  if (isLogged) {
+    setIsLiked(!isLiked); // Toggle between liked and unliked states
+    console.log(merchants._id);
+  } else {
+    Alert.alert(
+      "Sign In Required",
+      "You need to be logged in to like this perk. Would you like to sign in now?",
+      [
+        {
+          text: "Cancel",
+          style: "cancel", // Add a cancel button
+        },
+        {
+          text: "Sign In",
+          onPress: () => router.push("/sign-in"), // Navigate to sign-in page
+        }
+      ],
+      { cancelable: false } // Prevent dismissing the alert by tapping outside
+    );
+  }
+};
+
 
   const verificationBadge = {
     icon: merchants.verification_status === "Verified" ? "checkmark-circle" : "checkmark-circle-outline",
@@ -111,7 +135,24 @@ const MerchantsDetails = ({ handleNavigate }) => {
 
   // Function to handle phone number click and copying
   const handlePhonePress = (phone) => {
-    // Show options to call or copy the phone number
+    if (!isLogged) {
+      Alert.alert(
+        "Sign In Required",
+        "You need to be logged in to like this perk. Would you like to sign in now?",
+        [
+          {
+            text: "Cancel",
+            style: "cancel", // Add a cancel button
+          },
+          {
+            text: "Sign In",
+            onPress: () => router.push("/sign-in"), // Navigate to sign-in page
+          }
+        ],
+        { cancelable: false } // Prevent dismissing the alert by tapping outside
+      );
+    } else {
+
     Alert.alert(
       "Contact Options",
       `Do you want to call or copy ${phone}?`,
@@ -137,6 +178,7 @@ const MerchantsDetails = ({ handleNavigate }) => {
         },
       ]
     );
+  };
   };
 
 
