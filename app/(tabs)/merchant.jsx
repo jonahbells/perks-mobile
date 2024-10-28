@@ -1,11 +1,19 @@
-import { View, Text, Image, FlatList, ActivityIndicator, RefreshControl, TouchableOpacity, SafeAreaView } from 'react-native';
-import React, { useEffect, useState } from 'react';
-import { fetchAllMerchants } from '../../hook/merchants'; // Assuming this is your API call
-import { router, Stack } from "expo-router"
+import {
+  View,
+  Text,
+  Image,
+  FlatList,
+  ActivityIndicator,
+  RefreshControl,
+  TouchableOpacity,
+  SafeAreaView,
+} from "react-native";
+import React, { useEffect, useState } from "react";
+import { fetchAllMerchants } from "../../hook/merchants"; // Assuming this is your API call
+import { router, Stack } from "expo-router";
 
 import { icons, images } from "../../constants";
-import Ionicons from '@expo/vector-icons/Ionicons';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import Ionicons from "@expo/vector-icons/Ionicons";
 
 const Merchants = () => {
   const [data, setData] = useState([]);
@@ -20,10 +28,10 @@ const Merchants = () => {
       if (responseData && responseData.length > 0) {
         setData(responseData); // Assuming responseData is an array of merchants
       } else {
-        console.log('No data received from API.');
+        console.log("No data received from API.");
       }
     } catch (err) {
-      console.error('Error fetching merchants:', err.message); // Capture and log error
+      console.error("Error fetching merchants:", err.message); // Capture and log error
       setError(err.message); // Set error message in state
     } finally {
       setLoading(false); // Stop the loading spinner
@@ -42,40 +50,49 @@ const Merchants = () => {
 
   const handlePress = (merchant) => {
     router.push(`/merchants-details/${merchant._id}`);
-    console.log(merchant._id)
-  }
+    console.log(merchant._id);
+  };
 
   // Render individual merchant item
   const RenderMerchants = ({ item }) => {
     return (
-<<<<<<< HEAD
       <TouchableOpacity
         onPress={() => handlePress(item)} // Trigger when the merchant is tapped
-        className="my-2 w-full rounded-lg bg-white border border-gray-300 shadow-sm"
+        className="h-20 my-2 rounded-lg bg-white shadow-sm"
       >
         <View className="p-3 flex-row items-center">
           {/* Image section */}
-          <Image
-            source={item.logoimage
-              ? { uri: `https://api.perksmania.com/api/v1/merchants/image/${item.logoimage}` }
-              : images.perksIcon} // Use local image if logo is missing
-            style={{ width: 50, height: 50, borderRadius: 25, marginRight: 10 }}
-          />
-=======
-      <View className="my-2 w-full rounded-xl bg-white border-1 flex-row items-center">
-        <TouchableOpacity className="w-full"
-          onPress={() => handlePress(item)} // Trigger when the merchant is tapped
->>>>>>> main
-
-          {/* Merchant details */}
-          <View className="flex-1">
-            <Text className="font-bold text-base uppercase" numberOfLines={2}>
-              {item.business_name ? item.business_name.toString() : 'Unknown Merchant'} {/* Merchant Name */}
+          <View>
+            <Image
+              source={
+                item.logoimage
+                  ? {
+                      uri: `https://api.perksmania.com/api/v1/merchants/image/${item.logoimage}`,
+                    }
+                  : images.perksIcon
+              } // Use local image if logo is missing
+              style={{
+                width: 50,
+                height: 50,
+                borderRadius: 25,
+                marginRight: 10,
+              }}
+            />
+          </View>
+          <View>
+            <Text
+              className="font-psemibold text-base uppercase text"
+            >
+              {item.business_name ? item.business_name : "Unknown Merchant"}
             </Text>
-            <View className="flex-row items-center mt-1">
+            <View className="flex-row mt-1 items-center">
               <Ionicons name="location-outline" size={12} color="black" />
-              <Text className="font-normal text-sm text-gray-600 ml-1 capitalize" numberOfLines={3}>
-                {item.office_address ? item.office_address.toString() : 'No address available'} {/* Merchant Address */}
+              <Text className="font-plight text-sm text-gray-600 ml-1 capitalize"
+              >
+                {item.office_address
+                  ? item.office_address
+                  : "No address available"}{" "}
+                {/* Merchant Address */}
               </Text>
             </View>
           </View>
@@ -86,9 +103,11 @@ const Merchants = () => {
 
   if (loading) {
     return (
-      <SafeAreaView edges={['bottom']} className="flex-1 bg-white">
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-          <ActivityIndicator size="large" color="#0000ff" />
+      <SafeAreaView edges={["bottom"]} className="flex-1 bg-white">
+        <View
+          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+        >
+          <ActivityIndicator size="large" />
         </View>
       </SafeAreaView>
     );
@@ -96,42 +115,40 @@ const Merchants = () => {
 
   if (error) {
     return (
-      <SafeAreaView edges={['bottom']} className="flex-1 bg-white">
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-          <Text>Error: {error}</Text> {/* Display error */}
+      <SafeAreaView edges={["bottom"]} className="flex-1 bg-white">
+        <View
+          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+        >
+          <Text>Error: {error}</Text>
         </View>
       </SafeAreaView>
     );
   }
 
   return (
-<<<<<<< HEAD
-    <SafeAreaView edges={['bottom']} className="flex-1 bg-white">
+    <View>
       <Stack.Screen
         options={{
           headerShadowVisible: false,
           headerBackVisible: false,
           headerTitle: () => (
-            <Text className="font-pmedium text-pretty text-lg" numberOfLines={2}>Merchants</Text>
+            <Text className="font-pmedium text-lg">Merchants</Text>
           ),
         }}
       />
-=======
-    <View className='px-4 mb-28'>
->>>>>>> main
       <FlatList
-      showsVerticalScrollIndicator="false"
+        className="px-4"
+        showsVerticalScrollIndicator="false"
         data={data} // Set the data fetched from the API
-        keyExtractor={(item, index) => item.id ? item.id.toString() : index.toString()} // Fallback to index if id is missing
-        renderItem={({ item }) => (
-          <RenderMerchants item={item} />
-        )}
+        keyExtractor={(item, index) =>
+          item.id ? item.id.toString() : index.toString()
+        } // Fallback to index if id is missing
+        renderItem={({ item }) => <RenderMerchants item={item} />}
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} /> // Pull to refresh functionality
         }
-        contentContainerStyle={{ paddingHorizontal: 16, paddingBottom: 80 }}
       />
-    </SafeAreaView>
+    </View>
   );
 };
 

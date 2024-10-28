@@ -1,8 +1,9 @@
 import axios from 'axios';
+import { API_URL } from '@env';
 
 // Create an instance of axios with base configuration
 const api = axios.create({
-  baseURL: process.env.API_URL,  // Your base URL
+  baseURL: API_URL,  // Your base URL
   timeout: 10000,  // Optional timeout
   headers: {
     'Content-Type': 'application/json',
@@ -12,7 +13,7 @@ const api = axios.create({
 
 export const fetchAllMerchants = async () => {
   try {
-    const response = await api.get('merchants');
+    const response = await api.get('/merchants');
     return response.data.rows;
   } catch (error) {
     throw error;  // Propagate error to the caller
@@ -23,7 +24,7 @@ export const fetchAllMerchants = async () => {
 // Function to make GET request by id
 export const fetchMerchantById = async (id) => {
   try {
-    const response = await api.get('merchants/'+id);
+    const response = await api.get('/merchants/'+id);
     return response.data;
 
   } catch (error) {
@@ -34,7 +35,7 @@ export const fetchMerchantById = async (id) => {
 
 export const checkMerchantVerification = async (id) => {
   try {
-    const response = await api.get('merchants/'+id);
+    const response = await api.get('/merchants/'+id);
     return response.data;m
 
   } catch (error) {

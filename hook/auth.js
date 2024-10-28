@@ -1,10 +1,11 @@
 import axios from 'axios';
 import CryptoJS from 'react-native-crypto-js';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { API_URL } from '@env';
 
 // Create an instance of axios with base configuration
 const api = axios.create({
-    baseURL: process.env.API_URL,  // Your base URL
+    baseURL: API_URL,  // Your base URL
     timeout: 10000,  // Optional timeout
     headers: {
         'Content-Type': 'application/json',
@@ -44,7 +45,7 @@ export const signIn = async (email, password) => {
     const encryptPass = CryptoJS.AES.encrypt(password, passphrasePass).toString();
     
     try {
-        const response = await api.post('customers/login', {
+        const response = await api.post('/customers/login', {
             client: encryptEmail,
             secret: encryptPass
         });
@@ -105,7 +106,7 @@ export const getCurrentUser = async () => {
         }
 
         // Use the token in the Authorization header to fetch user data
-        const response = await api.get('customers/getuser', {
+        const response = await api.get('/customers/getuser', {
             headers: {
                 Authorization: `Bearer ${token.accessToken}`,
             },

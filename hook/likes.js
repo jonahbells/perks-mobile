@@ -1,8 +1,9 @@
 import axios from 'axios';
+import { API_URL } from '@env';
 
 // Create an instance of axios with base configuration
 const api = axios.create({
-  baseURL: process.env.API_URL,  // Your base URL
+  baseURL: API_URL,  // Your base URL
   timeout: 10000,  // Optional timeout
   headers: {
     'Content-Type': 'application/json',
