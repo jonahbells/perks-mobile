@@ -101,10 +101,10 @@ const PerksDetails = () => {
           </TouchableOpacity>
 
           <View>
-                <TouchableOpacity onPress={toggleHeart} className="p-2 bg-gray-100 rounded-full">
+                <TouchableOpacity onPress={toggleHeart} className="p-2 rounded-full bg-white/70">
                   <Ionicons
                     name={isLiked ? "heart" : "heart-outline"} // Toggle between filled and outlined heart
-                    size={24}
+                    size={26}
                     color={isLiked ? "red" : "black"} // Change color on toggle
                   />
                 </TouchableOpacity>

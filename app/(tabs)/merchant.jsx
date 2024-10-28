@@ -5,6 +5,7 @@ import { router, Stack } from "expo-router"
 
 import { icons, images } from "../../constants";
 import Ionicons from '@expo/vector-icons/Ionicons';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const Merchants = () => {
   const [data, setData] = useState([]);
@@ -47,6 +48,7 @@ const Merchants = () => {
   // Render individual merchant item
   const RenderMerchants = ({ item }) => {
     return (
+<<<<<<< HEAD
       <TouchableOpacity
         onPress={() => handlePress(item)} // Trigger when the merchant is tapped
         className="my-2 w-full rounded-lg bg-white border border-gray-300 shadow-sm"
@@ -59,6 +61,11 @@ const Merchants = () => {
               : images.perksIcon} // Use local image if logo is missing
             style={{ width: 50, height: 50, borderRadius: 25, marginRight: 10 }}
           />
+=======
+      <View className="my-2 w-full rounded-xl bg-white border-1 flex-row items-center">
+        <TouchableOpacity className="w-full"
+          onPress={() => handlePress(item)} // Trigger when the merchant is tapped
+>>>>>>> main
 
           {/* Merchant details */}
           <View className="flex-1">
@@ -98,6 +105,7 @@ const Merchants = () => {
   }
 
   return (
+<<<<<<< HEAD
     <SafeAreaView edges={['bottom']} className="flex-1 bg-white">
       <Stack.Screen
         options={{
@@ -108,7 +116,11 @@ const Merchants = () => {
           ),
         }}
       />
+=======
+    <View className='px-4 mb-28'>
+>>>>>>> main
       <FlatList
+      showsVerticalScrollIndicator="false"
         data={data} // Set the data fetched from the API
         keyExtractor={(item, index) => item.id ? item.id.toString() : index.toString()} // Fallback to index if id is missing
         renderItem={({ item }) => (
