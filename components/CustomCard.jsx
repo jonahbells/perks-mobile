@@ -32,7 +32,7 @@ const CustomCard = ({ perks, handleNavigate }) => {
       
           try {
             // Call the addLikeByCustomer hook
-            const response = await addLikebyCustomer(user.id, perks._id, newLikedState, user.token);
+            const response = await addLikebyCustomer;
             console.log('Response from adding like:', response); // Debug response
           } catch (error) {
             Alert.alert("Error", error.message); // Handle error gracefully
