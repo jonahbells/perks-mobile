@@ -90,18 +90,19 @@ const PerksDetails = () => {
   return (
     <View className="flex-1">
       <ScrollView
+      showsVerticalScrollIndicator="false"
       refreshControl={
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
       }
       >
         <View className="px-4 pt-12 flex-row justify-between items-center absolute z-50 w-full">
         
-          <TouchableOpacity onPress={() => router.back()} className="p-2 rounded-full bg-white/70">
+          <TouchableOpacity onPress={() => router.back()} className="p-2 rounded-full bg-white/70 shadow-md">
             <Ionicons name="arrow-back" size={26} />
           </TouchableOpacity>
 
           <View>
-                <TouchableOpacity onPress={toggleHeart} className="p-2 rounded-full bg-white/70">
+                <TouchableOpacity onPress={toggleHeart} className="p-2 rounded-full bg-white/70 shadow-md">
                   <Ionicons
                     name={isLiked ? "heart" : "heart-outline"} // Toggle between filled and outlined heart
                     size={26}
@@ -135,7 +136,7 @@ const PerksDetails = () => {
           </View>
           <View className="mt-2">
             <Text className="font-pmedium text-lg">Description</Text>
-            <Text className="font-pregular text-md text-justify">
+            <Text className="mt-2 font-pregular text-md text-justify">
               {perks.perks_description}
             </Text>
           </View>
