@@ -127,4 +127,22 @@ export const getCurrentUser = async () => {
     }
 };
 
+// Sign In Function using AES Encryption
+export const signWithGoogle = async (session) => {
+    console.log('session:', session);
+    
+    try {
+        // Send the encrypted form as part of the request
+        const response = await api.post('gmail', {
+            sessionToken: session
+        });
+        
+        console.log('Server response:', response);
+        return response;
+    } catch (error) {
+        console.error('Error during sign-up:', error.response?.data || error.message);
+        throw error;  // Propagate error to the caller
+    }
+};
+
 

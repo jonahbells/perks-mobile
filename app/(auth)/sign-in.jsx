@@ -19,7 +19,7 @@ import { FontAwesome, MaterialIcons, Ionicons } from "@expo/vector-icons"; // fo
 
 import { images, icons } from "../../constants";
 import { CustomButton, FormField, CommonButton } from "../../components";
-import { signIn, getCurrentUser, signOut } from "../../hook/auth";
+import { signIn, getCurrentUser, signOut, signWithGoogle } from "../../hook/auth";
 import { useGlobalContext } from "../../context/GlobalProvider";
 
 const SignIn = () => {
@@ -67,9 +67,11 @@ const SignIn = () => {
     try {
       const { createdSessionId, signIn, signUp, setActive } = await startOAuthFlow({
       })
-
+      console.log(createdSessionId)
       if (createdSessionId) {
         await setActive({ session: createdSessionId })
+        const result = await signWithGoogle(createdSessionId);
+        console.log(result)
       } else {
         // Use signIn or signUp for next steps such as MFA
       }
