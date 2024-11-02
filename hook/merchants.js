@@ -13,7 +13,7 @@ const api = axios.create({
 
 export const fetchAllMerchants = async () => {
   try {
-    const response = await api.get('merchants');
+    const response = await api.get('merchants/');
     return response.data.rows;
   } catch (error) {
     throw error;  // Propagate error to the caller

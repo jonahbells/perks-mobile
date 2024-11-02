@@ -94,7 +94,7 @@ const api = axios.create({
 
 export const fetchAllPerks = async () => {
   try {
-    const response = await api.get('perks');
+    const response = await api.get('perks/');
     return response.data.rows;
   } catch (error) {
     throw error;  // Propagate error to the caller
