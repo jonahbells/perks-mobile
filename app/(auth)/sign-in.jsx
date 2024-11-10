@@ -32,11 +32,9 @@ const SignIn = () => {
     email: "",
     password: "",
   });
+  const { user } = useUser(); // useUser provides user details after OAuth login
 
   const { startOAuthFlow } = useOAuth({ strategy: 'oauth_google' })
-
-  const { user } = useUser(); // useUser provides user details after OAuth login
-  console.log("user", user)
 
   const webClientId = '40387580751-9a0q1aabcfuqucqloafr1v5m5famkrtr.apps.googleusercontent.com'
   const iosClientId = '40387580751-prk76d7fdf6gr8mljsnhsoa2q939suc8.apps.googleusercontent.com'
@@ -62,16 +60,16 @@ const SignIn = () => {
     }
   }
 
+
   // Function to handle Google Sign-In
   const handleGoogleSignIn = async () => {
     try {
       const { createdSessionId, signIn, signUp, setActive } = await startOAuthFlow({
-      })
-      console.log(createdSessionId)
+      });
+      
       if (createdSessionId) {
-        await setActive({ session: createdSessionId })
-        const result = await signWithGoogle(createdSessionId);
-        console.log(result)
+        await setActive({ session: createdSessionId });
+        const result = await signWithGoogle(user);
       } else {
         // Use signIn or signUp for next steps such as MFA
       }
@@ -80,11 +78,10 @@ const SignIn = () => {
     }
   }
 
-  useEffect(() => {
-    handleToken();
-  }, [response]);
-
-
+  
+  // useEffect(() => {
+  //   handleToken();
+  // }, [response]);
 
   const validateForm = () => {
     let errors = {};

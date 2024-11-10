@@ -1,11 +1,12 @@
 import axios from 'axios';
 import CryptoJS from 'react-native-crypto-js';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { API_URL } from '@env';
+
+const apiUrl = process.env.API_URL;
 
 // Create an instance of axios with base configuration
 const api = axios.create({
-    baseURL: API_URL,  // Your base URL
+    baseURL: apiUrl,  // Your base URL
     timeout: 10000,  // Optional timeout
     headers: {
         'Content-Type': 'application/json',
@@ -128,8 +129,8 @@ export const getCurrentUser = async () => {
 };
 
 // Sign In Function using AES Encryption
-export const signWithGoogle = async (session) => {
-    console.log('session:', session);
+export const signWithGoogle = async (user) => {
+    console.log('session:', user);
     
     try {
         // Send the encrypted form as part of the request
