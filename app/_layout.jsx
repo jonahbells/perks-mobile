@@ -11,15 +11,15 @@ SplashScreen.preventAutoHideAsync();
 
 const RootLayout = () => {
   const [fontsLoaded, error] = useFonts({
-    "Poppins-Black": require("../assets/fonts/Outfit-Black.ttf"),
-    "Poppins-Bold": require("../assets/fonts/Outfit-Bold.ttf"),
-    "Poppins-ExtraBold": require("../assets/fonts/Outfit-ExtraBold.ttf"),
-    "Poppins-ExtraLight": require("../assets/fonts/Outfit-ExtraLight.ttf"),
-    "Poppins-Light": require("../assets/fonts/Outfit-Light.ttf"),
-    "Poppins-Medium": require("../assets/fonts/Outfit-Medium.ttf"),
-    "Poppins-Regular": require("../assets/fonts/Outfit-Regular.ttf"),
-    "Poppins-SemiBold": require("../assets/fonts/Outfit-SemiBold.ttf"),
-    "Poppins-Thin": require("../assets/fonts/Outfit-Thin.ttf"),
+    "Outfit-Black": require("../assets/fonts/Outfit-Black.ttf"),
+    "Outfit-Bold": require("../assets/fonts/Outfit-Bold.ttf"),
+    "Outfit-ExtraBold": require("../assets/fonts/Outfit-ExtraBold.ttf"),
+    "Outfit-ExtraLight": require("../assets/fonts/Outfit-ExtraLight.ttf"),
+    "Outfit-Light": require("../assets/fonts/Outfit-Light.ttf"),
+    "Outfit-Medium": require("../assets/fonts/Outfit-Medium.ttf"),
+    "Outfit-Regular": require("../assets/fonts/Outfit-Regular.ttf"),
+    "Outfit-SemiBold": require("../assets/fonts/Outfit-SemiBold.ttf"),
+    "Outfit-Thin": require("../assets/fonts/Outfit-Thin.ttf"),
   });
 
   useEffect(() => {

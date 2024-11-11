@@ -66,7 +66,6 @@ const SignIn = () => {
     try {
       const { createdSessionId, signIn, signUp, setActive } = await startOAuthFlow({
       });
-      
       if (createdSessionId) {
         await setActive({ session: createdSessionId });
         const result = await signWithGoogle(user);
