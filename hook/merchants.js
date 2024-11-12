@@ -14,7 +14,7 @@ const api = axios.create({
 
 export const fetchAllMerchants = async () => {
   try {
-    const response = await api.get('merchants/');
+    const response = await api.get('/merchants');
     return response.data.rows;
   } catch (error) {
     throw error;  // Propagate error to the caller
@@ -25,7 +25,7 @@ export const fetchAllMerchants = async () => {
 // Function to make GET request by id
 export const fetchMerchantById = async (id) => {
   try {
-    const response = await api.get('merchants/'+id);
+    const response = await api.get('/merchants'+id);
     return response.data;
 
   } catch (error) {
@@ -36,7 +36,7 @@ export const fetchMerchantById = async (id) => {
 
 export const checkMerchantVerification = async (id) => {
   try {
-    const response = await api.get('merchants/'+id);
+    const response = await api.get('/merchants/'+id);
     return response.data;m
 
   } catch (error) {

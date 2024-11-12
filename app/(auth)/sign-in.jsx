@@ -22,7 +22,19 @@ import { CustomButton, FormField, CommonButton } from "../../components";
 import { signIn, getCurrentUser, signOut, signWithGoogle } from "../../hook/auth";
 import { useGlobalContext } from "../../context/GlobalProvider";
 
+export const useWarmUpBrowser = () => {
+  useEffect(() => {
+    void WebBrowser.warmUpAsync()
+    return () => {
+      void WebBrowser.coolDownAsync()
+    }
+  }, [])
+}
+
+WebBrowser.maybeCompleteAuthSession()
+
 const SignIn = () => {
+  useWarmUpBrowser()
   const { setUser, setIsLogged } = useGlobalContext();
   const [isSubmitting, setSubmitting] = useState(false);
   const [loginMessage, setLoginMessage] = useState("");

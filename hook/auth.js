@@ -46,7 +46,7 @@ export const signIn = async (email, password) => {
     const encryptPass = CryptoJS.AES.encrypt(password, passphrasePass).toString();
     
     try {
-        const response = await api.post('customers/login', {
+        const response = await api.post('/customers/login', {
             client: encryptEmail,
             secret: encryptPass
         });
@@ -83,7 +83,7 @@ export const signUp = async (form) => {
     
     try {
         // Send the encrypted form as part of the request
-        const response = await api.post('customers', {
+        const response = await api.post('/customers', {
             aparam: encryptForm
         });
         
@@ -107,7 +107,7 @@ export const getCurrentUser = async () => {
         }
 
         // Use the token in the Authorization header to fetch user data
-        const response = await api.get('customers/getuser', {
+        const response = await api.get('/customers/getuser', {
             headers: {
                 Authorization: `Bearer ${token.accessToken}`,
             },
@@ -134,7 +134,7 @@ export const signWithGoogle = async (user) => {
     
     try {
         // Send the encrypted form as part of the request
-        const response = await api.post('gmail', {
+        const response = await api.post('/gmail', {
             sessionToken: session
         });
         
