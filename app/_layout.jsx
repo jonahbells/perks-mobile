@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native'
-import { Slot, SplashScreen, Stack } from 'expo-router'
+import { Slot, SplashScreen, Stack, router } from 'expo-router'
+
 import { useFonts } from 'expo-font'
 import { useEffect } from 'react';
 
@@ -10,6 +11,7 @@ import GlobalProvider from "../context/GlobalProvider";
 SplashScreen.preventAutoHideAsync();
 
 const RootLayout = () => {
+
   const [fontsLoaded, error] = useFonts({
     "Outfit-Black": require("../assets/fonts/Outfit-Black.ttf"),
     "Outfit-Bold": require("../assets/fonts/Outfit-Bold.ttf"),
@@ -38,7 +40,6 @@ const RootLayout = () => {
   if (!fontsLoaded && !error) {
     return null;
   }
-
 
   return (
     <ClerkProvider publishableKey={process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY}>

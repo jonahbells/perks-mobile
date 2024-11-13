@@ -28,7 +28,11 @@
       "bundler": "metro"
     },
     "plugins": [
-      "expo-router"
+      "expo-router",
+      "@react-native-google-signin/google-signin",
+      {
+        "iosUrlScheme": "com.googleusercontent.apps.40387580751-prk76d7fdf6gr8mljsnhsoa2q939suc8"
+      }
     ],
     "extra": {
       "eas": {

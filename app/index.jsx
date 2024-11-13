@@ -2,6 +2,7 @@ import { StatusBar } from 'expo-status-bar'
 import { ScrollView, Text, View, Image } from 'react-native'
 import { Redirect, router } from 'expo-router'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import { useEffect } from 'react';
 
 import { CustomButton, Loader } from '../components'
 import { images } from '../constants'
@@ -10,7 +11,11 @@ import { useGlobalContext } from "../context/GlobalProvider";
 const Welcome = () => {
   const { loading, isLogged } = useGlobalContext();
 
-  if (!loading && isLogged) return <Redirect href="/home" />
+  useEffect(() => {
+    if (!loading && isLogged) {
+      router.replace('home');
+    }
+  })
 
   return (
     <SafeAreaView className="h-full">
@@ -31,7 +36,7 @@ const Welcome = () => {
 
           <Text className="text-sm font-pregular text-black mt-7 text-center">
             Where Creativity Meets Innovation: Embark on a Journey of Limitless
-            Exploration with Aora
+            Exploration with Perks
           </Text>
           <View className='w-[200px]'>
             <CustomButton

@@ -13,6 +13,7 @@ import { Link, router } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 import * as WebBrowser from "expo-web-browser";
 import * as Google from "expo-auth-session/providers/google";
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import { useOAuth, useUser } from '@clerk/clerk-expo'
 
 import { FontAwesome, MaterialIcons, Ionicons } from "@expo/vector-icons"; // for icons
@@ -21,6 +22,7 @@ import { images, icons } from "../../constants";
 import { CustomButton, FormField, CommonButton } from "../../components";
 import { signIn, getCurrentUser, signOut, signWithGoogle } from "../../hook/auth";
 import { useGlobalContext } from "../../context/GlobalProvider";
+import { googleSignIn } from "../../hook/googleSignIn";
 
 export const useWarmUpBrowser = () => {
   useEffect(() => {
@@ -32,6 +34,14 @@ export const useWarmUpBrowser = () => {
 }
 
 WebBrowser.maybeCompleteAuthSession()
+
+GoogleSignin.configure({
+  webClientId: web,
+  scopes: ["https://www.googleapis.com/auth/drive.readonly"], // what API you want to access on behalf of the user, default is email and profile
+  offlineAccess: true,
+  forceCodeForRefreshToken: true,
+  iosClientId: ios,
+});
 
 const SignIn = () => {
   useWarmUpBrowser()
@@ -79,16 +89,24 @@ const SignIn = () => {
       const { createdSessionId, signIn, signUp, setActive } = await startOAuthFlow({
       });
       if (createdSessionId) {
+        // Set the active session
         await setActive({ session: createdSessionId });
-        const result = await signWithGoogle(user);
+  
+        // Ensure `user` is not null or undefined before proceeding
+        if (user) {
+          console.log("User is defined:", user);
+          const result = await signWithGoogle(user);
+          console.log("Backend response:", result);
+        } else {
+          console.error("User object is undefined or null.");
+        }
       } else {
-        // Use signIn or signUp for next steps such as MFA
+        console.error("No session created, cannot proceed with sign-in.");
       }
     } catch (err) {
       console.error('OAuth error', err)
     }
   }
-
   
   // useEffect(() => {
   //   handleToken();
@@ -224,7 +242,7 @@ const SignIn = () => {
             {/* Google Button */}
             <TouchableOpacity
               className="w-full py-4 mt-2 flex-row items-center justify-center border bg-gray-300 border-gray-300 rounded-2xl"
-              onPress={() => handleGoogleSignIn()}
+              onPress={() => googleSignIn()}
             >
               <FontAwesome name="google" size={24} color="gray" />
               <Text className="text-gray-700 text-lg font-semibold ml-2">
