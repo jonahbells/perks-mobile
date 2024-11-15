@@ -1,8 +1,8 @@
 {
   "expo": {
     "name": "Perks Mania",
-    "slug": "PerksmaniaMobile",
-    "scheme": "PerksmaniaMobile",
+    "slug": "Perksmania-Mobile",
+    "scheme": "Perksmania-Mobile",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/perkmania_launcher.png",
@@ -28,17 +28,9 @@
       "bundler": "metro"
     },
     "plugins": [
-      "expo-router",
-      "@react-native-google-signin/google-signin",
-      {
-        "iosUrlScheme": "com.googleusercontent.apps.40387580751-prk76d7fdf6gr8mljsnhsoa2q939suc8"
-      }
+      "expo-router"
     ],
-    "extra": {
-      "eas": {
-        "projectId": "1146ccc0-18af-43a6-9245-877aece35230"
-      }
-    },
-    "owner": "jonah.delrosario"
+    "owner": "jonah.delrosario",
+    "newArchEnabled": true 
   }
 }

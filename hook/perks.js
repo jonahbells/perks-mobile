@@ -83,6 +83,8 @@ import axios from 'axios';
 
 const apiUrl = process.env.API_URL;
 
+console.log(apiUrl)
+
 // Create an instance of axios with base configuration
 const api = axios.create({
   baseURL: apiUrl,  // Your base URL
@@ -118,7 +120,7 @@ export const fetchPerkById = async (id) => {
 // Function to make GET perks by merchant
 export const fetchPerksByMerchantId = async (id) => {
   try {
-    const response = await api.get('/perks/bymerchant'+id);
+    const response = await api.get('/perks/bymerchant/'+id);
     return response.data;
   } catch (error) {
     throw error;  // Propagate error to the caller

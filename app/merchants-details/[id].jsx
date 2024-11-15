@@ -311,7 +311,7 @@ const MerchantsDetails = ({ handleNavigate }) => {
             {/* Perks */}
             {data && data.length > 0 ? (
               <View className="mt-6">
-                <Text className="font-bold text-balance text-base text-primary capitalize text-2xl flex-1 mr-4">Discover Perks</Text>
+                <Text className="font-pmedium text-primary capitalize text-2xl flex-1 mr-4">Discover Perks</Text>
 
                 <View className="flex-row flex-wrap mb-28">
                   {isLoading ? (

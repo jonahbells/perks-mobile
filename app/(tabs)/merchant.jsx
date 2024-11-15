@@ -138,7 +138,7 @@ const Merchants = () => {
       />
       <FlatList
         className="px-4"
-        showsVerticalScrollIndicator="false"
+        showsVerticalScrollIndicator={false}
         data={data} // Set the data fetched from the API
         keyExtractor={(item, index) =>
           item.id ? item.id.toString() : index.toString()

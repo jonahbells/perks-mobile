@@ -90,7 +90,7 @@ const PerksDetails = () => {
   return (
     <View className="flex-1">
       <ScrollView
-      showsVerticalScrollIndicator="false"
+      showsVerticalScrollIndicator={false}
       refreshControl={
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
       }
