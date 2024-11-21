@@ -42,7 +42,7 @@ const RootLayout = () => {
   }
 
   return (
-    <ClerkProvider publishableKey={process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY}>
+    // <ClerkProvider publishableKey={process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY}>
     <GlobalProvider>
     <Stack>
       <Stack.Screen
@@ -67,7 +67,7 @@ const RootLayout = () => {
       /> */}
     </Stack>
     </GlobalProvider>
-    </ClerkProvider>
+    // </ClerkProvider>
   )
 }
 

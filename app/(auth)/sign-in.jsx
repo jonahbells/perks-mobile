@@ -14,7 +14,13 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import * as WebBrowser from "expo-web-browser";
 import * as Google from "expo-auth-session/providers/google";
 
-import { useOAuth, useUser } from '@clerk/clerk-expo'
+import {
+  GoogleSignin,
+  GoogleSigninButton,
+  statusCodes,
+} from '@react-native-google-signin/google-signin';
+
+// import { useOAuth, useUser } from '@clerk/clerk-expo'
 
 import { FontAwesome, MaterialIcons, Ionicons } from "@expo/vector-icons"; // for icons
 
@@ -23,19 +29,31 @@ import { CustomButton, FormField, CommonButton } from "../../components";
 import { signIn, getCurrentUser, signOut, signWithGoogle } from "../../hook/auth";
 import { useGlobalContext } from "../../context/GlobalProvider";
 
-export const useWarmUpBrowser = () => {
-  useEffect(() => {
-    void WebBrowser.warmUpAsync()
-    return () => {
-      void WebBrowser.coolDownAsync()
-    }
-  }, [])
-}
+
+// export const useWarmUpBrowser = () => {
+//   useEffect(() => {
+//     void WebBrowser.warmUpAsync()
+//     return () => {
+//       void WebBrowser.coolDownAsync()
+//     }
+//   }, [])
+// }
 
 WebBrowser.maybeCompleteAuthSession()
 
+const webClientId = '40387580751-9a0q1aabcfuqucqloafr1v5m5famkrtr.apps.googleusercontent.com'
+const iosClientId = '40387580751-prk76d7fdf6gr8mljsnhsoa2q939suc8.apps.googleusercontent.com'
+const androidClientId = '40387580751-1lv6o1d0gfbbrikaojk3mk6nhh5mvsh0.apps.googleusercontent.com'
+
+
+GoogleSignin.configure({
+  webClientId,
+  iosClientId,
+  // scopes: ['profile', 'email'],
+});
+
 const SignIn = () => {
-  useWarmUpBrowser()
+  // useWarmUpBrowser()
   const { setUser, setIsLogged } = useGlobalContext();
   const [isSubmitting, setSubmitting] = useState(false);
   const [loginMessage, setLoginMessage] = useState("");
@@ -45,76 +63,75 @@ const SignIn = () => {
     email: "",
     password: "",
   });
-  const { user } = useUser(); // useUser provides user details after OAuth login
 
-  const { startOAuthFlow } = useOAuth({ strategy: 'oauth_google' })
+  // const { user } = useUser();
+  // const { startOAuthFlow } = useOAuth({ strategy: 'oauth_google' })
 
-  const webClientId = '40387580751-9a0q1aabcfuqucqloafr1v5m5famkrtr.apps.googleusercontent.com'
-  const iosClientId = '40387580751-prk76d7fdf6gr8mljsnhsoa2q939suc8.apps.googleusercontent.com'
-  const androidClientId = '40387580751-prk76d7fdf6gr8mljsnhsoa2q939suc8.apps.googleusercontent.com'
-
-  WebBrowser.maybeCompleteAuthSession
 
   const config = {
+
     webClientId,
     iosClientId,
-    androidClientId
+    androidClientId,
   }
+
+  useEffect(() => {
+    handleToken();
+  }, [response]);
+
 
   const [request, response, promptAsync] = Google.useAuthRequest(
     config
   );
+
+  const getUserProfile = async (token) => {
+    if(!token) return;
+    try {
+      const response = await fetch ('https //www.googleapis.com/userinfo/v2/me',{
+        headers: { Authorization: `Bearer ${token}`}
+      });
+      const user = await response.json();
+      console.log(user)
+    }
+    catch (error) {
+      console.log(error)
+    }
+  }
 
   const handleToken = () => {
     if (response?.type === "success") {
       const { authentication } = response;
       const token = authentication?.accessToken;
       console.log("access token", token)
-    }
-  }
-
-  useEffect(() => {
-    if (user) {
-      signInGoggle(user)
-    }
-  },);
-  const signInGoggle = async (userData) => {
-    let params = {
-      email: userData.emailAddresses[0].emailAddress,
-      firstName: userData.firstName,
-      lastName: userData.lastName,
-    }
-    try {
-      const result = await signWithGoogle(params)
-      setUser(result); // Set the user context
-      setIsLogged(true); // Mark the user as logged in
-      router.replace("/home");
-    } catch (error) {
-      console.error("No session created, cannot proceed with sign-in.");
+      getUserProfile(token)
     }
   }
 
 
   // Function to handle Google Sign-In
-  const handleGoogleSignIn = async () => {
-    try {
-      const { createdSessionId, signIn, signUp, setActive } = await startOAuthFlow({
-      });
-      if (createdSessionId) {
-        // Set the active session
-        await setActive({ session: createdSessionId });
-      } else {
-        console.error("No session created, cannot proceed with sign-in.");
-      }
-    } catch (err) {
-      console.error('OAuth error', err)
-    }
-  }
+  // const handleGoogleSignIn = async () => {
+  //   try {
+  //     const { createdSessionId, signIn, signUp, setActive } = await startOAuthFlow({
+  //     });
+  //     if (createdSessionId) {
+  //       // Set the active session
+  //       await setActive({ session: createdSessionId });
+  //     } else {
+  //       console.error("No session created, cannot proceed with sign-in.");
+  //     }
+  //   } catch (err) {
+  //     console.error('OAuth error', err)
+  //   }
+  // }
 
-  // useEffect(() => {
-  //   handleToken();
-  // }, [response]);
+  const GoogleLogin = async () => {
+    await GoogleSignin.hasPlayServices();
+    const userInfo = await GoogleSignin.signIn();
+    console.log('u', userInfo);
+    return userInfo;
+  };
 
+ 
   const validateForm = () => {
     let errors = {};
 
@@ -245,7 +262,7 @@ const SignIn = () => {
             {/* Google Button */}
             <TouchableOpacity
               className="w-full py-4 mt-2 flex-row items-center justify-center border bg-gray-300 border-gray-300 rounded-2xl"
-              onPress={() => handleGoogleSignIn()}
+              onPress={() => promptAsync()}
             >
               <FontAwesome name="google" size={24} color="gray" />
               <Text className="text-gray-700 text-lg font-semibold ml-2">
