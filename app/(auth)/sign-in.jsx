@@ -14,12 +14,6 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import * as WebBrowser from "expo-web-browser";
 import * as Google from "expo-auth-session/providers/google";
 
-import {
-  GoogleSignin,
-  GoogleSigninButton,
-  statusCodes,
-} from '@react-native-google-signin/google-signin';
-
 // import { useOAuth, useUser } from '@clerk/clerk-expo'
 
 import { FontAwesome, MaterialIcons, Ionicons } from "@expo/vector-icons"; // for icons
@@ -39,18 +33,8 @@ import { useGlobalContext } from "../../context/GlobalProvider";
 //   }, [])
 // }
 
+
 WebBrowser.maybeCompleteAuthSession()
-
-const webClientId = '40387580751-9a0q1aabcfuqucqloafr1v5m5famkrtr.apps.googleusercontent.com'
-const iosClientId = '40387580751-prk76d7fdf6gr8mljsnhsoa2q939suc8.apps.googleusercontent.com'
-const androidClientId = '40387580751-1lv6o1d0gfbbrikaojk3mk6nhh5mvsh0.apps.googleusercontent.com'
-
-
-GoogleSignin.configure({
-  webClientId,
-  iosClientId,
-  // scopes: ['profile', 'email'],
-});
 
 const SignIn = () => {
   // useWarmUpBrowser()
@@ -67,28 +51,22 @@ const SignIn = () => {
   // const { user } = useUser();
   // const { startOAuthFlow } = useOAuth({ strategy: 'oauth_google' })
 
+  const [request, response, promptAsync] = Google.useAuthRequest({
+    webClientId: '40387580751-9a0q1aabcfuqucqloafr1v5m5famkrtr.apps.googleusercontent.com',
+    iosClientId: '40387580751-prk76d7fdf6gr8mljsnhsoa2q939suc8.apps.googleusercontent.com',
+    androidClientId: '40387580751-1lv6o1d0gfbbrikaojk3mk6nhh5mvsh0.apps.googleusercontent.com',
+    scopes: ["profile", "email"],
+});
 
-  const config = {
-
-    webClientId,
-    iosClientId,
-    androidClientId,
-  }
-
-  useEffect(() => {
+  useEffect(()=>{
     handleToken();
-  }, [response]);
-
-
-  const [request, response, promptAsync] = Google.useAuthRequest(
-    config
-  );
+  }, [response])
 
   const getUserProfile = async (token) => {
     if(!token) return;
     try {
-      const response = await fetch ('https //www.googleapis.com/userinfo/v2/me',{
-        headers: { Authorization: `Bearer ${token}`}
+      const response = await fetch('https://www.googleapis.com/oauth2/v2/userinfo', {
+        headers: { Authorization: `Bearer ${token}` },
       });
       const user = await response.json();
       console.log(user)
@@ -98,7 +76,7 @@ const SignIn = () => {
     }
   }
 
-  const handleToken = () => {
+  const handleToken = async () => {
     if (response?.type === "success") {
       const { authentication } = response;
       const token = authentication?.accessToken;
@@ -124,12 +102,12 @@ const SignIn = () => {
   //   }
   // }
 
-  const GoogleLogin = async () => {
-    await GoogleSignin.hasPlayServices();
-    const userInfo = await GoogleSignin.signIn();
-    console.log('u', userInfo);
-    return userInfo;
-  };
+  // const GoogleLogin = async () => {
+  //   await GoogleSignin.hasPlayServices();
+  //   const userInfo = await GoogleSignin.signIn();
+  //   console.log('user', userInfo);
+  //   return userInfo;
+  // };
 
  
   const validateForm = () => {
