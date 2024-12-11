@@ -68,20 +68,40 @@ const SignIn = () => {
       const response = await fetch('https://www.googleapis.com/oauth2/v2/userinfo', {
         headers: { Authorization: `Bearer ${token}` },
       });
-      const user = await response.json();
-      console.log(user)
+      const userData = await response.json();
+      
+      // Call signWithGoogle with the user data
+      const result = await signWithGoogle({
+        email: userData.email,
+        firstName: userData.given_name,
+        lastName: userData.family_name
+      });
+
+      // Update global context
+      setUser(result);
+      setIsLogged(true);
+      
+      // Navigate to home
+      router.replace("/home");
     }
     catch (error) {
-      console.log(error)
+      Alert.alert("Error", "Failed to sign in with Google");
+      console.error(error);
     }
   }
 
   const handleToken = async () => {
     if (response?.type === "success") {
-      const { authentication } = response;
-      const token = authentication?.accessToken;
-      console.log("access token", token)
-      getUserProfile(token)
+      setSubmitting(true);
+      try {
+        const { authentication } = response;
+        const token = authentication?.accessToken;
+        await getUserProfile(token);
+      } catch (error) {
+        Alert.alert("Error", "Authentication failed");
+      } finally {
+        setSubmitting(false);
+      }
     }
   }
 
@@ -111,13 +131,25 @@ const SignIn = () => {
 
  
   const validateForm = () => {
-    let errors = {};
+    let newErrors = {};
 
-    if (!form.email) errors.email = "Email is required";
-    if (!form.password) errors.password = "Password is required";
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!form.email) {
+      newErrors.email = "Email is required";
+    } else if (!emailRegex.test(form.email)) {
+      newErrors.email = "Please enter a valid email address";
+    }
 
-    setErrors(errors);
-    return Object.keys(errors).length === 0;
+    // Password validation
+    if (!form.password) {
+      newErrors.password = "Password is required";
+    } else if (form.password.length < 8) {
+      newErrors.password = "Password must be at least 8 characters";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
   const submit = async () => {
@@ -210,7 +242,7 @@ const SignIn = () => {
           />
 
           <CustomButton
-            title="Login"
+            title="Continue"
             handlePress={submit}
             containerStyles="mt-5"
             isLoading={isSubmitting}
@@ -218,19 +250,19 @@ const SignIn = () => {
 
           <View className="w-full items-center">
             {/* OR separator */}
-            <View className="flex-row items-center my-5">
+            <View className="flex-row items-center mx-16 my-5">
               {/* Left line */}
               <View className="flex-1 h-px bg-gray-300" />
 
               {/* OR text */}
-              <Text className="mx-2 text-gray-500">OR</Text>
+              <Text className="mx-4 text-gray-300">OR</Text>
 
               {/* Right line */}
               <View className="flex-1 h-px bg-gray-300" />
             </View>
 
             {/* Apple Button */}
-            <TouchableOpacity className="w-full py-4 flex-row items-center justify-center bg-gray-300 border-gray-300 rounded-2xl">
+            <TouchableOpacity className="w-full py-4 flex-row items-center justify-center border-[2px] border-gray-300 rounded-2xl">
               <FontAwesome name="apple" size={24} color="black" />
               <Text className="text-gray-700 text-lg font-semibold ml-2">
                 Sign in with Apple
@@ -239,7 +271,7 @@ const SignIn = () => {
 
             {/* Google Button */}
             <TouchableOpacity
-              className="w-full py-4 mt-2 flex-row items-center justify-center border bg-gray-300 border-gray-300 rounded-2xl"
+              className="w-full py-4 mt-3 flex-row items-center justify-center border-[2px] border-gray-300 rounded-2xl"
               onPress={() => promptAsync()}
             >
               <FontAwesome name="google" size={24} color="gray" />
