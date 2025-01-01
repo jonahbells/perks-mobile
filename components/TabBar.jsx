@@ -42,7 +42,7 @@ const TabBar = ({ state, descriptors, navigation }) => {
     justify-between 
     bg-primary 
     mx-20 
-    py-6 
+    py-4 
     rounded-full
     "
     >
@@ -51,9 +51,9 @@ const TabBar = ({ state, descriptors, navigation }) => {
           position: "absolute",
           backgroundColor: "rgba(255, 255, 255, 0.2)",
           borderRadius: 30,
-          marginHorizontal: 8,
-          height: dimensions.height - 25,
-          width: buttonWidth - 15
+          marginHorizontal: 5,
+          height: dimensions.height - 15,
+          width: buttonWidth - 10
         }
       ]} />
       {state.routes.map((route, index) => {

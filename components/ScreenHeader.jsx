@@ -31,7 +31,7 @@ const Header = () => {
 
                     <View>
                         <Text className='font-pmedium text-sm text-gray-300'>
-                            Welcome Back
+                            Welcome,
                         </Text>
                         <Text className='text-xl font-psemibold text-white'>
                             {user ? user.firstname : 'Guest'}

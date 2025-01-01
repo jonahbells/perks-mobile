@@ -47,7 +47,7 @@ const TabBarButton = ({
       <Image
         source={isFocused ? icons.home : icons.homeOutline}
         resizeMode="contain"
-        tintColor={isFocused ? "#fff" : "#94a3b8"}
+        tintColor={isFocused ? "#ffff" : "#94a3b8"}
         className="w-6 h-6"
       />
     ),
@@ -55,7 +55,7 @@ const TabBarButton = ({
       <Image
         source={icons.merchantOutline}
         resizeMode="contain"
-        tintColor={isFocused ? "#fff" : "#94a3b8"}
+        tintColor={isFocused ? "#ffff" : "#94a3b8"}
         className="w-6 h-6"
       />
     ),
@@ -63,7 +63,7 @@ const TabBarButton = ({
       <Image
         source={icons.scanner}
         resizeMode="contain"
-        tintColor={isFocused ? "#fff" : "#94a3b8"}
+        tintColor={isFocused ? "#ffff" : "#94a3b8"}
         className="w-6 h-6"
       />
     ),
@@ -71,7 +71,7 @@ const TabBarButton = ({
       <Image
         source={isFocused ? icons.user  : icons.userOutline}
         resizeMode="contain"
-        tintColor={isFocused ? "#fff" : "#94a3b8"}
+        tintColor={isFocused ? "#ffff" : "#94a3b8"}
         className="w-6 h-6"
       />
     ),

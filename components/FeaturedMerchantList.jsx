@@ -39,15 +39,15 @@ const FeaturedMerchantList = ({ item, index, scrollX }) => {
       style={[rnAnimatedStyle, {width:width}]}>
       <Image
         source={{ uri: url }}
-        className={`h-52 rounded-xl`}
+        className={`h-40 rounded-xl`}
         style={{width:width-57}}
       />
       <LinearGradient
         colors={["transparent", 'rgba(0, 0, 0, 0.6)']}
-        className={`absolute left-7 right-0 top-0 h-52 rounded-xl`}
+        className={`absolute left-7 right-0 top-0 h-40 rounded-xl`}
         style={[{width:width-57}]}
       >
-        <View className="absolute top-40 px-4">
+        <View className="absolute top-32 px-4">
           <Text className="text-gray font-pregular text-sm">{item.business_name}</Text>
         </View>
       </LinearGradient>

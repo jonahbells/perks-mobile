@@ -7,6 +7,8 @@ import {
   RefreshControl,
   ScrollView,
 } from "react-native";
+import { StatusBar } from 'expo-status-bar';
+
 import React, { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Stack, router } from "expo-router";
@@ -45,7 +47,7 @@ const Home = () => {
 
   return (
     <>
-
+    <StatusBar style="light" backgroundColor={"transparent"} translucent />
     {/* Header */}
 
       <Stack.Screen

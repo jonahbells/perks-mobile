@@ -1,11 +1,12 @@
-import { View, Text } from 'react-native'
+import { View, Text } from 'react-native';
 import { Redirect, Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
-import React from 'react'
+import React from 'react';
 
 const AuthLayout = () => {
   return (
     <>
+    <StatusBar backgroundColor={'transparent'} translucent/>
       <Stack>
         <Stack.Screen
           name="sign-in"

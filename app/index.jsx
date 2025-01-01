@@ -19,7 +19,7 @@ const Welcome = () => {
 
   return (
     <SafeAreaView className="h-full">
-
+      
       <ScrollView
         contentContainerStyle={{
           height: '100%'
@@ -50,7 +50,7 @@ const Welcome = () => {
         </View>
       </ScrollView>
 
-      <StatusBar backgroundColor='#161622' style='dark' />
+      <StatusBar backgroundColor={"transparent"} translucent />
     </SafeAreaView>
   )
 }

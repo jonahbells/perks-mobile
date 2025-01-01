@@ -1,17 +1,17 @@
-import { StyleSheet, Text, View } from 'react-native'
-import { Slot, SplashScreen, Stack, router } from 'expo-router'
+import { StyleSheet, Text, View } from "react-native";
+import { Slot, SplashScreen, Stack, router } from "expo-router";
+import { StatusBar } from "expo-status-bar";
 
-import { useFonts } from 'expo-font'
-import { useEffect } from 'react';
+import { useFonts } from "expo-font";
+import { useEffect } from "react";
 
-import { ClerkProvider, ClerkLoaded } from '@clerk/clerk-expo'
+import { ClerkProvider, ClerkLoaded } from "@clerk/clerk-expo";
 
 import GlobalProvider from "../context/GlobalProvider";
 
 SplashScreen.preventAutoHideAsync();
 
 const RootLayout = () => {
-
   const [fontsLoaded, error] = useFonts({
     "Outfit-Black": require("../assets/fonts/Outfit-Black.ttf"),
     "Outfit-Bold": require("../assets/fonts/Outfit-Bold.ttf"),
@@ -31,7 +31,6 @@ const RootLayout = () => {
       SplashScreen.hideAsync();
     }
   }, [fontsLoaded, error]);
-  
 
   if (!fontsLoaded) {
     return null;
@@ -44,31 +43,22 @@ const RootLayout = () => {
   return (
     // <ClerkProvider publishableKey={process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY}>
     <GlobalProvider>
-    <Stack>
-      <Stack.Screen
-        name='(tabs)'
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name='index'
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name='(auth)'
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen 
-        name='perks-details/[id]'
-        options={{ headerShown: false }}
-      />
-      {/* <Stack.Screen 
+      <Stack>
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Stack.Screen name="index" options={{ headerShown: false }} />
+        <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+        <Stack.Screen
+          name="perks-details/[id]"
+          options={{ headerShown: false }}
+        />
+        {/* <Stack.Screen 
         name='/search/{query}'
         options={{ headerShown: false }}
       /> */}
-    </Stack>
+      </Stack>
     </GlobalProvider>
     // </ClerkProvider>
-  )
-}
+  );
+};
 
-export default RootLayout
+export default RootLayout;

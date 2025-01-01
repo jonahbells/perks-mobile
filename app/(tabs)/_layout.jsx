@@ -1,5 +1,6 @@
 import { View, Text, Image } from 'react-native'
 import { Tabs, Redirect } from 'expo-router'
+import { StatusBar } from "expo-status-bar"
 import Ionicons from '@expo/vector-icons/Ionicons'; // Import Ionicons
 
 import { TabBar } from '../../components'
@@ -141,4 +142,4 @@ const TabsLayout = () => {
   )
 }
 
-export default TabsLayout
+export default TabsLayout;
