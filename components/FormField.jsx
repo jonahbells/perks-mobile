@@ -22,7 +22,7 @@ const FormField = ({
     <View className={`space-y-2 ${otherStyles}`}>
       <Text className="text-base font-pmedium">{title}</Text>
 
-      <View className={` w-full h-16 px-4 rounded-2xl border-[2px] flex-row items-center ${
+      <View className={` w-full h-14 px-4 rounded-xl border-[2px] flex-row items-center ${
           isFocused ? "border-primary" : errors ? "border-red-500 border-2" : "border-gray-300"
         }`}>
         <TextInput

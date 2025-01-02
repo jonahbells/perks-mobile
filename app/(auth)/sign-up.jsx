@@ -156,7 +156,7 @@ const SignUp = () => {
             </View>
 
             {/* Apple Button */}
-            <TouchableOpacity className="w-full py-4 flex-row items-center justify-center bg-gray-300 border-gray-300 rounded-2xl">
+            <TouchableOpacity className="w-full h-14 flex-row items-center justify-center border-[2px] border-gray-300 rounded-xl">
               <FontAwesome name="apple" size={24} color="black" />
               <Text className="text-gray-700 text-lg font-semibold ml-2">
                 Sign in with Apple
@@ -164,7 +164,7 @@ const SignUp = () => {
             </TouchableOpacity>
 
             {/* Google Button */}
-            <TouchableOpacity className="w-full py-4 mt-2 flex-row items-center justify-center border bg-gray-300 border-gray-300 rounded-2xl">
+            <TouchableOpacity className="w-full h-14 mt-2 flex-row items-center justify-center border-[2px] border-gray-300 rounded-xl">
               <FontAwesome name="google" size={24} color="gray" />
               <Text className="text-gray-700 text-lg font-semibold ml-2">
                 Sign in with Google

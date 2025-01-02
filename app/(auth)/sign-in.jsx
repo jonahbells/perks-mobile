@@ -56,20 +56,20 @@ const SignIn = () => {
     iosClientId: '40387580751-prk76d7fdf6gr8mljsnhsoa2q939suc8.apps.googleusercontent.com',
     androidClientId: '40387580751-1lv6o1d0gfbbrikaojk3mk6nhh5mvsh0.apps.googleusercontent.com',
     scopes: ["profile", "email"],
-});
+  });
 
-  useEffect(()=>{
+  useEffect(() => {
     handleToken();
   }, [response])
 
   const getUserProfile = async (token) => {
-    if(!token) return;
+    if (!token) return;
     try {
       const response = await fetch('https://www.googleapis.com/oauth2/v2/userinfo', {
         headers: { Authorization: `Bearer ${token}` },
       });
       const userData = await response.json();
-      
+
       // Call signWithGoogle with the user data
       const result = await signWithGoogle({
         email: userData.email,
@@ -80,7 +80,7 @@ const SignIn = () => {
       // Update global context
       setUser(result);
       setIsLogged(true);
-      
+
       // Navigate to home
       router.replace("/home");
     }
@@ -129,7 +129,7 @@ const SignIn = () => {
   //   return userInfo;
   // };
 
- 
+
   const validateForm = () => {
     let newErrors = {};
 
@@ -193,34 +193,34 @@ const SignIn = () => {
 
 
   return (
-    <SafeAreaView edges={["bottom"]} className="h-full">
-      <ScrollView className="pt-14">
-        <View className="px-4 flex-row">
-          <TouchableOpacity onPress={() => router.replace("/home")}
-            className="p-2 rounded-full bg-white shadow-sm">
-            <Ionicons name="arrow-back" size={26} />
-          </TouchableOpacity>
-        </View>
+    <SafeAreaView className="h-full">
+      <ScrollView>
         <View
-          className="w-full flex items-center h-full px-4"
-          style={{
-            minHeight: Dimensions.get("window").height - 100,
-          }}
+          className="w-full h-full px-4"
         >
-          <View>
-            <Image
-              source={images.perksIcon}
-              resizeMode="contain"
-              className="w-[300] h-[60]"
-            />
+          <View className="mt-4 flex-row">
+            <TouchableOpacity onPress={() => router.replace("/home")}
+              className="p-2 rounded-full bg-white">
+              <Ionicons name="arrow-back" size={26} />
+            </TouchableOpacity>
           </View>
 
-          <Text className="text-3xl font-psemibold text-black mt-5">
-            Welcome back
-          </Text>
-          <Text className="text-base font-pregular text-gray-500 mt-2">
-            Please enter your details to login.
-          </Text>
+          <View className="items-center">
+            <View>
+              <Image
+                source={images.perksIcon}
+                resizeMode="contain"
+                className="w-[300] h-[60]"
+              />
+            </View>
+
+            <Text className="text-3xl font-psemibold text-black mt-5">
+              Welcome back
+            </Text>
+            <Text className="text-base font-pregular text-gray-500 mt-2">
+              Please enter your details to login.
+            </Text>
+          </View>
 
           <FormField
             title="Email"
@@ -262,20 +262,20 @@ const SignIn = () => {
             </View>
 
             {/* Apple Button */}
-            <TouchableOpacity className="w-full py-4 flex-row items-center justify-center border-[2px] border-gray-300 rounded-2xl">
-              <FontAwesome name="apple" size={24} color="black" />
-              <Text className="text-gray-700 text-lg font-semibold ml-2">
+            <TouchableOpacity className="w-full h-14 flex-row items-center justify-center border-[2px] border-gray-300 rounded-xl">
+              <FontAwesome name="apple" size={20} color="black" />
+              <Text className="text-gray-700 text-sm font-semibold ml-2">
                 Sign in with Apple
               </Text>
             </TouchableOpacity>
 
             {/* Google Button */}
             <TouchableOpacity
-              className="w-full py-4 mt-3 flex-row items-center justify-center border-[2px] border-gray-300 rounded-2xl"
+              className="w-full h-14 mt-3 flex-row items-center justify-center border-[2px] border-gray-300 rounded-xl"
               onPress={() => promptAsync()}
             >
-              <FontAwesome name="google" size={24} color="gray" />
-              <Text className="text-gray-700 text-lg font-semibold ml-2">
+              <FontAwesome name="google" size={20} color="gray" />
+              <Text className="text-gray-700 text-sm font-semibold ml-2">
                 Sign in with Google
               </Text>
             </TouchableOpacity>
